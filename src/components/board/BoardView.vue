@@ -75,19 +75,19 @@ export default {
   },
   methods: {
     listArticle() {
-      this.$router.push({ name: "BoardList" });
+      this.$router.push({ name: "boardlist" });
     },
     moveModifyArticle() {
       this.$router.replace({
-        name: "BoardUpdate",
+        name: "boardmodify",
         params: { articleNo: this.article.articleNo },
       });
-      //   this.$router.push({ path: `/board/modify/${this.article.articleNo}` });
+      //this.$router.push({ path: `/board/modify/${this.article.articleNo}` });
     },
     removeArticle() {
       if (confirm("정말로 삭제?")) {
         deleteArticle(this.article.articleNo, () => {
-          this.$router.push({ name: "BoardList" });
+          this.$router.push({ name: "boardlist" });
         });
       }
     },

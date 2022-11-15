@@ -3,15 +3,15 @@
     <b-col style="text-align: left">
       <b-form @submit="onSubmit" @reset="onReset">
         <b-form-group
-          id="userid-group"
+          id="userId-group"
           label="작성자:"
-          label-for="userid"
+          label-for="userId"
           description="작성자를 입력하세요."
         >
           <b-form-input
-            id="userid"
-            :disabled="isUserid"
-            v-model="article.userid"
+            id="userId"
+            :disabled="isuserId"
+            v-model="article.userId"
             type="text"
             required
             placeholder="작성자 입력..."
@@ -67,12 +67,12 @@ export default {
   data() {
     return {
       article: {
-        articleno: 0,
-        userid: "",
+        articleNo: 0,
+        userId: "",
         subject: "",
         content: "",
       },
-      isUserid: false,
+      isuserId: false,
     };
   },
   props: {
@@ -80,14 +80,14 @@ export default {
   },
   created() {
     if (this.type === "modify") {
-      http.get(`/board/${this.$route.params.articleno}`).then(({ data }) => {
-        // this.article.articleno = data.article.articleno;
-        // this.article.userid = data.article.userid;
+      http.get(`/board/${this.$route.params.articleNo}`).then(({ data }) => {
+        // this.article.articleNo = data.article.articleNo;
+        // this.article.userId = data.article.userId;
         // this.article.subject = data.article.subject;
         // this.article.content = data.article.content;
         this.article = data;
       });
-      this.isUserid = true;
+      this.isuserId = true;
     }
   },
   methods: {
@@ -96,10 +96,10 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.article.userid &&
+      !this.article.userId &&
         ((msg = "작성자 입력해주세요"),
         (err = false),
-        this.$refs.userid.focus());
+        this.$refs.userId.focus());
       err &&
         !this.article.subject &&
         ((msg = "제목 입력해주세요"),
@@ -117,7 +117,7 @@ export default {
     },
     onReset(event) {
       event.preventDefault();
-      this.article.articleno = 0;
+      this.article.articleNo = 0;
       this.article.subject = "";
       this.article.content = "";
       this.moveList();
@@ -125,7 +125,7 @@ export default {
     registArticle() {
       http
         .post(`/board`, {
-          userid: this.article.userid,
+          userId: this.article.userId,
           subject: this.article.subject,
           content: this.article.content,
         })
@@ -137,8 +137,8 @@ export default {
     modifyArticle() {
       http
         .put(`/board`, {
-          articleno: this.article.articleno,
-          userid: this.article.userid,
+          articleNo: this.article.articleNo,
+          userId: this.article.userId,
           subject: this.article.subject,
           content: this.article.content,
         })

@@ -26,16 +26,16 @@ const routes = [
         name: "boardwrite",
         component: () => import("@/components/board/BoardWrite"),
       },
-      // {
-      //   path: "modify",
-      //   name: "boardmodify",
-      //   component: () => import("@/components/board/BoardModify"),
-      // },
-      // {
-      //   path: "delete/:articleno",
-      //   name: "boarddelete",
-      //   component: () => import("@/components/board/BoardDelete"),
-      // },
+      {
+        path: "modify",
+        name: "boardmodify",
+        component: () => import("@/components/board/BoardModify"),
+      },
+      {
+        path: "delete/:articleNo",
+        name: "boarddelete",
+        component: () => import("@/components/board/BoardDelete"),
+      },
     ],
   },
 ];

@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     moveWrite() {
-      this.$router.push({ name: "BoardWrite" });
+      this.$router.push({ name: "boardwrite" });
     },
     viewArticle(article) {
       this.$router.push({
