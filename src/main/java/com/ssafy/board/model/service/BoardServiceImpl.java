@@ -31,13 +31,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("key",map.get("key").equals("userid")?"b.user_id":map.get("key"));
-		System.out.println(param);
-		param.put("word", map.get("word"));
-		int pgNo = Integer.parseInt(map.get("pgno"));
-		int start = pgNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
-		param.put("start", start);
-		param.put("listsize", SizeConstant.LIST_SIZE);
+//		param.put("key", map.get("key").equals("userid") ? "b.user_id" : map.get("key"));
+//		System.out.println(param);
+//		param.put("word", map.get("word"));
+//		int pgNo = Integer.parseInt(map.get("pgno"));
+//		int start = pgNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
+//		param.put("start", start);
+//		param.put("listsize", SizeConstant.LIST_SIZE);
 		
 		return boardMapper.listArticle(param);
 	}
