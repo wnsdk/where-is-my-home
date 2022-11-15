@@ -15,11 +15,11 @@ const routes = [
         name: "boardlist",
         component: () => import("@/components/board/BoardList"),
       },
-      // {
-      //   path: "write",
-      //   name: "boardwrite",
-      //   component: () => import("@/components/board/BoardWrite"),
-      // },
+      {
+        path: "write",
+        name: "boardwrite",
+        component: () => import("@/components/board/BoardWrite"),
+      },
       // {
       //   path: "view/:articleno",
       //   name: "boardview",

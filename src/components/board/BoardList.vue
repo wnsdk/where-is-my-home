@@ -7,7 +7,9 @@
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary">글쓰기</b-button>
+        <b-button variant="outline-primary" @click="moveWrite()"
+          >글쓰기</b-button
+        >
       </b-col>
     </b-row>
     <b-row>
@@ -36,12 +38,16 @@ export default {
     };
   },
   created() {
-    http.get(`board/list`).then(({ data }) => {
+    http.get(`board`).then(({ data }) => {
       console.log(data);
       this.articles = data;
     });
   },
-  methods: {},
+  methods: {
+    moveWrite() {
+      this.$router.push({ name: "boardwrite" });
+    },
+  },
 };
 </script>
 
