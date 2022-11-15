@@ -171,8 +171,8 @@ document.querySelector("#list-btn").addEventListener("click", function () {
   hidePolylines();
   hideCustomOverlays();
   
-  //fetch(`http://localhost:80/whereismyhome-springboot-15/api?dong=${dongCode}&DEAL_YMD=${dealYM}&aptName=${aptName}`)
-  fetch(`http://localhost:80/whereismyhome-springboot-15/house/search?dongCode=${dongCode}&apartmentName=${aptName}`)
+  //fetch(`http://localhost:80/where-is-my-home-server/api?dong=${dongCode}&DEAL_YMD=${dealYM}&aptName=${aptName}`)
+  fetch(`http://localhost:80/where-is-my-home-server/house/search?dongCode=${dongCode}&apartmentName=${aptName}`)
   	.then((response) => response.json())
   	.then((data) => dataSet(data));
 });

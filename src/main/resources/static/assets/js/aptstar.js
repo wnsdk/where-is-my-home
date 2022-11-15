@@ -160,7 +160,7 @@ stars_move.forEach(function (star_move) {
 			  hidePolylines();
 			  hideCustomOverlays();
 			  
-			  fetch(`http://localhost:80/whereismyhome-springboot-15/house/search?dongCode=${dongCode}&apartmentName=`)
+			  fetch(`http://localhost:80/where-is-my-home-server/house/search?dongCode=${dongCode}&apartmentName=`)
 			  	.then((response) => response.json())
 			  	.then((data) => dataSet(data));
 			});

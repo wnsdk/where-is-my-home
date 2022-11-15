@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ssafy</groupId>
-	<artifactId>whereismyhome-springboot-15</artifactId>
+	<artifactId>where-is-my-home-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>whereismyhome-springboot-15</name>
+	<name>where-is-my-home-server</name>
 	<description>whereismyhome</description>
 	<properties>
 		<java.version>1.8</java.version>
