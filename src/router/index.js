@@ -15,15 +15,16 @@ const routes = [
         name: "boardlist",
         component: () => import("@/components/board/BoardList"),
       },
-      // {
-      //   path: "write",
-      //   name: "boardwrite",
-      //   component: () => import("@/components/board/BoardWrite"),
-      // },
+
       {
         path: "view/:articleNo",
         name: "boardview",
         component: () => import("@/components/board/BoardView"),
+      },
+      {
+        path: "write",
+        name: "boardwrite",
+        component: () => import("@/components/board/BoardWrite"),
       },
       // {
       //   path: "modify",
