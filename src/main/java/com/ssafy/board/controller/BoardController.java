@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,16 +15,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.service.BoardService;
 
-@Controller
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@RestController
 @RequestMapping("/board")
+@Api("게시판 컨트롤러  API V1")
 public class BoardController {
 	
 	private final BoardService boardService;
@@ -35,14 +41,8 @@ public class BoardController {
 		this.boardService = boardService;
 	}
 	
-//	@GetMapping
-//	public ResponseEntity<List<BoardDto>> listArticle(@ApiParam(value = "게시글을 얻기위한 부가정보.", required = true) BoardParameterDto boardParameterDto) throws Exception {
-//		logger.info("listArticle - 호출");
-//		return new ResponseEntity<List<BoardDto>>(boardService.listArticle(boardParameterDto), HttpStatus.OK);
-//	}
-	
-	@ResponseBody
-	@GetMapping("/list")
+	@GetMapping
+	@ApiOperation(value = "게시판 글목록", notes = "모든 게시글의 정보를 반환한다.", response = List.class)
 	@CrossOrigin(origins= "*")
 	private ResponseEntity<?> list(@RequestParam Map<String,String> map, Model model) throws Exception {
 		return new ResponseEntity<List<BoardDto>> (boardService.listArticle(map), HttpStatus.OK);
@@ -89,116 +89,40 @@ public class BoardController {
 ////			return "/user/login";
 ////		}
 //	}
-	
-	@GetMapping("/mvwrite")
-	private String mvWrite() {
-		return "board/write";
-	}
 
-	@PostMapping("/write")
-	private String write(BoardDto boardDto, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if(memberDto != null) {
-//			boardDto.setUserId(memberDto.getUserId());
-			try {
-				boardDto.setUserId("ssafy");
-				boardService.writeArticle(boardDto);
-				redirectAttributes.addAttribute("pgno",1);
-				redirectAttributes.addAttribute("key","");
-				redirectAttributes.addAttribute("word","");
-				return "redirect:/board/list";
-			} catch (Exception e) {
-				e.printStackTrace();
-				model.addAttribute("msg", "글작성 중 에러발생!!!");
-				return "/error/error";
-			}
-//		} else {
-//			return "/user/login";
-//		}
+	@PostMapping
+	@ApiOperation(value = "게시판 글작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	@CrossOrigin(origins= "*")
+	private ResponseEntity<?> write(@RequestBody @ApiParam(value = "게시글 정보.", required = true) BoardDto boardDto) throws Exception {
+		boardDto.setUserId("ssafy");
+		boardService.writeArticle(boardDto);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/detail")
-	private String view(@RequestParam Map<String,String> map, HttpSession session, Model model) {
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if(memberDto != null) {
-			try {
-				int articleNo = Integer.parseInt(map.get("articleno"));
-				BoardDto boardDto = boardService.getArticle(articleNo);
-				boardService.updateHit(articleNo);
-				model.addAttribute("article", boardDto);
-				model.addAttribute("param", map);
-				System.out.println(map);
-				return "/board/view";
-			} catch (Exception e) {
-				e.printStackTrace();
-				model.addAttribute("msg", "글 얻기 중 에러발생!!!");
-				return "/error/error";
-			}
-//		} else {
-//			return "/user/login";
-//		}
+	@ApiOperation(value = "게시판 글보기", notes = "글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardDto.class)
+	@GetMapping("/{articleNo}")
+	@CrossOrigin(origins= "*")
+	private ResponseEntity<?> view(@PathVariable("articleNo") int articleNo) throws Exception {
+		BoardDto boardDto = boardService.getArticle(articleNo);
+		boardService.updateHit(articleNo);
+		return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "게시판 글수정", notes = "수정할 게시글 정보를 입력한다.", response = String.class)
+	@PutMapping
+	@CrossOrigin(origins= "*")
+	private ResponseEntity<?> modify(@RequestBody @ApiParam(value = "수정할 글정보.", required = true) BoardDto boardDto) throws Exception {
+		boardService.modifyArticle(boardDto);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	@GetMapping("/mvmodify")
-	private String mvModify(@RequestParam Map<String,String> map, HttpSession session, Model model) {
-		try {
-//			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//			if(memberDto != null) {
-				BoardDto boardDto = boardService.getArticle(Integer.parseInt(map.get("articleno")));
-				model.addAttribute("article", boardDto);
-				System.out.println(map);
-				return "/board/modify";
-//			} else
-//				return "/user/login";
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", "글내용 얻는 중 문제 발생!!!");
-			return "/error/error";
-		}
-	}
-
-	@PostMapping("/modify")
-	private String modify(@RequestParam("articleno") int articleNo, BoardDto boardDto, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if(memberDto != null) {
-			try {
-				System.out.println(articleNo);
-				System.out.println(boardDto);
-				boardDto.setArticleNo(articleNo);
-				boardService.modifyArticle(boardDto);
-				redirectAttributes.addAttribute("pgno",1);
-				redirectAttributes.addAttribute("key","");
-				redirectAttributes.addAttribute("word","");
-				return "redirect:/board/list";
-			} catch (Exception e) {
-				e.printStackTrace();
-				model.addAttribute("msg", "글수정 중 문제 발생!!!");
-				return "/error/error";
-			}
-			
-//		} else
-//			return "/user/login";
-	}
-
-
-	@GetMapping("/delete")
-	private String delete(@RequestParam("articleno") int articleNo, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if(memberDto != null) {
-			try {
-				boardService.deleteArticle(articleNo);
-				redirectAttributes.addAttribute("pgno",1);
-				redirectAttributes.addAttribute("key","");
-				redirectAttributes.addAttribute("word","");
-				return "redirect:/board/list";
-			} catch (Exception e) {
-				e.printStackTrace();
-				model.addAttribute("msg", "글 삭제 중 에러발생!!!");
-				return "/error/error";
-			}
-//		} else {
-//			return "/user/login";
-//		}
+	
+	@ApiOperation(value = "게시판 글삭제", notes = "글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)
+	@DeleteMapping("/{articleNo}")
+	@CrossOrigin(origins= "*")
+	private ResponseEntity<?> delete(@PathVariable("articleNo") @ApiParam(value = "삭제할 글의 글번호.", required = true) int articleNo) throws Exception {
+		boardService.deleteArticle(articleNo);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
 }
