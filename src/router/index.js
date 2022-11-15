@@ -20,11 +20,11 @@ const routes = [
       //   name: "boardwrite",
       //   component: () => import("@/components/board/BoardWrite"),
       // },
-      // {
-      //   path: "view/:articleno",
-      //   name: "boardview",
-      //   component: () => import("@/components/board/BoardView"),
-      // },
+      {
+        path: "view/:articleNo",
+        name: "boardview",
+        component: () => import("@/components/board/BoardView"),
+      },
       // {
       //   path: "modify",
       //   name: "boardmodify",

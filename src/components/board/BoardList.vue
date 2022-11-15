@@ -7,12 +7,21 @@
     </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary">글쓰기</b-button>
+        <b-button variant="outline-primary" @click="moveWrite()"
+          >글쓰기</b-button
+        >
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-table striped hover :items="articles" :fields="fields"> </b-table>
+        <b-table
+          striped
+          hover
+          :items="articles"
+          :fields="fields"
+          @row-clicked="viewArticle"
+        >
+        </b-table>
       </b-col>
     </b-row>
   </b-container>
@@ -36,12 +45,22 @@ export default {
     };
   },
   created() {
-    http.get(`board/list`).then(({ data }) => {
+    http.get(`board`).then(({ data }) => {
       console.log(data);
       this.articles = data;
     });
   },
-  methods: {},
+  methods: {
+    moveWrite() {
+      this.$router.push({ name: "BoardWrite" });
+    },
+    viewArticle(article) {
+      this.$router.push({
+        name: "boardview",
+        params: { articleNo: article.articleNo },
+      });
+    },
+  },
 };
 </script>
 
