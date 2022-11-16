@@ -11,6 +11,38 @@
           >글쓰기</b-button
         >
       </b-col>
+      <b-col>
+        <div class="col-md-10 offset-2">
+          <form class="d-flex" id="form-search" action="">
+            <b-form-select
+              v-model="searchOption"
+              class="form-select form-select-sm ms-10 me-1 w-50"
+              name="key"
+              aria-label="검색조건"
+            >
+              <option value="" selected>검색조건</option>
+              <option value="subject">제목</option>
+              <option value="userid">아이디</option>
+            </b-form-select>
+            <div class="input-group input-group-sm">
+              <input
+                v-model="word"
+                type="text"
+                class="form-control"
+                name="searchBar"
+                placeholder="검색어..."
+              />
+              <b-button
+                id="btn-search"
+                class="btn btn-dark"
+                @click.self.prevent="search()"
+              >
+                검색
+              </b-button>
+            </div>
+          </form>
+        </div>
+      </b-col>
     </b-row>
     <b-row>
       <b-col>
@@ -42,6 +74,8 @@ export default {
         { key: "registerTime", label: "작성일", tdClass: "tdClass" },
         { key: "hit", label: "조회수", tdClass: "tdClass" },
       ],
+      word: "",
+      searchOption: "",
     };
   },
   created() {
@@ -59,6 +93,13 @@ export default {
         name: "boardview",
         params: { articleNo: article.articleNo },
       });
+    },
+    search() {
+      http
+        .get(`board?key=${this.searchOption}&word=${this.word}`)
+        .then(({ data }) => {
+          this.articles = data;
+        });
     },
   },
 };
