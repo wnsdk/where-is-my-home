@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.apartment.model.HouseInfoDto;
 import com.ssafy.apartment.model.SidoGugunCodeDto;
+
 import com.ssafy.apartment.model.mapper.HousedealMapper;
 
 @Service
 public class HousedealServiceImpl implements HousedealService{
-	
+
 	@Autowired
 	private SqlSession sqlSession;
 
