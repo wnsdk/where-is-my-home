@@ -5,60 +5,60 @@
 <mapper namespace="com.ssafy.member.model.mapper.MemberMapper">
 
 	<resultMap type="memberDto" id="member">
-		<result column="user_id" property="userId"/>
-		<result column="user_name" property="userName"/>
+		<result column="userId" property="userId"/>
+		<result column="userName" property="userName"/>
 	</resultMap>
 	
 	<resultMap type="memberDto" id="memberAll" extends="member">
-		<result column="user_password" property="userPwd"/>
-		<result column="user_email" property="userEmail"/>
-		<result column="user_phone" property="userPhone"/>
-		<result column="user_role" property="userRole"/>
+		<result column="userPassword" property="userPwd"/>
+		<result column="userEmail" property="userEmail"/>
+		<result column="userPhone" property="userPhone"/>
+		<result column="userRole" property="userRole"/>
 	</resultMap>
 
 	<select id="idCheck" parameterType="String" resultType="int">
-		select count(user_id)
+		select count(userId)
 		from members
-		where user_id = #{userId}
+		where userId = #{userId}
 	</select>
 
 	<insert id="joinMember" parameterType="memberDto">
-		insert into members (user_id, user_name, user_password, user_email, user_phone, user_role)
+		insert into members (userId, userName, userPassword, userEmail, userPhone, userRole)
 		values (#{userId}, #{userName}, md5(#{userPwd}), #{userEmail}, #{userPhone}, #{userRole})
 	</insert>
 
 	<select id="loginMember" parameterType="map" resultMap="memberAll ">
-		select user_id, user_name, user_role
+		select userId, userName, userRole
 		from members
-		where user_id = #{userId} and user_password = md5(#{userPwd})
+		where userId = #{userId} and userPassword = md5(#{userPwd})
 	</select>
 	
 	<select id="listMember" resultMap="memberAll">
-		select user_id, user_name, user_email, user_phone, user_role, user_del
+		select userId, userName, userEmail, userPhone, userRole, userDel
 		from members
-		order by user_role
+		order by userRole
 	</select>
 	
 	<select id="getMember" parameterType="string" resultMap="memberAll">
-		select user_id, user_name, user_password, user_email, user_phone, user_role
+		select userId, userName, userPassword, userEmail, userPhone, userRole
 		from members
-		where user_id = #{userId}
+		where userId = #{userId}
 	</select>
 	
 	<update id="updateMember" parameterType="memberDto">
 		update members
 		<trim prefix="set" suffixOverrides=",">
-			<if test="userName != null">user_name = #{userName},</if>
-			<if test="userPwd != null">user_password = md5(#{userPwd}),</if>
-			<if test="userEmail != null">user_email= #{userEmail},</if>
-			<if test="userPhone != null">user_phone = #{userPhone}</if>
+			<if test="userName != null">userName = #{userName},</if>
+			<if test="userPwd != null">userPassword = md5(#{userPwd}),</if>
+			<if test="userEmail != null">userEmail= #{userEmail},</if>
+			<if test="userPhone != null">userPhone = #{userPhone}</if>
 		</trim>
-		where user_id = #{userId}
+		where userId = #{userId}
 	</update>
 	
 	<delete id="deleteMember" parameterType="String">
-		update members set user_del = 1
-		where user_id = #{userId}
+		update members set userDel = 1
+		where userId = #{userId}
 	</delete>
 	
 </mapper>
