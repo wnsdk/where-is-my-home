@@ -52,34 +52,35 @@
           :items="articles"
           :fields="fields"
           @row-clicked="viewArticle"
+          :per-page="perPage"
+          :current-page="currentPage"
         >
         </b-table>
+        <pagination
+          :pageCount="pageCount"
+          :perPage="perPage"
+          :total="total"
+          :value="currentPage"
+          :withText="withText"
+          :noArrows="noArrows"
+          @input="pgfunc"
+        >
+        </pagination>
       </b-col>
     </b-row>
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <span class="page-link">Previous</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">2</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
   </b-container>
 </template>
 
 <script>
 import http from "@/api/http";
-//import Pagination from "@/components/Pagination.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "BoardList",
+  bodyClass: "profile-page",
+  components: {
+    Pagination,
+  },
   data() {
     return {
       articles: [],
@@ -92,12 +93,20 @@ export default {
       ],
       word: "",
       searchOption: "",
+      currentPage: 1,
+      perPage: 10,
+      pageCount: 0,
+      total: 0,
+      withText: true,
+      noArrows: false,
     };
   },
   created() {
     http.get(`board`).then(({ data }) => {
       console.log(data);
       this.articles = data;
+      this.total = data.length;
+      console.log(data.length);
     });
   },
   methods: {
@@ -115,9 +124,12 @@ export default {
         .get(`board?key=${this.searchOption}&word=${this.word}`)
         .then(({ data }) => {
           this.articles = data;
+          this.total = data.length;
         });
     },
-    movePage() {},
+    pgfunc(data) {
+      this.currentPage = data;
+    },
   },
 };
 </script>
