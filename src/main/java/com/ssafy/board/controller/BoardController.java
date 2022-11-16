@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/board")
 @Api("게시판 컨트롤러  API V1")
+@CrossOrigin(origins= "*")
 public class BoardController {
 	
 	private final BoardService boardService;
@@ -43,8 +44,7 @@ public class BoardController {
 	
 	@GetMapping
 	@ApiOperation(value = "게시판 글목록", notes = "모든 게시글의 정보를 반환한다.", response = List.class)
-	@CrossOrigin(origins= "*")
-	private ResponseEntity<?> list(@RequestParam Map<String,String> map, Model model) throws Exception {
+	private ResponseEntity<?> list(@RequestParam @ApiParam(value = "검색 조건.", required = true) Map<String,String> map) throws Exception {
 		return new ResponseEntity<List<BoardDto>> (boardService.listArticle(map), HttpStatus.OK);
 	}
 	
@@ -92,7 +92,6 @@ public class BoardController {
 
 	@PostMapping
 	@ApiOperation(value = "게시판 글작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-	@CrossOrigin(origins= "*")
 	private ResponseEntity<?> write(@RequestBody @ApiParam(value = "게시글 정보.", required = true) BoardDto boardDto) throws Exception {
 		boardDto.setUserId("ssafy");
 		boardService.writeArticle(boardDto);
@@ -101,8 +100,7 @@ public class BoardController {
 	
 	@ApiOperation(value = "게시판 글보기", notes = "글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardDto.class)
 	@GetMapping("/{articleNo}")
-	@CrossOrigin(origins= "*")
-	private ResponseEntity<?> view(@PathVariable("articleNo") int articleNo) throws Exception {
+	private ResponseEntity<?> view(@PathVariable("articleNo") @ApiParam(value = "검색할 글정보.", required = true) int articleNo) throws Exception {
 		BoardDto boardDto = boardService.getArticle(articleNo);
 		boardService.updateHit(articleNo);
 		return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
@@ -110,7 +108,6 @@ public class BoardController {
 	
 	@ApiOperation(value = "게시판 글수정", notes = "수정할 게시글 정보를 입력한다.", response = String.class)
 	@PutMapping
-	@CrossOrigin(origins= "*")
 	private ResponseEntity<?> modify(@RequestBody @ApiParam(value = "수정할 글정보.", required = true) BoardDto boardDto) throws Exception {
 		boardService.modifyArticle(boardDto);
 		return new ResponseEntity<String>(HttpStatus.OK);
@@ -119,7 +116,6 @@ public class BoardController {
 	
 	@ApiOperation(value = "게시판 글삭제", notes = "글번호에 해당하는 게시글의 정보를 삭제한다.", response = String.class)
 	@DeleteMapping("/{articleNo}")
-	@CrossOrigin(origins= "*")
 	private ResponseEntity<?> delete(@PathVariable("articleNo") @ApiParam(value = "삭제할 글의 글번호.", required = true) int articleNo) throws Exception {
 		boardService.deleteArticle(articleNo);
 		return new ResponseEntity<String>(HttpStatus.OK);

@@ -19,8 +19,8 @@
 			<if test="key == 'subject'">
 				and subject like concat('%', #{word}, '%')
 			</if>
-			<if test="key != 'subject'">
-				and #{key} = #{word}
+			<if test="key == 'b.user_id'">
+				and b.user_id = #{word}
 			</if>
 		</if>
 	</sql>
