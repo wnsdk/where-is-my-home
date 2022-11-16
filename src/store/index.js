@@ -93,7 +93,7 @@ export default new Vuex.Store({
     /////////////////////////////// House start /////////////////////////////////////
     getSido({ commit }) {
       http
-        .get(`/map/sido`)
+        .get(`/house/sido`)
         .then(({ data }) => {
           // console.log(data);
           commit("SET_SIDO_LIST", data);
@@ -105,7 +105,7 @@ export default new Vuex.Store({
     getGugun({ commit }, sidoCode) {
       const params = { sido: sidoCode };
       http
-        .get(`/map/gugun`, { params })
+        .get(`/house/gugun`, { params })
         .then(({ data }) => {
           // console.log(commit, response);
           commit("SET_GUGUN_LIST", data);
@@ -115,21 +115,8 @@ export default new Vuex.Store({
         });
     },
     getHouseList({ commit }, gugunCode) {
-      // vue cli enviroment variables 검색
-      //.env.local file 생성.
-      // 반드시 VUE_APP으로 시작해야 한다.
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-      // const SERVICE_KEY =
-      //   "######################## Service Key ########################";
-      const SERVICE_URL =
-        "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-      const params = {
-        LAWD_CD: gugunCode,
-        DEAL_YMD: "202207",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
-      };
       http
-        .get(SERVICE_URL, { params })
+        .get(`house/aptlist/${gugunCode}/202207`)
         .then(({ data }) => {
           // console.log(commit, data);
           commit("SET_HOUSE_LIST", data.response.body.items.item);
