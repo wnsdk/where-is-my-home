@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <nav>
+      <router-link to="/board">로고사진(인덱스로 이동)</router-link> |
       <router-link to="/house">아파트매매정보</router-link> |
-      <router-link to="/board">게시판</router-link>
+      <router-link to="/board">공지사항</router-link> |
+      <router-link to="/board">자유게시판</router-link> |
+      <router-link to="/board">QnA</router-link> |
+      <router-link to="/board">뉴스</router-link> |
     </nav>
     <router-view />
   </div>
