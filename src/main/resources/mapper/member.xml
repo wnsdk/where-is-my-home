@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.member.model.mapper.MemberMapper">
+
+	<resultMap type="memberDto" id="member">
+		<result column="userId" property="userId"/>
+		<result column="userName" property="userName"/>
+	</resultMap>
+	
+	<resultMap type="memberDto" id="memberAll" extends="member">
+		<result column="userPassword" property="userPwd"/>
+		<result column="userEmail" property="userEmail"/>
+		<result column="userPhone" property="userPhone"/>
+		<result column="userRole" property="userRole"/>
+	</resultMap>
+
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(userId)
+		from members
+		where userId = #{userId}
+	</select>
+
+	<insert id="joinMember" parameterType="memberDto">
+		insert into members (userId, userName, userPassword, userEmail, userPhone, userRole)
+		values (#{userId}, #{userName}, md5(#{userPwd}), #{userEmail}, #{userPhone}, #{userRole})
+	</insert>
+
+	<select id="loginMember" parameterType="map" resultMap="memberAll ">
+		select userId, userName, userRole
+		from members
+		where userId = #{userId} and userPassword = md5(#{userPwd})
+	</select>
+	
+	<select id="listMember" resultMap="memberAll">
+		select userId, userName, userEmail, userPhone, userRole, userDel
+		from members
+		order by userRole
+	</select>
+	
+	<select id="getMember" parameterType="string" resultMap="memberAll">
+		select userId, userName, userPassword, userEmail, userPhone, userRole
+		from members
+		where userId = #{userId}
+	</select>
+	
+	<update id="updateMember" parameterType="memberDto">
+		update members
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName != null">userName = #{userName},</if>
+			<if test="userPwd != null">userPassword = md5(#{userPwd}),</if>
+			<if test="userEmail != null">userEmail= #{userEmail},</if>
+			<if test="userPhone != null">userPhone = #{userPhone}</if>
+		</trim>
+		where userId = #{userId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		update members set userDel = 1
+		where userId = #{userId}
+	</delete>
+	
+</mapper>

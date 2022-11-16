@@ -5,29 +5,29 @@
 <mapper namespace="com.ssafy.apartment.model.mapper.StarMapper">
 
 	<resultMap type="starDto" id="star">
-		<result column="star_no" property="starNo"/>
+		<result column="starNo" property="starNo"/>
 		<result column="dongCode" property="dongCode"/>
 		<result column="dealYM" property="dealYM"/>
-		<result column="user_id" property="userId"/>
+		<result column="userId" property="userId"/>
 		<result column="sidoName" property="sidoName"/>
 		<result column="gugunName" property="gugunName"/>
 		<result column="dongName" property="dongName"/>
 	</resultMap>
 	
 	<select id="listStar" parameterType="String" resultMap="star">
-		select s.star_no, d.dongCode, s.dealYM, s.user_id, d.sidoName, d.gugunName, d.dongName
+		select s.starNo, d.dongCode, s.dealYM, s.userId, d.sidoName, d.gugunName, d.dongName
 		from dongcode d join star s
 		on d.dongCode = s.dongCode
-		where s.user_id = #{userId}
+		where s.userId = #{userId}
 	</select>
 	
 	<insert id="addStar" parameterType="map">
-	insert into star (user_id, dongCode, dealYM)
+	insert into star (userId, dongCode, dealYM)
 	values(#{userId},#{dongCode},#{dealYM})
 	</insert>
 	
 	<delete id="deleteStar" parameterType="int">
 	delete from star
-	where star_no=#{starNo}
+	where starNo=#{starNo}
 	</delete>
 </mapper>

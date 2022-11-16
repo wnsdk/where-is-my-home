@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (map.containsKey("key"))
-			param.put("key", map.get("key").equals("userid") ? "b.user_id" : map.get("key"));
+			param.put("key", map.get("key").equals("userid") ? "b.userId" : map.get("key"));
 		
 		if (map.containsKey("word"))
 			param.put("word", map.get("word"));

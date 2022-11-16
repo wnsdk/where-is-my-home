@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ssafy.qna.model.mapper.QnAMapper">
+
+	<resultMap type="qnaDto" id="article">
+		<result column="articleNo" property="articleNo"/>
+		<result column="userId" property="userId"/>
+		<result column="userName" property="userName"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="answer" property="answer"/>
+		<result column="hit" property="hit"/>
+		<result column="registerTime" property="registerTime"/>
+	</resultMap>
+
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key == 'q.userId'">
+				and q.userId = #{word}
+			</if>
+		</if>
+	</sql>
+
+	<select id="listArticle" parameterType="map" resultMap="article">
+		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.hit, q.registerTime, m.userName
+		from qna q, members m 
+		where q.userId = m.userId
+		<include refid="search"></include>
+		order by q.articleNo desc
+		<!-- limit #{start}, #{listsize} -->
+	</select>
+	
+	<select id="getArticle" parameterType="int" resultMap="article">
+		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.hit, q.registerTime, m.userName 
+		from qna q, members m
+		where q.userId = m.userId
+		and q.articleNo = #{articleNo}
+	</select>
+
+	<insert id="writeArticle" parameterType="qnaDto">
+		insert into qna (userId, subject, content, hit, registerTime)
+		values (#{userId}, #{subject}, #{content}, 0, now())
+		<selectKey resultType="int" keyProperty="articleNo" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<update id="writeAnswer" parameterType="qnaDto">
+		update qna
+		set answer = #{answer}
+		where articleNo = #{articleNo}
+	</update>
+	
+	<update id="modifyArticle" parameterType="qnaDto">
+		update qna
+		set subject = #{subject}, content = #{content}
+		where articleNo = #{articleNo}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="int">
+		delete from qna
+		where articleNo = #{articleNo}
+	</delete>
+	
+	<select id="totalArticleCount" parameterType="map" resultType="int">
+		select count(articleNo)
+		from qna
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+	
+	<update id="updateHit" parameterType="int">
+		update qna
+		set hit = hit + 1
+		where articleNo = #{articleNo}
+	</update>
+	
+</mapper>
