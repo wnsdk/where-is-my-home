@@ -93,7 +93,6 @@ public class BoardController {
 	@PostMapping
 	@ApiOperation(value = "게시판 글작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	private ResponseEntity<?> write(@RequestBody @ApiParam(value = "게시글 정보.", required = true) BoardDto boardDto) throws Exception {
-		boardDto.setUserId("ssafy");
 		boardService.writeArticle(boardDto);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
