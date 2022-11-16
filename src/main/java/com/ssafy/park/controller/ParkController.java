@@ -21,11 +21,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.park.model.ParkDto;
 import com.ssafy.park.model.service.ParkService;
 
-@Controller
+@RestController
 @RequestMapping("/park")
 public class ParkController {
 	
@@ -33,7 +34,6 @@ public class ParkController {
 	public ParkService parkService;
 
 	@GetMapping("/getAllParks")
-	@ResponseBody
 	public ResponseEntity<?> getAllParks(@RequestParam Map<String,String> map, Model model) throws IOException {
         String lng = map.get("lng");
         String lat = map.get("lat");
