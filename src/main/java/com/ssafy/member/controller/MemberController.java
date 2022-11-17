@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,11 +24,14 @@ import com.ssafy.jwt.service.JwtServiceImpl;
 import com.ssafy.member.model.MemberDto;
 import com.ssafy.member.model.service.MemberService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/member")
+@Api("멤버 컨트롤러  API")
+@CrossOrigin(origins= "*")
 public class MemberController {
 	
 	private static final String SUCCESS = "success";

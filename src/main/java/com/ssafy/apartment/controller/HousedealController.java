@@ -27,11 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.apartment.model.SidoGugunCodeDto;
 import com.ssafy.apartment.model.service.HousedealService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping(value = "/house")
+@Api("아파트 컨트롤러  API")
 @CrossOrigin(origins= "*")
 public class HousedealController {
 
