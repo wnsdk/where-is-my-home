@@ -1,0 +1,88 @@
+import Vue from "vue";
+import VueRouter from "vue-router";
+
+Vue.use(VueRouter);
+
+const routes = [
+  {
+    path: "/house",
+    name: "house",
+    component: () => import("@/views/AppHouse"),
+  },
+  {
+    path: "/board",
+    name: "board",
+    component: () => import("@/views/AppBoard"),
+    redirect: "/board/list",
+    children: [
+      {
+        path: "list",
+        name: "boardlist",
+        component: () => import("@/components/board/BoardList"),
+      },
+
+      {
+        path: "view/:articleNo",
+        name: "boardview",
+        component: () => import("@/components/board/BoardView"),
+      },
+      {
+        path: "write",
+        name: "boardwrite",
+        component: () => import("@/components/board/BoardWrite"),
+      },
+      {
+        path: "modify",
+        name: "boardmodify",
+        component: () => import("@/components/board/BoardModify"),
+      },
+      {
+        path: "delete/:articleNo",
+        name: "boarddelete",
+        component: () => import("@/components/board/BoardDelete"),
+      },
+    ],
+  },
+  {
+    path: "/qna",
+    name: "qna",
+    component: () => import("@/views/AppQnA"),
+    redirect: "/qna/list",
+    children: [
+      {
+        path: "list",
+        name: "qnalist",
+        component: () => import("@/components/qna/QnAList"),
+      },
+
+      {
+        path: "view/:articleNo",
+        name: "qnaview",
+        component: () => import("@/components/qna/QnAView"),
+      },
+      {
+        path: "write",
+        name: "qnawrite",
+        component: () => import("@/components/qna/QnAWrite"),
+      },
+      {
+        path: "modify",
+        name: "qnamodify",
+        component: () => import("@/components/qna/QnAModify"),
+      },
+      {
+        path: "delete/:articleNo",
+        name: "qnadelete",
+        component: () => import("@/components/qna/QnADelete"),
+      },
+    ],
+  },
+];
+
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
+});
+
+export default router;
