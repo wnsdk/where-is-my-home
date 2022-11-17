@@ -1,6 +1,6 @@
 # argontest
 
-## Project setup
+### Project setup - 필수
 
 ```
 npm install
@@ -8,7 +8,7 @@ npm install axios
 npm install vue bootstrap bootstrap-vue
 ```
 
-### vue-fontawesome (with Vue 2)
+### vue-fontawesome (with Vue 2) - 필수
 
 ```
 npm i --save @fortawesome/fontawesome-svg-core
