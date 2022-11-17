@@ -9,7 +9,14 @@ public class MemberDto {
 	private String userPhone;
 	private String userRole;
 	private String userDel;
+	private String token;
 	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -57,8 +64,4 @@ public class MemberDto {
 		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", userEmail="
 				+ userEmail + ", userPhone=" + userPhone + ", userRole=" + userRole + ", userDel=" + userDel + "]";
 	}
-	
-
-	
-
 }

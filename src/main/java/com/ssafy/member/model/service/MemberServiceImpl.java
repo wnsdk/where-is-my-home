@@ -1,5 +1,6 @@
 package com.ssafy.member.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import com.ssafy.member.model.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-
+	
 	private MemberMapper memberMapper;
 	
 	@Autowired
@@ -30,8 +31,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto loginMember(Map<String, String> map) throws Exception {
-		return memberMapper.loginMember(map);
+	public MemberDto loginMember(MemberDto memberDto) throws Exception {
+		if (memberDto.getUserId() == null || memberDto.getUserPwd() == null)
+			return null;
+		return memberMapper.loginMember(memberDto);
 	}
 
 	@Override
@@ -52,5 +55,26 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberDto> listMember() throws Exception {
 		return memberMapper.listMember();
+	}
+	
+	@Override
+	public void saveRefreshToken(String userId, String refreshToken) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("token", refreshToken);
+		memberMapper.saveRefreshToken(map);
+	}
+	
+	@Override
+	public Object getRefreshToken(String userId) throws Exception {
+		return memberMapper.getRefreshToken(userId);
+	}
+	
+	@Override
+	public void deleRefreshToken(String userId) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("token", null);
+		memberMapper.deleteRefreshToken(map);
 	}
 }

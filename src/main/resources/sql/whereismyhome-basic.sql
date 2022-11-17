@@ -1,5 +1,6 @@
+-- drop database myhome;
 -- CREATE SCHEMA IF NOT EXISTS `myhome` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
--- USE `myhome` ;
+USE `myhome` ;
 
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `myhome`.`members` ;
@@ -12,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `myhome`.`members` (
   `userPhone` VARCHAR(20) NULL DEFAULT NULL,
   `userRole` VARCHAR(16) NOT NULL,
   `userDel` INT DEFAULT 0,
+  `token` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`userId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
