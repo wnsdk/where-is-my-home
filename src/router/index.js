@@ -5,6 +5,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "main",
+    component: () => import("@/views/AppMain"),
+  },
+  {
     path: "/house",
     name: "house",
     component: () => import("@/views/AppHouse"),
@@ -74,6 +79,29 @@ const routes = [
         path: "delete/:articleNo",
         name: "qnadelete",
         component: () => import("@/components/qna/QnADelete"),
+      },
+    ],
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/AppUser"),
+    children: [
+      {
+        path: "join",
+        name: "join",
+        component: () => import("@/components/user/UserRegister"),
+      },
+      {
+        path: "login",
+        name: "login",
+        component: () => import("@/components/user/UserLogin"),
+      },
+      {
+        path: "mypage",
+        name: "mypage",
+        //beforeEnter: onlyAuthUser,
+        component: () => import("@/components/user/UserMyPage"),
       },
     ],
   },

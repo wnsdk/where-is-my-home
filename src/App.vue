@@ -1,16 +1,23 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/board">로고사진(인덱스로 이동)</router-link> |
-      <router-link to="/house">아파트매매정보</router-link> |
-      <router-link to="/notice">공지사항</router-link> |
-      <router-link to="/board">자유게시판</router-link> |
-      <router-link to="/qna">QnA</router-link> |
-      <router-link to="/news">뉴스</router-link> |
-    </nav>
-    <router-view />
+    <the-header-navbar></the-header-navbar>
+    <main>
+      <fade-transition origin="center" mode="out-in" :duration="250">
+        <router-view />
+      </fade-transition>
+    </main>
   </div>
 </template>
+
+<script>
+import TheHeaderNavbar from "@/components/TheHeaderNavbar";
+export default {
+  name: "App",
+  components: {
+    TheHeaderNavbar,
+  },
+};
+</script>
 
 <style>
 #app {

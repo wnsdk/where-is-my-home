@@ -51,7 +51,7 @@
           hover
           :items="articles"
           :fields="fields"
-          @row-clicked="viewArticle"
+          @row-clicked="showAnswer"
           :per-page="perPage"
           :current-page="currentPage"
         >
@@ -69,7 +69,6 @@
               {{ data.detailsShowing ? "Hide" : "Show" }}
             </b-button>
           </template>
-
           <template #row-details="data">
             <b-card>
               <b-row class="mb-2">
@@ -118,7 +117,7 @@ export default {
         { key: "registerTime", label: "작성일", tdClass: "tdClass" },
         { key: "hit", label: "조회수", tdClass: "tdClass" },
         { key: "answer", label: "답변여부", tdClass: "tdClass" },
-        { key: "details", label: "상세 보기", tdClass: "tdClass" },
+        { key: "details", label: "상세", tdClass: "tdClass" },
       ],
       word: "",
       searchOption: "",
@@ -128,6 +127,7 @@ export default {
       total: 0,
       withText: true,
       noArrows: false,
+      answer: false,
     };
   },
   created() {
@@ -164,6 +164,10 @@ export default {
     },
     pgfunc(data) {
       this.currentPage = data;
+    },
+    showAnswer() {
+      if (this.answer) this.answer = false;
+      else this.answer = true;
     },
   },
 };

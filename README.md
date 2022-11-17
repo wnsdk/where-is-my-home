@@ -33,6 +33,17 @@ npm run build
 npm run lint
 ```
 
+### vue-fontawesome (with Vue 2)
+
+```
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+npm i --save @fortawesome/vue-fontawesome@2
+```
+
+See [Configuration Reference](https://github.com/FortAwesome/vue-fontawesome).
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
