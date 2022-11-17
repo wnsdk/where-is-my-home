@@ -4,6 +4,15 @@
 
 ```
 npm install
+npm install axios
+npm install vue bootstrap bootstrap-vue
+```
+
+### 윈도우 환경에서 git 사용 시 자동으로 CRLF로 바뀌는 것을 방지해주는 git 명령어
+
+```
+git config core.eol lf
+git config core.autocrlf input
 ```
 
 ### Compiles and hot-reloads for development

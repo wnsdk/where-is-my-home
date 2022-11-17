@@ -73,7 +73,6 @@
 
 <script>
 import http from "@/api/http";
-
 import Pagination from "@/components/Pagination.vue";
 
 export default {
@@ -82,7 +81,6 @@ export default {
   components: {
     Pagination,
   },
-
   data() {
     return {
       articles: [],
@@ -95,7 +93,6 @@ export default {
       ],
       word: "",
       searchOption: "",
-
       currentPage: 1,
       perPage: 10,
       pageCount: 0,
@@ -108,7 +105,6 @@ export default {
     http.get(`board`).then(({ data }) => {
       console.log(data);
       this.articles = data;
-
       this.total = data.length;
       console.log(data.length);
     });
@@ -128,7 +124,6 @@ export default {
         .get(`board?key=${this.searchOption}&word=${this.word}`)
         .then(({ data }) => {
           this.articles = data;
-
           this.total = data.length;
         });
     },
