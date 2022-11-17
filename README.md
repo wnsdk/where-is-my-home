@@ -47,3 +47,14 @@ See [Configuration Reference](https://github.com/FortAwesome/vue-fontawesome).
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Argon theme 적용
+
+```
+npm i vue-lazyload -S
+npm i vue2-transitions
+npm install nouislider
+npm install sass-loader sass webpack --save-dev
+```
+
+https://www.creative-tim.com/product/vue-argon-design-system
