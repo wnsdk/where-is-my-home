@@ -11,6 +11,7 @@ export default new Vuex.Store({
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    houseDeal: null,
   },
   getters: {},
 
@@ -46,6 +47,9 @@ export default new Vuex.Store({
       // console.log("Mutations", house);
       state.house = house;
     },
+    SET_HOUSEDEAL(state, houseDeal) {
+      state.houseDeal = houseDeal;
+    },
     /////////////////////////////// House end /////////////////////////////////////
   },
   actions: {
@@ -75,10 +79,9 @@ export default new Vuex.Store({
     },
     getHouseList({ commit }, gugunCode) {
       http
-        .get(`house/aptlist/${gugunCode}/202207`)
+        .get(`house/gugunAptList/${gugunCode}`)
         .then(({ data }) => {
-          // console.log(commit, data);
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
+          commit("SET_HOUSE_LIST", data);
         })
         .catch((error) => {
           console.log(error);
@@ -87,7 +90,11 @@ export default new Vuex.Store({
     detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출
       // console.log(commit, house);
+
       commit("SET_DETAIL_HOUSE", house);
+      http.get(`house/AptDealList/${house.aptCode}`).then(({ data }) => {
+        commit("SET_HOUSEDEAL", data);
+      });
     },
     /////////////////////////////// House end /////////////////////////////////////
   },

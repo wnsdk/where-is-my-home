@@ -1,10 +1,8 @@
 <template>
-  <div id="container">
+  <div id="houseModal">
     <house-search-bar></house-search-bar>
-    <b-row>
-      <b-col><house-list /></b-col>
-      <b-col><house-detail /></b-col>
-    </b-row>
+    <b-row><house-detail /></b-row>
+    <b-row><house-list /></b-row>
   </div>
 </template>
 
@@ -23,7 +21,4 @@ export default {
 };
 </script>
 
-<style scoped>
-#container {
-}
-</style>
+<style scoped></style>

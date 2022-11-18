@@ -1,9 +1,9 @@
 <template>
-  <b-container class="bv-example-row mt-3 text-center">
+  <div>
     <house-navigation></house-navigation>
     <house-modal></house-modal>
     <house-map></house-map>
-  </b-container>
+  </div>
 </template>
 <script>
 import HouseMap from "@/components/house/HouseMap.vue";
@@ -27,5 +27,18 @@ export default {
     rgba(255, 255, 255, 0) 70%,
     rgba(231, 149, 27, 0.3) 30%
   );
+}
+#houseModal {
+  width: 380px;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  z-index: 3;
+}
+#map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 </style>

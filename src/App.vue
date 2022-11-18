@@ -1,22 +1,16 @@
 <template>
   <div id="app">
     <the-header-navbar></the-header-navbar>
-    <main>
-      <fade-transition origin="center" mode="out-in" :duration="250">
-        <router-view />
-      </fade-transition>
-    </main>
+    <router-view id="main"></router-view>
   </div>
 </template>
 
 <script>
-import { FadeTransition } from "vue2-transitions";
 import TheHeaderNavbar from "@/components/TheHeaderNavbar";
 export default {
   name: "App",
   components: {
     TheHeaderNavbar,
-    FadeTransition,
   },
 };
 </script>
@@ -28,6 +22,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
 }
 
 nav {
