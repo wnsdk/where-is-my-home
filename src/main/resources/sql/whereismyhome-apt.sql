@@ -138,7 +138,6 @@ INSERT INTO `guguncode` VALUES ('1111000000','종로구'),('1114000000','중구'
 /*!40000 ALTER TABLE `guguncode` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
 --
 -- Table structure for table `sidocode`
 --
@@ -174,3 +173,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-09-17 11:27:56
+

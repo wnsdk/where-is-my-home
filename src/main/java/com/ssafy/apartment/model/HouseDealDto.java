@@ -29,7 +29,6 @@ public class HouseDealDto {
 		this.floor = floor;
 		this.aptName = aptName;
 		this.dongName = dongName;
-
 	}
 	public String getNo() {
 		return no;

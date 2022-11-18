@@ -86,7 +86,6 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-		
 		<!-- Spring에서 Json을 다루는 라이브러리가 없어서 나타나는 request 415 문제 해결 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -111,9 +110,6 @@
 			<artifactId>guava-collections</artifactId>
 			<version>r03</version>
 		</dependency>
-		
-		
-		
 	</dependencies>
 
 	<build>

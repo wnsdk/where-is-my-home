@@ -52,6 +52,5 @@ public class HousedealServiceImpl implements HousedealService{
 	public List<HouseDealDto> AptDealList(String aptCode) throws Exception {
 		return sqlSession.getMapper(HousedealMapper.class).AptDealList(aptCode);
 	}
-
 	
 }

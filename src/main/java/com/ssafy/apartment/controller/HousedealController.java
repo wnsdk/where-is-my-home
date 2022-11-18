@@ -112,5 +112,4 @@ public class HousedealController {
 //
 //		return new ResponseEntity<String>(jsonStr, HttpStatus.OK);
 //	}
-	
 }
