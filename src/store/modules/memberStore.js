@@ -44,7 +44,11 @@ const memberStore = {
           if (data.message === "success") {
             let accessToken = data["access-token"];
             let refreshToken = data["refresh-token"];
-            console.log("login success token created!!!! >> ", accessToken, refreshToken);
+            console.log(
+              "login success token created!!!! >> ",
+              accessToken,
+              refreshToken
+            );
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
@@ -57,7 +61,7 @@ const memberStore = {
           }
         },
         (error) => {
-          console.log("여기는 userConfirm error" ,error);
+          console.log("여기는 userConfirm error", error);
         }
       );
     },
