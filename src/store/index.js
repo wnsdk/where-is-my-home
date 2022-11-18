@@ -1,13 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import http from "@/api/http";
-import createPersistedState from "vuex-persistedstate";
-// module import
-import boardStore from "@/store/modules/boardStore";
-import houseStore from "@/store/modules/houseStore";
-import memberStore from "@/store/modules/memberStore";
-import todoStore from "@/store/modules/todoStore";
-
+// import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -41,6 +35,9 @@ export default new Vuex.Store({
     },
     CLEAR_GUGUN_LIST(state) {
       state.guguns = [{ value: null, text: "선택하세요" }];
+    },
+    CLEAR_DETAIL_HOUSE(state) {
+      state.house = null;
     },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
@@ -94,16 +91,11 @@ export default new Vuex.Store({
     },
     /////////////////////////////// House end /////////////////////////////////////
   },
-  modules: {
-    boardStore,
-    houseStore,
-    memberStore,
-    todoStore,
-  },
-  plugins: [
-    createPersistedState({
-      // 브라우저 종료시 제거하기 위해 localStorage가 아닌 sessionStorage로 변경. (default: localStorage)
-      storage: sessionStorage,
-    }),
-  ],
+  modules: {},
+  // plugins: [
+  //   createPersistedState({
+  //     // 브라우저 종료시 제거하기 위해 localStorage가 아닌 sessionStorage로 변경. (default: localStorage)
+  //     storage: sessionStorage,
+  //   }),
+  // ],
 });
