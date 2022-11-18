@@ -35,9 +35,10 @@ export default {
   methods: {
     ...mapActions(["detailHouse"]),
     selectHouse() {
-      console.log("listRow : ", this.house);
+      // console.log("listRow : ", this.house);
       // this.$store.dispatch("getHouse", this.house);
       this.detailHouse(this.house);
+      this.FOCUS_MAP_HOUSE(this.house);
     },
     colorChange(flag) {
       this.isColor = flag;

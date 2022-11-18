@@ -16,9 +16,29 @@ export default {
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns", "houses"]),
+    ...mapState(["sidos", "guguns", "houses", "house"]),
   },
   watch: {
+    // house가 변경되면 마커 focus가 이동됨
+    house: function (apt) {
+      let address = `${apt.도로명} ${apt.도로명건물본번호코드}`;
+      this.geocoder.addressSearch(address, (result, status) => {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+          let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+          // 결과값으로 받은 위치를 마커로 표시합니다
+          var marker = new kakao.maps.Marker({
+            position: coords,
+          });
+          // 마커가 지도 위에 표시되도록 설정합니다
+          marker.setMap(this.map);
+
+          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+          this.map.setCenter(coords);
+        }
+      });
+    },
     // houses가 변경되면 지도가 변경됨
     houses: function (value) {
       this.apt_map = new Map();
@@ -105,7 +125,7 @@ export default {
 
 <style scoped>
 #map {
-  width: 400px;
-  height: 400px;
+  width: 100vh;
+  height: 100vh;
 }
 </style>

@@ -48,7 +48,12 @@ export default {
   },
   methods: {
     ...mapActions(["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations(["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST", "CLEAR_APT_LIST"]),
+    ...mapMutations([
+      "CLEAR_SIDO_LIST",
+      "CLEAR_GUGUN_LIST",
+      "CLEAR_APT_LIST",
+      "CLEAR_DETAIL_HOUSE",
+    ]),
 
     gugunList() {
       this.CLEAR_GUGUN_LIST();
@@ -56,7 +61,10 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      if (this.gugunCode) this.getHouseList(this.gugunCode);
+      if (this.gugunCode) {
+        this.getHouseList(this.gugunCode);
+        this.CLEAR_DETAIL_HOUSE();
+      }
     },
   },
 };

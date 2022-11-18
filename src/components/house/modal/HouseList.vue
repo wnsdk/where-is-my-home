@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import HouseListItem from "@/components/house/HouseListItem";
+import HouseListItem from "@/components/house/modal/HouseListItem";
 import { mapState } from "vuex";
 
 export default {

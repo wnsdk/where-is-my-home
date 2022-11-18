@@ -36,6 +36,9 @@ export default new Vuex.Store({
     CLEAR_GUGUN_LIST(state) {
       state.guguns = [{ value: null, text: "선택하세요" }];
     },
+    CLEAR_DETAIL_HOUSE(state) {
+      state.house = null;
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
     },
