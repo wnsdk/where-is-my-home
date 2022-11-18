@@ -16,13 +16,15 @@
     "bootstrap": "^5.2.2",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
+    "jwt-decode": "^3.1.2",
     "nouislider": "^15.6.1",
     "vue": "^2.7.14",
-    "vue-flatpickr-component": "^8.1.7",
+    "vue-jwt-decode": "^0.1.0",
     "vue-lazyload": "^3.0.0-rc.2",
     "vue-router": "^3.5.1",
     "vue2-transitions": "^0.3.0",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

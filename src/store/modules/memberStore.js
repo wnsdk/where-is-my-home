@@ -1,6 +1,8 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
+import Vuex from "vuex";
 import { login, findById, tokenRegeneration, logout } from "@/api/member";
+import Vue from "vue";
 
 const memberStore = {
   namespaced: true,
@@ -35,13 +37,18 @@ const memberStore = {
   },
   actions: {
     async userConfirm({ commit }, user) {
+      await console.log("commit은 ", commit, "유저는 >?>", user);
       await login(
         user,
         ({ data }) => {
           if (data.message === "success") {
             let accessToken = data["access-token"];
             let refreshToken = data["refresh-token"];
-            // console.log("login success token created!!!! >> ", accessToken, refreshToken);
+            console.log(
+              "login success token created!!!! >> ",
+              accessToken,
+              refreshToken
+            );
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
@@ -54,19 +61,19 @@ const memberStore = {
           }
         },
         (error) => {
-          console.log(error);
+          console.log("여기는 userConfirm error", error);
         }
       );
     },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
-      // console.log("2. getUserInfo() decodeToken :: ", decodeToken);
+      console.log("2. getUserInfo() decodeToken :: ", decodeToken);
       await findById(
         decodeToken.userid,
         ({ data }) => {
           if (data.message === "success") {
             commit("SET_USER_INFO", data.userInfo);
-            // console.log("3. getUserInfo data >> ", data);
+            console.log("3. getUserInfo data >> ", data);
           } else {
             console.log("유저 정보 없음!!!!");
           }
@@ -144,5 +151,7 @@ const memberStore = {
     },
   },
 };
+
+Vue.use(Vuex);
 
 export default memberStore;

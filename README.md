@@ -20,6 +20,22 @@ npm i --save @fortawesome/vue-fontawesome@2
 
 See [Configuration Reference](https://github.com/FortAwesome/vue-fontawesome).
 
+### vuex-persistedstate - 필수
+
+```
+npm install --save vuex-persistedstate
+```
+
+브라우저 종료시 제거하기 위해 localStorage가 아닌 sessionStorage로 변경. (default: localStorage)
+
+### jwt-decode - 필수
+
+```
+npm install jwt-decode
+```
+
+java web token을 이용한 로그인 인증 처리를 위한 모듈
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).

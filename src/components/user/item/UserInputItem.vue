@@ -88,7 +88,62 @@
   </section>
 </template>
 <script>
-export default {};
+export default {
+  name: "UserInputItem",
+  data() {
+    return {
+      // isLoginError: false,
+      user: {
+        userId: "",
+        userName: "",
+        userPwd: "",
+        userEmail: "",
+        userPhone: "",
+        userRole: "",
+        userDel: "",
+        token: "",
+      },
+    };
+  },
+  props:{
+    type:{type : String},
+  },
+
+  methods:{
+    onSubmit(event) {
+      event.preventDefault();
+      let err = true;
+      let msg = "";
+      !this.user.userId &&
+        ((msg = "아이디를 입력해주세요"),
+        (err = false),
+        this.$refs.userId.focus());
+      err &&
+        !this.user.userPwd &&
+        ((msg = "비밀번호를 입력해주세요"),
+        (err = false),
+        this.$refs.userPwd.focus());
+      if (!err) alert(msg);
+      else
+        this.type === "register" ? this.registArticle() : this.modifyArticle();
+    },
+    // onReset(event) {
+    //   event.preventDefault();
+    //   this.user.userId = "";
+    //   this.user.userPwd= "";
+    //   this.user.userName= "";
+    //   this.user.userPwd= "";
+    //   this.user.userEmail= "";
+    //   this.user.userPhone= "";
+    //   this.user.userRole= "";
+    //   this.user.userDel= "";
+    //   this.user.token= "";
+    //   this.moveList();
+    // },
+    loginUser(){
+        
+    }
+  }
+};
 </script>
 <style></style>
-

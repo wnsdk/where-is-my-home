@@ -6,7 +6,7 @@ function apiInstance() {
   const instance = axios.create({
     baseURL: API_BASE_URL,
     headers: {
-      "Content-type": "application/json",
+      "Content-Type": "application/json;charset=utf-8",
     },
   });
   return instance;
@@ -16,7 +16,7 @@ function houseInstance() {
   const instance = axios.create({
     baseURL: APT_DEAL_URL,
     headers: {
-      "Content-type": "application/json",
+      "Content-Type": "application/json;charset=utf-8",
     },
   });
   return instance;
