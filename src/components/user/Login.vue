@@ -42,35 +42,37 @@
               </div>
               <b-form-group label-for="userId">
                 <b-form-input
-                alternative
-                class="mb-3"
-                addon-left-icon="ni ni-email-83"
-                id="userId"
-                v-model="user.userid"
-                required
-                placeholder="아이디...."
-              ></b-form-input>
+                  alternative
+                  class="mb-3"
+                  addon-left-icon="ni ni-email-83"
+                  id="userId"
+                  v-model="user.userId"
+                  required
+                  placeholder="아이디...."
+                ></b-form-input>
               </b-form-group>
-              <b-form-group label-for="userPwd" >
+              <b-form-group label-for="userPwd">
                 <b-form-input
-                alternative
-                type="password"
-                class="mb-3"
-                addon-left-icon="ni ni-email-83"
-                id="userPwd"
-                v-model="user.userpwd"
-                required
-                placeholder="비밀번호...."
-              ></b-form-input>
+                  alternative
+                  type="password"
+                  class="mb-3"
+                  addon-left-icon="ni ni-email-83"
+                  id="userPwd"
+                  v-model="user.userPwd"
+                  required
+                  placeholder="비밀번호...."
+                ></b-form-input>
               </b-form-group>
-                <b-checkbox> Remember me </b-checkbox>
-                <div class="text-center">
-                  <b-button type="button" variant="success" class="my-4"
+              <b-checkbox> Remember me </b-checkbox>
+              <div class="text-center">
+                <b-button
+                  type="button"
+                  variant="success"
+                  class="my-4"
                   @click="confirm"
-                    >로그인</b-button
-                  >
-                </div>
-              
+                  >로그인</b-button
+                >
+              </div>
             </template>
           </b-card>
           <div class="row mt-3">
@@ -100,8 +102,8 @@ export default {
     return {
       // isLoginError: false,
       user: {
-        userid: "",
-        userpwd: "",
+        userId: "",
+        userPwd: "",
       },
     };
   },
@@ -112,16 +114,18 @@ export default {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     async confirm() {
       await this.userConfirm(this.user); //로그인은 비동기, 따라서 Actions
-      await console.log("여기는 Login.js confirm안에 있는 this.user >> ", this.user)
+      await console.log(
+        "여기는 Login.js confirm안에 있는 this.user >> ",
+        this.user
+      );
       let token = sessionStorage.getItem("access-token");
       console.log("1. confirm() token >> " + token);
       if (this.isLogin) {
         await this.getUserInfo(token);
         console.log("4. confirm() userInfo :: ", this.userInfo);
         this.$router.push({ name: "main" });
-      }
-      else{
-        console.log("로그인 에러")
+      } else {
+        console.log("로그인 에러");
       }
     },
     movePage() {

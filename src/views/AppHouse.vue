@@ -1,42 +1,19 @@
 <template>
-  <b-container class="bv-example-row mt-3 text-center">
-    <h3 class="underline-orange">
-      <b-icon icon="house-fill"></b-icon> House Service
-      <house-map></house-map>
-    </h3>
-    <!-- <b-row>
-      <b-col>
-        <b-img alt="Happy House" :src="require('@/assets/happyhouse.png')" />
-      </b-col>
-    </b-row> -->
-    <b-row>
-      <b-col>
-        <house-search-bar></house-search-bar>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col cols="6" align="left">
-        <house-list />
-      </b-col>
-      <b-col cols="6">
-        <house-detail />
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <house-navigation></house-navigation>
+    <router-view></router-view>
+    <house-map></house-map>
+  </div>
 </template>
 <script>
-import HouseSearchBar from "@/components/house/HouseSearchBar.vue";
-import HouseList from "@/components/house/HouseList.vue";
-import HouseDetail from "@/components/house/HouseDetail.vue";
 import HouseMap from "@/components/house/HouseMap.vue";
+import HouseNavigation from "@/components/house/navigation/HouseNavigation.vue";
 
 export default {
   name: "AppHouse",
   components: {
-    HouseSearchBar,
-    HouseList,
-    HouseDetail,
     HouseMap,
+    HouseNavigation,
   },
 };
 </script>
@@ -48,5 +25,18 @@ export default {
     rgba(255, 255, 255, 0) 70%,
     rgba(231, 149, 27, 0.3) 30%
   );
+}
+#houseModal {
+  width: 380px;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  z-index: 3;
+}
+#map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 </style>

@@ -8,7 +8,6 @@ import houseStore from "@/store/modules/houseStore";
 import memberStore from "@/store/modules/memberStore";
 import todoStore from "@/store/modules/todoStore";
 
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -17,6 +16,7 @@ export default new Vuex.Store({
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    houseDeal: null,
   },
   getters: {},
 
@@ -42,12 +42,18 @@ export default new Vuex.Store({
     CLEAR_GUGUN_LIST(state) {
       state.guguns = [{ value: null, text: "선택하세요" }];
     },
+    CLEAR_DETAIL_HOUSE(state) {
+      state.house = null;
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
     },
     SET_DETAIL_HOUSE(state, house) {
       // console.log("Mutations", house);
       state.house = house;
+    },
+    SET_HOUSEDEAL(state, houseDeal) {
+      state.houseDeal = houseDeal;
     },
     /////////////////////////////// House end /////////////////////////////////////
   },
@@ -78,10 +84,9 @@ export default new Vuex.Store({
     },
     getHouseList({ commit }, gugunCode) {
       http
-        .get(`house/aptlist/${gugunCode}/202207`)
+        .get(`house/gugunAptList/${gugunCode}`)
         .then(({ data }) => {
-          // console.log(commit, data);
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
+          commit("SET_HOUSE_LIST", data);
         })
         .catch((error) => {
           console.log(error);
@@ -90,7 +95,16 @@ export default new Vuex.Store({
     detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출
       // console.log(commit, house);
+
       commit("SET_DETAIL_HOUSE", house);
+      http.get(`house/AptDealList/${house.aptCode}`).then(({ data }) => {
+        commit("SET_HOUSEDEAL", data);
+      });
+    },
+    getMyhouse({ commit }, userId) {
+      http.get(`myhouse/${userId}`).then(({ data }) => {
+        commit("SET_HOUSE_LIST", data);
+      });
     },
     /////////////////////////////// House end /////////////////////////////////////
   },

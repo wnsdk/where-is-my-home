@@ -13,6 +13,19 @@ const routes = [
     path: "/house",
     name: "house",
     component: () => import("@/views/AppHouse"),
+    redirect: "/house/search",
+    children: [
+      {
+        path: "search",
+        name: "search",
+        component: () => import("@/components/house/HouseModalSearch"),
+      },
+      {
+        path: "myhouse",
+        name: "myhouse",
+        component: () => import("@/components/house/HouseModalMyhouse"),
+      },
+    ],
   },
   {
     path: "/board",
