@@ -96,6 +96,11 @@ export default new Vuex.Store({
         commit("SET_HOUSEDEAL", data);
       });
     },
+    getMyhouse({ commit }, userId) {
+      http.get(`myhouse/${userId}`).then(({ data }) => {
+        commit("SET_HOUSE_LIST", data);
+      });
+    },
     /////////////////////////////// House end /////////////////////////////////////
   },
   modules: {},

@@ -1,21 +1,19 @@
 <template>
   <div>
     <house-navigation></house-navigation>
-    <house-modal></house-modal>
+    <router-view></router-view>
     <house-map></house-map>
   </div>
 </template>
 <script>
 import HouseMap from "@/components/house/HouseMap.vue";
 import HouseNavigation from "@/components/house/navigation/HouseNavigation.vue";
-import HouseModal from "@/components/house/HouseModal.vue";
 
 export default {
   name: "AppHouse",
   components: {
     HouseMap,
     HouseNavigation,
-    HouseModal,
   },
 };
 </script>
