@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatim.org//DTD Mapper 3.0//EN" 
+	"http://mybatim.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.apartment.model.mapper.MydongMapper">
+
+	<resultMap type="mydongDto" id="mydong">
+		<result column="dongCode" property="dongCode"/>
+		<result column="userId" property="userId"/>
+		<result column="sidoName" property="sidoName"/>
+		<result column="gugunName" property="gugunName"/>
+		<result column="dongName" property="dongName"/>
+	</resultMap>
+	
+	<select id="listMydong" parameterType="String" resultMap="mydong">
+		select d.dongCode, m.userId, d.sidoName, d.gugunName, d.dongName
+		from dongcode d join mydong m
+		on d.dongCode = m.dongCode
+		where m.userId = #{userId}
+	</select>
+	
+	<insert id="addMydong" parameterType="map">
+	insert into mydong (userId, dongCode)
+	values(#{userId}, #{dongCode})
+	</insert>
+	
+	<delete id="deleteMydong" parameterType="map">
+	delete from mydong
+	where userId=#{userId} and dongCode=#{dongCode}
+	</delete>
+</mapper>
