@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <login />
+    
     <the-header-navbar></the-header-navbar>
     <main>
       <fade-transition origin="center" mode="out-in" :duration="250">
@@ -12,14 +12,14 @@
 
 <script>
 import { FadeTransition } from "vue2-transitions";
-import Login from "@/views/Login.vue";
+//import Login from "@/components/user/Login.vue";
 import TheHeaderNavbar from "@/components/TheHeaderNavbar";
 export default {
   name: "App",
   components: {
     TheHeaderNavbar,
     FadeTransition,
-    Login,
+    //Login,
   },
 };
 </script>
