@@ -56,6 +56,9 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
+      this.CLEAR_SIDO_LIST();
+      this.CLEAR_GUGUN_LIST();
+      this.CLEAR_APT_LIST();
       if (this.gugunCode) this.getHouseList(this.gugunCode);
     },
   },
