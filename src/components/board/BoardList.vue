@@ -56,6 +56,10 @@
           :current-page="currentPage"
         >
         </b-table>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <pagination
           :pageCount="pageCount"
           :perPage="perPage"
@@ -103,10 +107,8 @@ export default {
   },
   created() {
     http.get(`board`).then(({ data }) => {
-      console.log(data);
       this.articles = data;
       this.total = data.length;
-      console.log(data.length);
     });
   },
   methods: {

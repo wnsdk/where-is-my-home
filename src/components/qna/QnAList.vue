@@ -82,6 +82,10 @@
             </b-card>
           </template>
         </b-table>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
         <pagination
           :pageCount="pageCount"
           :perPage="perPage"

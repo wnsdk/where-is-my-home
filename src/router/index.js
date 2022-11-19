@@ -119,6 +119,19 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/news",
+    name: "news",
+    component: () => import("@/views/AppNews"),
+    redirect: "/news/list",
+    children: [
+      {
+        path: "list",
+        name: "list",
+        component: () => import("@/components/news/NewsList"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

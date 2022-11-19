@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <div><router-view></router-view></div>
 </template>
 
 <script>
 export default {
-  name: "AppBoard",
+  name: "AppNews",
 };
 </script>
 
