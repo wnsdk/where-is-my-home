@@ -30,13 +30,6 @@ export default {
   height: 5vh;
   margin-top: 0;
 }
-#house-modal {
-  width: 380px;
-  height: 88vh;
-  background-color: white;
-  position: absolute;
-  z-index: 3;
-}
 #map {
   position: absolute;
   width: 100%;

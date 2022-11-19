@@ -32,13 +32,11 @@
                 name="searchBar"
                 placeholder="검색어..."
               />
-              <b-button
-                id="btn-search"
-                class="btn btn-dark"
-                @click.self.prevent="search()"
-              >
-                검색
-              </b-button>
+              <div class="input-group-append">
+                <button class="btn btn-dark" @click.self.prevent="search()">
+                  검색
+                </button>
+              </div>
             </div>
           </form>
         </div>

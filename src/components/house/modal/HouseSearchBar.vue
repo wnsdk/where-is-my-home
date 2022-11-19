@@ -1,5 +1,5 @@
 <template>
-  <b-row class="mt-4 mb-4 text-center">
+  <b-row id="house-search-bar">
     <!-- <b-col class="sm-3">
       <b-form-input
         v-model.trim="dongCode"
@@ -10,24 +10,33 @@
     <b-col class="sm-3" align="left">
       <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
     </b-col> -->
-    <b-col class="sm-3">
-      <b-form-select
-        v-model="sidoCode"
-        :options="sidos"
-        @change="gugunList"
-      ></b-form-select>
-    </b-col>
-    <b-col class="sm-3">
-      <b-form-select v-model="gugunCode" :options="guguns"></b-form-select>
-    </b-col>
-    <b-col class="sm-2">
-      <button @click="searchApt">검색</button>
-    </b-col>
+    <b-form-select
+      class="form-select"
+      style="border-radius: 5px 0 0 5px"
+      v-model="sidoCode"
+      :options="sidos"
+      @change="gugunList"
+    />
+    <b-form-select
+      class="form-select"
+      style="border-radius: 0 0 0 0"
+      v-model="gugunCode"
+      :options="guguns"
+    />
+
+    <button
+      id="search-button"
+      class="btn-dark rounded-right"
+      @click="searchApt"
+    >
+      검색
+    </button>
   </b-row>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
+const houseStore = "houseStore";
 
 export default {
   name: "HouseSearchBar",
@@ -38,7 +47,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns", "houses"]),
+    ...mapState(houseStore, ["sidos", "guguns", "houses"]),
   },
   created() {
     this.CLEAR_SIDO_LIST();
@@ -47,14 +56,13 @@ export default {
     this.getSido();
   },
   methods: {
-    ...mapActions(["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations([
+    ...mapActions(houseStore, ["getSido", "getGugun", "getHouseList"]),
+    ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
       "CLEAR_APT_LIST",
       "CLEAR_DETAIL_HOUSE",
     ]),
-
     gugunList() {
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
@@ -70,4 +78,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.form-select {
+  width: 41%;
+  height: 40px;
+}
+#search-button {
+  width: 17%;
+  height: 40px;
+}
+#house-search-bar {
+  display: flex;
+  height: 8vh;
+}
+</style>
