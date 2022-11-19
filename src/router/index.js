@@ -109,7 +109,6 @@ const routes = [
       {
         path: "login",
         name: "login",
-        //component: () => import("@/components/user/UserLogin"),
         component: () => import("@/components/user/Login"),
       },
       {

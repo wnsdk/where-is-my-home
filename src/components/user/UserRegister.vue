@@ -1,5 +1,5 @@
 <template>
-  <section class="section section-shaped section-lg my-0">
+  <section class="section section-shaped section-lg my-0" id="register-page">
     <div class="shape shape-style-1 bg-gradient-default">
       <span></span>
       <span></span>
@@ -90,4 +90,4 @@
 <script>
 export default {};
 </script>
-<style></style>
+<style scoped></style>

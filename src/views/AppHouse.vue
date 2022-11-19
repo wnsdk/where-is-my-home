@@ -26,9 +26,13 @@ export default {
     rgba(231, 149, 27, 0.3) 30%
   );
 }
-#houseModal {
+#house-navbar {
+  height: 5vh;
+  margin-top: 0;
+}
+#house-modal {
   width: 380px;
-  height: 100%;
+  height: 88vh;
   background-color: white;
   position: absolute;
   z-index: 3;
@@ -36,7 +40,7 @@ export default {
 #map {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 88vh;
   z-index: -1;
 }
 </style>

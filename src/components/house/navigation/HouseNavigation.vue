@@ -1,21 +1,19 @@
 <template>
-  <section class="">
-    <base-nav
-      v-model="menu"
-      effect="dark"
-      expand
-      class="mt-4"
-      title="아파트 매매 정보"
-    >
-      <div class="row" slot="content-header" slot-scope="{ closeMenu }">
-        <div class="col-6 collapse-close">
-          <close-button @click="closeMenu" :target="`navbar-${menu.type}`">
-          </close-button>
-        </div>
+  <base-nav
+    v-model="menu"
+    effect="dark"
+    expand
+    title="아파트 매매 정보"
+    id="house-navbar"
+  >
+    <div class="row" slot="content-header" slot-scope="{ closeMenu }">
+      <div class="col-6 collapse-close">
+        <close-button @click="closeMenu" :target="`navbar-${menu.type}`">
+        </close-button>
       </div>
-      <component :is="menu.menuComponent"></component>
-    </base-nav>
-  </section>
+    </div>
+    <component :is="menu.menuComponent"></component>
+  </base-nav>
 </template>
 <script>
 import BaseNav from "@/components/Argons/BaseNav";

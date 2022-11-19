@@ -1,5 +1,5 @@
 <template>
-  <div id="houseModal">
+  <div id="house-modal">
     <b-row><house-detail /></b-row>
     <b-row><house-list /></b-row>
   </div>

@@ -1,14 +1,15 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar id="header-navbar" toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#">
         <router-link :to="{ name: 'main' }">
-          <b-img
+          <!-- <b-img
             :src="require('@/assets/ssafy_logo.png')"
             id="logo"
             class="d-inline-block align-top"
             alt="logo"
-          ></b-img>
+          ></b-img> -->
+          로고이미지
         </router-link>
       </b-navbar-brand>
 
@@ -17,14 +18,6 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="#">
-            <router-link :to="{ name: 'main' }" class="link">
-              <b-icon
-                icon="house-door"
-                animation="fade"
-                font-scale="2"
-              ></b-icon>
-              로고사진(인덱스로 이동)
-            </router-link>
             <router-link :to="{ name: 'house' }" class="m-2 link">
               <b-icon icon="instagram" animation="fade" font-scale="2"></b-icon>
               아파트매매정보
@@ -105,7 +98,6 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-
 const memberStore = "memberStore";
 
 export default {
@@ -139,6 +131,10 @@ export default {
 </script>
 
 <style scoped>
+#header-navbar {
+  height: 7vh;
+}
+
 #logo {
   width: 120px;
 }
