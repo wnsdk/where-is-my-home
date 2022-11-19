@@ -22,9 +22,13 @@
               <b-icon icon="instagram" animation="fade" font-scale="2"></b-icon>
               아파트매매정보
             </router-link>
-            <router-link :to="{ name: 'notice' }" class="m-2 link">
-              <b-icon icon="journal" animation="fade" font-scale="2"></b-icon>
-              공지사항
+            <router-link :to="{ name: 'news' }" class="link">
+              <b-icon
+                icon="calendar-check"
+                animation="fade"
+                font-scale="2"
+              ></b-icon>
+              뉴스
             </router-link>
             <router-link :to="{ name: 'board' }" class="m-2 link">
               <b-icon
@@ -41,14 +45,6 @@
                 font-scale="2"
               ></b-icon>
               QnA
-            </router-link>
-            <router-link :to="{ name: 'news' }" class="link">
-              <b-icon
-                icon="calendar-check"
-                animation="fade"
-                font-scale="2"
-              ></b-icon>
-              뉴스
             </router-link>
           </b-nav-item>
         </b-navbar-nav>
