@@ -114,10 +114,6 @@ export default {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     async confirm() {
       await this.userConfirm(this.user); //로그인은 비동기, 따라서 Actions
-      await console.log(
-        "여기는 Login.js confirm안에 있는 this.user >> ",
-        this.user
-      );
       let token = sessionStorage.getItem("access-token");
       console.log("1. confirm() token >> " + token);
       if (this.isLogin) {

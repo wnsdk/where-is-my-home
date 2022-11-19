@@ -2,10 +2,10 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>회원가입</h3></b-alert>
+        <b-alert show><h3>마이 페이지</h3></b-alert>
       </b-col>
     </b-row>
-    <user-input-item type="join" />
+    <user-input-item type="modify" />
   </b-container>
 </template>
 
@@ -13,7 +13,7 @@
 import UserInputItem from "@/components/user/item/UserInputItem";
 
 export default {
-  name: "UserRegister",
+  name: "UserModify",
   components: {
     UserInputItem,
   },
