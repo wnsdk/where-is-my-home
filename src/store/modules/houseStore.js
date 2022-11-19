@@ -1,4 +1,4 @@
-import { sidoList, gugunList, houseList } from "@/api/house.js";
+import http from "@/api/http.js";
 
 const houseStore = {
   namespaced: true,
@@ -7,19 +7,11 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    houseDeal: null,
+    showDetail: false,
   },
   getters: {},
   mutations: {
-    CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
-    },
-    CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
-    },
-    CLEAR_APT_LIST(state) {
-      state.houses = [];
-      state.house = null;
-    },
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
@@ -30,56 +22,88 @@ const houseStore = {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
+    CLEAR_SIDO_LIST(state) {
+      state.sidos = [{ value: null, text: "선택하세요" }];
+    },
+    CLEAR_APT_LIST(state) {
+      state.houses = [];
+      state.house = null;
+    },
+    CLEAR_GUGUN_LIST(state) {
+      state.guguns = [{ value: null, text: "선택하세요" }];
+    },
+    CLEAR_DETAIL_HOUSE(state) {
+      state.house = null;
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
     },
     SET_DETAIL_HOUSE(state, house) {
+      // console.log("Mutations", house);
       state.house = house;
+      console.log("HouseInfo 값이 채워짐");
+      console.log(state.houseDeal);
+    },
+    SET_HOUSEDEAL(state, houseDeal) {
+      state.houseDeal = houseDeal;
+      console.log("HouseDeal 값이 채워짐");
+      console.log(state.houseDeal);
+    },
+    SET_SHOW_DETAIL_FALSE(state) {
+      state.showDetail = false;
+    },
+    SET_SHOW_DETAIL_TRUE(state) {
+      state.showDetail = true;
     },
   },
   actions: {
-    getSido: ({ commit }) => {
-      sidoList(
-        ({ data }) => {
+    getSido({ commit }) {
+      http
+        .get(`/house/sido`)
+        .then(({ data }) => {
+          // console.log(data);
           commit("SET_SIDO_LIST", data);
-        },
-        (error) => {
+        })
+        .catch((error) => {
           console.log(error);
-        }
-      );
+        });
     },
-    getGugun: ({ commit }, sidoCode) => {
+    getGugun({ commit }, sidoCode) {
       const params = { sido: sidoCode };
-      gugunList(
-        params,
-        ({ data }) => {
+      http
+        .get(`/house/gugun`, { params })
+        .then(({ data }) => {
+          // console.log(commit, response);
           commit("SET_GUGUN_LIST", data);
-        },
-        (error) => {
+        })
+        .catch((error) => {
           console.log(error);
-        }
-      );
+        });
     },
-    getHouseList: ({ commit }, gugunCode) => {
-      const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-      const params = {
-        LAWD_CD: gugunCode,
-        DEAL_YMD: "202207",
-        serviceKey: decodeURIComponent(SERVICE_KEY),
-      };
-      houseList(
-        params,
-        ({ data }) => {
-          commit("SET_HOUSE_LIST", data.response.body.items.item);
-        },
-        (error) => {
+    getHouseList({ commit }, gugunCode) {
+      http
+        .get(`house/gugunAptList/${gugunCode}`)
+        .then(({ data }) => {
+          commit("SET_HOUSE_LIST", data);
+        })
+        .catch((error) => {
           console.log(error);
-        }
-      );
+        });
     },
-    detailHouse: ({ commit }, house) => {
+    async detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출
-      commit("SET_DETAIL_HOUSE", house);
+      // console.log(commit, house);
+
+      await commit("SET_DETAIL_HOUSE", house);
+      await http.get(`house/AptDealList/${house.aptCode}`).then(({ data }) => {
+        commit("SET_HOUSEDEAL", data);
+      });
+      await commit("SET_SHOW_DETAIL_TRUE");
+    },
+    getMyhouse({ commit }, userId) {
+      http.get(`myhouse/${userId}`).then(({ data }) => {
+        commit("SET_HOUSE_LIST", data);
+      });
     },
   },
 };

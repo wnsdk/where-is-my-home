@@ -10,9 +10,8 @@
       :styles="styles"
       :width="width"
       :height="height"
-      id="bar"
-    >
-    </Bar>
+    />
+
     <div v-show="!flag" id="exist"></div>
     <div v-show="flag" id="noexist">1년간 거래내역이 존재하지 않습니다.</div>
   </div>
@@ -21,6 +20,8 @@
 <script>
 // vue-chartjs 참고
 // https://vue-chartjs.org/guide/#creating-your-first-chart
+import { mapState } from "vuex";
+
 import { Bar } from "vue-chartjs";
 import {
   Chart as ChartJS,
@@ -45,7 +46,6 @@ export default {
   name: "BarChart",
   components: { Bar },
   props: {
-    houseDeal: null,
     chartId: {
       type: String,
       default: "bar-chart",
@@ -81,6 +81,7 @@ export default {
     };
   },
   computed: {
+    ...mapState("houseStore", ["houseDeal"]),
     chartData() {
       let ret = {
         labels: [
@@ -107,7 +108,7 @@ export default {
       for (let i = 0; i < this.houseDeal.length; i++) {
         const data = this.houseDeal[i];
         const dealMonth = data.dealMonth;
-        const dealAmount = parseInt(data.dealAmount.replace(",", ""));
+        const dealAmount = parseInt(data.dealAmount.replace(",", "")) / 1000;
         arrMax[dealMonth - 1] = Math.max(arrMax[dealMonth - 1], dealAmount);
         arrMin[dealMonth - 1] = Math.min(arrMin[dealMonth - 1], dealAmount);
       }
@@ -137,8 +138,38 @@ export default {
     chartOptions() {
       return {
         responsive: true,
+        aspectRatio: 1.2,
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 11,
+              },
+            },
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "거래내역 (단위 : 천만)",
+            font: {
+              size: 15,
+            },
+          },
+          legend: {
+            labels: {
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
       };
     },
+  },
+  created() {
+    console.log("차트 그려지기 시작");
+    console.log(this.houseDeal);
   },
   methods: {
     changeFlag() {
@@ -154,21 +185,22 @@ export default {
 
 <style scoped>
 #bar {
-  height: 180px;
-  width: 100%;
+  height: 25vh;
   position: absolute;
 }
 #exist {
-  height: 190px;
+  height: 25vh;
   width: 100%;
-  position: relative;
+  position: absolute;
   z-index: 5;
 }
 #noexist {
   font-size: 12px;
-  height: 190px;
-  width: 100%;
-  position: relative;
+  height: 141px;
+  width: 270px;
+  margin-left: 30px;
+  margin-top: 30px;
+  position: absolute;
   z-index: 5;
   background-color: rgba(241, 241, 241, 0.5);
   align-items: center;

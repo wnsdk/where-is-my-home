@@ -26,13 +26,13 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["houses"]),
+    ...mapState("houseStore", ["houses"]),
     // houses() {
     //   return this.$store.state.houses;
     // },
   },
   methods: {
-    ...mapActions(["getMyhouse"]),
+    ...mapActions("houseStore", ["getMyhouse"]),
   },
   created() {
     //////////////////////////////////////////////////

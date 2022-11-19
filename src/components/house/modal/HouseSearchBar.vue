@@ -28,6 +28,7 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
+const houseStore = "houseStore";
 
 export default {
   name: "HouseSearchBar",
@@ -38,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["sidos", "guguns", "houses"]),
+    ...mapState(houseStore, ["sidos", "guguns", "houses"]),
   },
   created() {
     this.CLEAR_SIDO_LIST();
@@ -47,14 +48,13 @@ export default {
     this.getSido();
   },
   methods: {
-    ...mapActions(["getSido", "getGugun", "getHouseList"]),
-    ...mapMutations([
+    ...mapActions(houseStore, ["getSido", "getGugun", "getHouseList"]),
+    ...mapMutations(houseStore, [
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
       "CLEAR_APT_LIST",
       "CLEAR_DETAIL_HOUSE",
     ]),
-
     gugunList() {
       this.CLEAR_GUGUN_LIST();
       this.gugunCode = null;
