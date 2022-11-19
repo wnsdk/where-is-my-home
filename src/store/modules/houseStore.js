@@ -3,8 +3,8 @@ import http from "@/api/http.js";
 const houseStore = {
   namespaced: true,
   state: {
-    sidos: [{ value: null, text: "선택하세요" }],
-    guguns: [{ value: null, text: "선택하세요" }],
+    sidos: [{ value: null, text: "시도를 선택하세요" }],
+    guguns: [{ value: null, text: "구군을 선택하세요" }],
     houses: [],
     house: null,
     houseDeal: null,
@@ -23,14 +23,14 @@ const houseStore = {
       });
     },
     CLEAR_SIDO_LIST(state) {
-      state.sidos = [{ value: null, text: "선택하세요" }];
+      state.sidos = [{ value: null, text: "시도를 선택하세요" }];
     },
     CLEAR_APT_LIST(state) {
       state.houses = [];
       state.house = null;
     },
     CLEAR_GUGUN_LIST(state) {
-      state.guguns = [{ value: null, text: "선택하세요" }];
+      state.guguns = [{ value: null, text: "구군을 선택하세요" }];
     },
     CLEAR_DETAIL_HOUSE(state) {
       state.house = null;

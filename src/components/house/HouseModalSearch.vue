@@ -2,7 +2,7 @@
   <div>
     <div id="house-modal">
       <b-col>
-        <house-search-bar />
+        <house-search-bar id="house-search-bar" />
         <house-list />
       </b-col>
     </div>
@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style scoped>
+#house-search-bar {
+  padding-top: 15px;
+}
 #house-modal {
   width: 380px;
   height: 88vh;

@@ -10,11 +10,11 @@
       :house="house"
     />
   </div>
-  <b-container v-else class="bv-example-row mt-3">
+  <div v-else class="bv-example-row mt-3">
     <b-row>
       <b-col>주택 목록이 없습니다.</b-col>
     </b-row>
-  </b-container>
+  </div>
 </template>
 
 <script>

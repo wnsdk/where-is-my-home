@@ -15,15 +15,19 @@
       </tr>
       <tr>
         <th>준공년도</th>
-        <td>{{ house.buildYear }}</td>
+        <td>{{ house.buildYear }}년</td>
       </tr>
       <tr>
-        <th>주소</th>
+        <th>도로명주소</th>
         <td>{{ house.roadName }}</td>
       </tr>
       <tr>
         <th>법정동</th>
         <td>{{ house.dong }}</td>
+      </tr>
+      <tr>
+        <th>거래건수</th>
+        <td>{{ houseDeal.length }}회</td>
       </tr>
     </table>
     <house-chart id="house-chart"></house-chart>
@@ -88,15 +92,13 @@ export default {
 #house-detail-container {
   height: 88vh;
   /* background-color: red; */
-  /* display: flex;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
   flex: auto;
   flex-wrap: wrap; */
 }
 #house-detail-name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
 }
 #add-my-house {
@@ -114,10 +116,12 @@ export default {
   object-fit: cover;
 }
 #house-chart {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  /* width: 30vh; */
+  align-items: center; */
+  position: absolute;
+  bottom: 40px;
+  width: 341px;
   height: 30vh;
   /* background-color: aqua; */
 }

@@ -188,23 +188,23 @@ export default {
   height: 25vh;
   position: absolute;
 }
-#exist {
+/* #exist {
   height: 25vh;
   width: 100%;
   position: absolute;
   z-index: 5;
-}
+} */
 #noexist {
   font-size: 12px;
-  height: 141px;
-  width: 270px;
+  height: 178px;
+  width: 311px;
   margin-left: 30px;
   margin-top: 30px;
-  position: absolute;
-  z-index: 5;
-  background-color: rgba(241, 241, 241, 0.5);
+  background-color: rgba(241, 241, 241, 0.65);
   align-items: center;
   display: flex;
   justify-content: center;
+  position: fixed;
+  bottom: 71px;
 }
 </style>

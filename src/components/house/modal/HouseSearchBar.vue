@@ -10,19 +10,27 @@
     <b-col class="sm-3" align="left">
       <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
     </b-col> -->
-    <b-col class="sm-3">
-      <b-form-select
-        v-model="sidoCode"
-        :options="sidos"
-        @change="gugunList"
-      ></b-form-select>
-    </b-col>
-    <b-col class="sm-3">
-      <b-form-select v-model="gugunCode" :options="guguns"></b-form-select>
-    </b-col>
-    <b-col class="sm-2">
-      <button @click="searchApt">검색</button>
-    </b-col>
+    <b-form-select
+      class="form-select"
+      style="border-radius: 5px 0 0 5px"
+      v-model="sidoCode"
+      :options="sidos"
+      @change="gugunList"
+    />
+    <b-form-select
+      class="form-select"
+      style="border-radius: 0 0 0 0"
+      v-model="gugunCode"
+      :options="guguns"
+    />
+
+    <button
+      id="search-button"
+      class="btn-dark rounded-right"
+      @click="searchApt"
+    >
+      검색
+    </button>
   </b-row>
 </template>
 
@@ -71,7 +79,16 @@ export default {
 </script>
 
 <style scoped>
+.form-select {
+  width: 41%;
+  height: 40px;
+}
+#search-button {
+  width: 17%;
+  height: 40px;
+}
 #house-search-bar {
+  display: flex;
   height: 8vh;
 }
 </style>
