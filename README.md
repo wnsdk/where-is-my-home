@@ -7,6 +7,7 @@ npm install
 npm install axios
 npm install vue bootstrap bootstrap-vue
 npm install vue-flatpickr-component@^8
+npm install vue-chartjs chart.js
 ```
 
 ### vue-fontawesome (with Vue 2) - 필수
