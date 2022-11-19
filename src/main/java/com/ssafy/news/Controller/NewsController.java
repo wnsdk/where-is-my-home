@@ -33,7 +33,9 @@ public class NewsController {
     	// 몇 페이지까지 뉴스기사가 있는지 구하기
     	StringBuilder url = new StringBuilder("https://news.naver.com/main/list.naver?mode=LS2D&sid2=260&sid1=101&mid=shm");
     	Document doc = Jsoup.connect(url.toString()).get();
-    	int lastpageno = Integer.parseInt(doc.select("div.paging>a:last-child").text());
+    	int lastpageno = 1;
+    	if (doc.select("div.paging>a:last-child").text() != null && !doc.select("div.paging>a:last-child").text().equals(""))
+    		lastpageno = Integer.parseInt(doc.select("div.paging>a:last-child").text());
     	
     	// 오늘 날짜 구하기
     	Date today = new Date();
