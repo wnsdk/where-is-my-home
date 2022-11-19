@@ -26,4 +26,8 @@ async function logout(userId, success, fail) {
   await api.get(`/member/logout/${userId}`).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout };
+async function join(userId, success, fail) {
+  await api.get(`/member`).then(success).catch(fail);
+}
+
+export { login, findById, tokenRegeneration, logout, join};
