@@ -3,7 +3,6 @@ import router from "@/router";
 import Vuex from "vuex";
 import { login, findById, tokenRegeneration, logout } from "@/api/member";
 import Vue from "vue";
-
 const memberStore = {
   namespaced: true,
   state: {
@@ -60,7 +59,7 @@ const memberStore = {
           }
         },
         (error) => {
-          console.log("여기는 userConfirm error", error);
+          console.log(error);
         }
       );
     },
