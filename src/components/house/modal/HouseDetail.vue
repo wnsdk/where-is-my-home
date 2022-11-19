@@ -9,10 +9,9 @@
     <b-row> 일련번호 : {{ house.aptCode }} </b-row>
     <b-row> 아파트 이름 : {{ house.apartmentName }} </b-row>
     <b-row> 법정동 : {{ house.dong }} </b-row>
-    <b-row v-if="houseDeal.length == 0">1년간 거래내역이 없습니다.</b-row>
-    <b-row v-if="houseDeal.length">
+    <b-row>
       거래내역
-      {{ houseDeal }}
+      <house-chart :houseDeal="houseDeal" ref="chart"></house-chart>
     </b-row>
     <!-- <b-row>
       거래금액 :
@@ -24,9 +23,13 @@
 <script>
 import { mapState } from "vuex";
 import http from "@/api/http";
+import HouseChart from "./HouseChart.vue";
 
 export default {
   name: "HouseDetail",
+  components: {
+    HouseChart,
+  },
   computed: {
     ...mapState(["house", "houseDeal"]),
   },

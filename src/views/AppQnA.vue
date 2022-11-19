@@ -1,6 +1,5 @@
 <template>
   <div>
-    QnA
     <router-view></router-view>
   </div>
 </template>
