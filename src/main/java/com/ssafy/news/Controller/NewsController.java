@@ -1,60 +1,54 @@
 package com.ssafy.news.Controller;
 
-import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
  
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
- 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
  
  
 @Controller
+@RequestMapping("/news")
+@CrossOrigin(origins = { "*" })
 public class NewsController {
  
-    @RequestMapping(value="craw/craw_main.do")
-    public String main() {
-        return "craw/craw_main";
-    }
-    
-    @RequestMapping(value="craw/craw_select.ajax")
-    @ResponseBody
-    public Map<String,Object> craw_select(String user_id,HttpServletRequest req,HttpServletResponse resp)throws Exception {
-        boolean result =false;
-        String url = "https://www.op.gg/summoner/userName="+user_id;
-        Document doc =Jsoup.connect(url).get();
+    @RequestMapping(value="/crawl")
+    public ResponseEntity<?> crawling() throws IOException {
+    	String url = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=260";
+        Document doc = Jsoup.connect(url).get();
+        Elements el = doc.select("ul.type06_headline");
         
-        Elements ele = doc.select("div.ChampionBox.Ranked");
+        List<String> photos = el.select("li>dl>dt.photo>a>img").eachAttr("src");
+        List<String> links = el.select("li>dl>dt.photo>a").eachAttr("href");
+        List<String> subjects = el.select("li>dl>dt>a").eachText();
+        List<String> details = el.select("li>dl>dd>span.lede").eachText();
+        List<String> writers = el.select("li>dl>dd>span.writing").eachText();
+        List<String> dates = el.select("li>dl>dd>span.date").eachText();
         
+        List<Map<String, String>> articles = new ArrayList<>();
         
-        int chamLength = ele.size();
-        System.out.println("div개수"+chamLength);
+        for (int i = 0; i < photos.size(); i++) {
+        	Map<String, String> article = new HashMap<>();
+        	
+        	article.put("photo", photos.get(i));
+        	article.put("link", links.get(i));
+        	article.put("subject", subjects.get(i));
+        	article.put("detail", details.get(i));
+        	article.put("writer", writers.get(i));
+        	article.put("date", dates.get(i));
+        	
+        	articles.add(article);
+		}
         
-             
-        
-        List<String> NameResult = new ArrayList<>();
-        List<String> PlayedResult = new ArrayList<>();
-        NameResult.add(ele.select(".ChampionName a").text()); //챔피언 이름
-        PlayedResult.add(ele.select(".Played .title").text());
-        
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("NameResult", NameResult);
-        resultMap.put("PlayedResult", PlayedResult);
-            result =true;
-        
-//        PrintWriter writer = resp.getWriter();
-//        resp.setCharacterEncoding("UTF-8"); 
-//        resp.setContentType("text/html;charset=UTF-8");
-//        writer.println(result);
-        
-        return resultMap;
+        return new ResponseEntity<List<Map<String, String>>>(articles, HttpStatus.OK);
     }
 }
