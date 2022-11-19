@@ -65,9 +65,9 @@
           <b-nav-item class="align-self-center">
             <b-avatar
               variant="primary"
-              v-text="userInfo.userid.charAt(0).toUpperCase()"
+              v-text="userInfo.userId.charAt(0).toUpperCase()"
             ></b-avatar>
-            {{ userInfo.username }}({{ userInfo.userid }})님 환영합니다.
+            {{ userInfo.username }}({{ userInfo.userId }})님 환영합니다.
           </b-nav-item>
           <b-nav-item class="align-self-center">
             <router-link :to="{ name: 'mypage' }" class="link align-self-center"
@@ -125,11 +125,11 @@ export default {
       // this.SET_USER_INFO(null);
       // sessionStorage.removeItem("access-token");
       // if (this.$route.path != "/") this.$router.push({ name: "main" });
-      console.log(this.userInfo.userid);
+      console.log(this.userInfo.userId);
       //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
       //+ satate에 isLogin, userInfo 정보 변경)
-      // this.$store.dispatch("userLogout", this.userInfo.userid);
-      this.userLogout(this.userInfo.userid);
+      // this.$store.dispatch("userLogout", this.userInfo.userId);
+      this.userLogout(this.userInfo.userId);
       sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
       sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
       if (this.$route.path != "/") this.$router.push({ name: "main" });

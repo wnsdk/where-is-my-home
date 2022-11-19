@@ -4,13 +4,16 @@ const api = apiInstance();
 
 async function login(user, success, fail) {
   //서버의 memberController 의 @PostMapping("/login과 연결")
-  await api.post(`/member/login`, JSON.stringify(user)).then(success).catch(fail);
+  await api
+    .post(`/member/login`, JSON.stringify(user))
+    .then(success)
+    .catch(fail);
   //await console.log("여긴 member.js의 로그인 끝 ")
 }
 
-async function findById(userid, success, fail) {
+async function findById(userId, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
-  await api.get(`/member/info/${userid}`).then(success).catch(fail);
+  await api.get(`/member/info/${userId}`).then(success).catch(fail);
 }
 
 async function tokenRegeneration(user, success, fail) {
@@ -19,8 +22,8 @@ async function tokenRegeneration(user, success, fail) {
   await api.post(`/member/refresh`, user).then(success).catch(fail);
 }
 
-async function logout(userid, success, fail) {
-  await api.get(`/member/logout/${userid}`).then(success).catch(fail);
+async function logout(userId, success, fail) {
+  await api.get(`/member/logout/${userId}`).then(success).catch(fail);
 }
 
 export { login, findById, tokenRegeneration, logout };
