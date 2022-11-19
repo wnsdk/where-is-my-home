@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `myhome`.`members` ;
 CREATE TABLE IF NOT EXISTS `myhome`.`members` (
   `userId` VARCHAR(16) NOT NULL,
   `userName` VARCHAR(20) NOT NULL,
-  `userPassword` VARCHAR(32) NOT NULL,
+  `userPwd` VARCHAR(32) NOT NULL,
   `userEmail` VARCHAR(40) NULL DEFAULT NULL,
   `userPhone` VARCHAR(20) NULL DEFAULT NULL,
   `userRole` VARCHAR(16) NOT NULL,
@@ -19,11 +19,11 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-insert into `myhome`.`members` (userId, userName, userPassword, userEmail, userPhone, userRole)
+insert into `myhome`.`members` (userId, userName, userPwd, userEmail, userPhone, userRole)
 values     ('admin', '관리자', '1234', 'admin@google.com', '010-1234-5678', 'admin'),
 	('ssafy', '김싸피', '1234', 'ssafy@ssafy.com', '010-1234-5678', 'member');
     
-update members set userPassword=md5(userPassword);
+update members set userPwd=md5(userPwd);
 
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `myhome`.`board` ;
