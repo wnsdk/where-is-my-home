@@ -1,14 +1,18 @@
 <template>
-  <b-container v-if="houses && houses.length != 0" class="bv-example-row mt-3">
+  <div
+    id="house-list"
+    v-if="houses && houses.length != 0"
+    class="bv-example-row mt-3"
+  >
     <house-list-item
       v-for="(house, index) in houses"
       :key="index"
       :house="house"
     />
-  </b-container>
+  </div>
   <b-container v-else class="bv-example-row mt-3">
     <b-row>
-      <b-col><b-alert show>주택 목록이 없습니다.</b-alert></b-col>
+      <b-col>주택 목록이 없습니다.</b-col>
     </b-row>
   </b-container>
 </template>
@@ -34,4 +38,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#house-list {
+  height: 78vh;
+  overflow: scroll;
+}
+</style>

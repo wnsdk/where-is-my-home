@@ -1,5 +1,5 @@
 <template>
-  <b-row class="mt-4 mb-4 text-center">
+  <b-row id="house-search-bar">
     <!-- <b-col class="sm-3">
       <b-form-input
         v-model.trim="dongCode"
@@ -70,4 +70,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#house-search-bar {
+  height: 8vh;
+}
+</style>
