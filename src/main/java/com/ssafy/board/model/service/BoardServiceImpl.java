@@ -31,12 +31,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
+		// 검색 조건
 		if (map.containsKey("key"))
 			param.put("key", map.get("key").equals("userid") ? "b.userId" : map.get("key"));
 		
+		// 검색어
 		if (map.containsKey("word"))
 			param.put("word", map.get("word"));
-		System.out.println(param.toString());
+		
+		// 몇 개의 글을 불러올 것인지
+		if (map.containsKey("limit"))
+			param.put("limit", Integer.parseInt(map.get("limit")));
+		
 //		int pgNo = Integer.parseInt(map.get("pgno"));
 //		int start = pgNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
 //		param.put("start", start);

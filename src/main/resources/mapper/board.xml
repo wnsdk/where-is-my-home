@@ -24,6 +24,12 @@
 			</if>
 		</if>
 	</sql>
+	
+	<sql id="setLimit">
+		<if test="limit != null and limit != ''">
+			limit #{limit}
+		</if>
+	</sql>
 
 	<select id="listArticle" parameterType="map" resultMap="article">
 		select b.articleNo, b.userId, b.subject, b.content, b.hit, b.registerTime, m.userName
@@ -31,6 +37,7 @@
 		where b.userId = m.userId
 		<include refid="search"></include>
 		order by b.articleNo desc
+		<include refid="setLimit"></include>
 		<!-- limit #{start}, #{listsize} -->
 	</select>
 	

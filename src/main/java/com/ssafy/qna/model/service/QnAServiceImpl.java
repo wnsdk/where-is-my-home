@@ -35,7 +35,6 @@ public class QnAServiceImpl implements QnAService {
 		
 		if (map.containsKey("word"))
 			param.put("word", map.get("word"));
-		System.out.println(param.toString());
 		
 		return qnaMapper.listArticle(param);
 	}

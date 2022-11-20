@@ -16,16 +16,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiParam;
  
  
-@Controller
+@RestController
 @RequestMapping("/news")
 @CrossOrigin(origins = { "*" })
 public class NewsController {
  
-    @RequestMapping(value="/crawl")
-    public ResponseEntity<?> crawling() throws IOException {
+    @GetMapping
+    public ResponseEntity<?> crawling(@RequestParam @ApiParam(value = "검색 조건.") String limit) throws IOException {
+    	// 반환할 기사의 최대 개수
+    	int limitCnt = Integer.MAX_VALUE;
+    	if (!limit.equals("") && limit!=null && !limit.equals("MAX"))
+    		limitCnt = Integer.parseInt(limit);
     	
     	// 반환할 기사 리스트
     	List<Map<String, String>> articles = new ArrayList<>();
@@ -50,7 +59,6 @@ public class NewsController {
 			
 			Elements el = doc.select("ul.type06_headline");
             el.addAll(doc.select("ul.type06"));
-            if (pageno == 5) System.out.println(el);
             
             List<String> photos = el.select("li>dl>dt.photo>a>img").eachAttr("src");
             List<String> links = el.select("li>dl>dt.photo>a").eachAttr("href");
@@ -70,7 +78,10 @@ public class NewsController {
             	article.put("date", dates.get(i));
             	
             	articles.add(article);
+            	if (articles.size() >= limitCnt) break;
     		}
+            
+            if (articles.size() >= limitCnt) break;
 		}
         
         return new ResponseEntity<List<Map<String, String>>>(articles, HttpStatus.OK);
