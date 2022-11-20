@@ -56,7 +56,7 @@
               variant="primary"
               v-text="userInfo.userId.charAt(0).toUpperCase()"
             ></b-avatar>
-            {{ userInfo.username }}({{ userInfo.userId }})님 환영합니다.
+            {{ userInfo.username }}({{ userInfo.userName }})님 환영합니다.
           </b-nav-item>
           <b-nav-item class="align-self-center">
             <router-link :to="{ name: 'mypage' }" class="link align-self-center"

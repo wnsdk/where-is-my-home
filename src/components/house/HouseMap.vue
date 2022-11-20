@@ -105,7 +105,6 @@ export default {
       this.geocoder = new kakao.maps.services.Geocoder();
     },
   },
-  created() {},
   mounted() {
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement("script");
