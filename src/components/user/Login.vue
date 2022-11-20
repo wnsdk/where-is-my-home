@@ -115,13 +115,13 @@ export default {
     async confirm() {
       await this.userConfirm(this.user); //로그인은 비동기, 따라서 Actions
       let token = sessionStorage.getItem("access-token");
-      console.log("1. confirm() token >> " + token);
+      // console.log("1. confirm() token >> " + token);
       if (this.isLogin) {
         await this.getUserInfo(token);
-        console.log("4. confirm() userInfo :: ", this.userInfo);
+        // console.log("4. confirm() userInfo :: ", this.userInfo);
         this.$router.push({ name: "main" });
       } else {
-        console.log("로그인 에러");
+        // console.log("로그인 에러");
       }
     },
     movePage() {

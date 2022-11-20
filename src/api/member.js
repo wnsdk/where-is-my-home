@@ -1,6 +1,20 @@
 import { apiInstance } from "./index.js";
+import store from "@/store";
 
 const api = apiInstance();
+
+// https://v3.router.vuejs.org/kr/guide/advanced/navigation-guards.html
+async function checkAuthUser() {
+  const checkUserInfo = store.getters["memberStore/checkUserInfo"];
+  const checkToken = store.getters["memberStore/checkToken"];
+  let token = sessionStorage.getItem("access-token");
+
+  // 토큰 유효성 체크하기
+  if (checkUserInfo != null && token)
+    await store.dispatch("memberStore/getUserInfo", token);
+
+  return checkToken && checkUserInfo != null;
+}
 
 async function login(user, success, fail) {
   //서버의 memberController 의 @PostMapping("/login과 연결")
@@ -30,4 +44,4 @@ async function join(userId, success, fail) {
   await api.get(`/member`).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout, join};
+export { checkAuthUser, login, findById, tokenRegeneration, logout, join };

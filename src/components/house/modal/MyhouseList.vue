@@ -31,17 +31,13 @@ export default {
   },
   computed: {
     ...mapState("houseStore", ["houses"]),
-    // houses() {
-    //   return this.$store.state.houses;
-    // },
+    ...mapState("memberStore", ["userInfo"]),
   },
   methods: {
     ...mapActions("houseStore", ["getMyhouse"]),
   },
   created() {
-    //////////////////////////////////////////////////
-    // 로그인 유저의 아이디를 받아와야됨
-    this.getMyhouse("ssafy");
+    this.getMyhouse(this.userInfo.userId);
   },
 };
 </script>

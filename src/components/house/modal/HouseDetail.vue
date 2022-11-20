@@ -4,7 +4,7 @@
     <h4 id="house-detail-name">{{ house.apartmentName }}</h4>
     <font-awesome-icon
       :icon="iconHeart"
-      id="add-my-house"
+      id="click-my-house"
       @click="clickMyhouse"
     />
 
@@ -41,8 +41,9 @@
 
 <script>
 import { mapState } from "vuex";
-//import http from "@/api/http";
+import http from "@/api/http";
 import HouseChart from "./HouseChart.vue";
+import { checkAuthUser } from "@/api/member";
 
 export default {
   name: "HouseDetail",
@@ -56,6 +57,7 @@ export default {
   },
   computed: {
     ...mapState("houseStore", ["house", "houseDeal"]),
+    ...mapState("memberStore", ["userInfo"]),
   },
   filters: {
     price(value) {
@@ -66,23 +68,53 @@ export default {
   created() {
     console.log("디테일 창이 띄어짐");
     console.log(this.houseDeal);
-    // 로그인 되어 있다면
-    // 해당 매물이 찜하기 되어있는지 확인한 후
-    // this.iconHeart = "fa-solid fa-heart"; 해주기
+
+    this.fillHeart();
+  },
+  watch: {
+    house() {
+      this.fillHeart();
+    },
   },
   methods: {
+    fillHeart() {
+      checkAuthUser().then((response) => {
+        if (response) {
+          http
+            .get(`myhouse/${this.userInfo.userId}/${this.house.aptCode}`)
+            .then(({ data }) => {
+              if (data > 0) this.iconHeart = "fa-solid fa-heart";
+              else this.iconHeart = "fa-regular fa-heart";
+            });
+        }
+      });
+    },
     clickMyhouse() {
       if (this.iconHeart == "fa-regular fa-heart") this.addMyhouse();
       else this.deleteMyhouse();
     },
     addMyhouse() {
-      // 로그인 토큰 적용!!!!
-      //http.post(`/${userId}/${this.house.}/${}`);
-      this.iconHeart = "fa-solid fa-heart";
+      checkAuthUser().then((response) => {
+        if (!response) {
+          alert("로그인이 필요한 서비스입니다.");
+        } else {
+          http.post(`myhouse/${this.userInfo.userId}/${this.house.aptCode}`);
+          // .then((response) => {
+          //   console.log(response);
+          // });
+          this.iconHeart = "fa-solid fa-heart";
+        }
+      });
     },
     deleteMyhouse() {
-      this.iconHeart = "fa-regular fa-heart";
-      //http.delete();
+      checkAuthUser().then((response) => {
+        if (!response) {
+          alert("로그인이 필요한 서비스입니다.");
+        } else {
+          http.delete(`myhouse/${this.userInfo.userId}/${this.house.aptCode}`);
+          this.iconHeart = "fa-regular fa-heart";
+        }
+      });
     },
   },
 };
@@ -101,7 +133,7 @@ export default {
 #house-detail-name {
   width: 100%;
 }
-#add-my-house {
+#click-my-house {
   width: 40px;
   height: 40px;
   color: rgb(233, 132, 141);

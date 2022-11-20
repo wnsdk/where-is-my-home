@@ -65,15 +65,15 @@ const memberStore = {
     },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
-      console.log("2. getUserInfo() decodeToken :: ", decodeToken);
+      // console.log("2. getUserInfo() decodeToken :: ", decodeToken);
       await findById(
         decodeToken.userId,
         ({ data }) => {
           if (data.message === "success") {
             commit("SET_USER_INFO", data.userInfo);
-            console.log("3. getUserInfo data >> ", data);
+            // console.log("3. getUserInfo data >> ", data);
           } else {
-            console.log("유저 정보 없음!!!!");
+            // console.log("유저 정보 없음!!!!");
           }
         },
         async (error) => {
@@ -114,7 +114,8 @@ const memberStore = {
                 } else {
                   console.log("리프레시 토큰 제거 실패");
                 }
-                alert("RefreshToken 기간 만료!!! 다시 로그인해 주세요.");
+                // RefreshToken 기간 만료!!!
+                alert("다시 로그인해 주세요.");
                 commit("SET_IS_LOGIN", false);
                 commit("SET_USER_INFO", null);
                 commit("SET_IS_VALID_TOKEN", false);
