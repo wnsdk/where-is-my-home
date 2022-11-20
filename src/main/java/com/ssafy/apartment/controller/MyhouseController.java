@@ -63,6 +63,18 @@ public class MyhouseController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "관심 매물 검색", notes = "선택한 매물을 관심 매물에 있는지 검색한다.", response = List.class)
+	@GetMapping("/{userId}/{aptCode}")
+	private ResponseEntity<?> getMyhouse(@PathVariable @ApiParam(value = "아파트코드.", required = true) String aptCode
+			, @PathVariable @ApiParam(value = "로그인 유저 id.", required = true) String userId) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("aptCode", aptCode);
+
+		int cnt = myhouseService.getMyhouse(map);
+		return new ResponseEntity<Integer>(cnt, HttpStatus.OK);
+	}
+	
 	@ApiOperation(value = "관심 매물 삭제", notes = "선택한 관심 매물을 삭제한다.", response = List.class)
 	@DeleteMapping("/{userId}/{aptCode}")
 	private ResponseEntity<?> deleteMyhouse(@PathVariable @ApiParam(value = "아파트코드.", required = true) String aptCode

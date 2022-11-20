@@ -39,5 +39,10 @@ public class MyhouseServiceImpl implements MyhouseService {
 	public void deleteMyhouse(Map<String, String> map) throws Exception {
 		myhouseMapper.deleteMyhouse(map);
 	}
+
+	@Override
+	public int getMyhouse(Map<String, String> map) throws Exception {
+		return myhouseMapper.getMyhouse(map);
+	}
 	
 }

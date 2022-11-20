@@ -14,5 +14,6 @@ public interface MyhouseMapper {
 	List<HouseInfoDto> listMyhouse(String userId) throws SQLException;
 	void addMyhouse(Map<String, String> map) throws SQLException;
 	void deleteMyhouse(Map<String, String> map) throws SQLException;
+	int getMyhouse(Map<String, String> map) throws SQLException;
 	
 }

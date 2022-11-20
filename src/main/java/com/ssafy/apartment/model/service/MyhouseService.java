@@ -11,4 +11,5 @@ public interface MyhouseService {
 	List<HouseInfoDto> listMyhouse(String userId) throws Exception;
 	void addMyhouse(Map<String, String> map) throws Exception;
 	void deleteMyhouse(Map<String, String> map) throws Exception;
+	int getMyhouse(Map<String, String> map) throws Exception;
 }

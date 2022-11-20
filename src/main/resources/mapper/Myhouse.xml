@@ -13,12 +13,18 @@
 	</select>
 	
 	<insert id="addMyhouse" parameterType="map">
-	insert into myhouse (userId, aptCode)
-	values(#{userId}, #{aptCode})
+		insert into myhouse (userId, aptCode)
+		values(#{userId}, #{aptCode})
 	</insert>
 	
 	<delete id="deleteMyhouse" parameterType="map">
-	delete from myhouse
-	where userId=#{userId} and aptCode=#{aptCode}
+		delete from myhouse
+		where userId=#{userId} and aptCode=#{aptCode}
 	</delete>
+	
+	<select id="getMyhouse" parameterType="map" resultType="int">
+		select count(*)
+		from myhouse
+		where userId=#{userId} and aptCode=#{aptCode}
+	</select>
 </mapper>
