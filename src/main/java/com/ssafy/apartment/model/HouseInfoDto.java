@@ -12,6 +12,8 @@ public class HouseInfoDto {
 	private int buildYear;
 	@ApiModelProperty(value = "도로명")
 	private String roadName;
+	@ApiModelProperty(value = "도로명 본번")
+	private String roadNameBonBun;
 	@ApiModelProperty(value = "도로명코드")
 	private String roadNameCode;
 	@ApiModelProperty(value = "법정동")
@@ -30,6 +32,13 @@ public class HouseInfoDto {
 	private String lng;
 	@ApiModelProperty(value = "아파트이미지")
 	private String img;
+	
+	public String getRoadNameBonBun() {
+		return roadNameBonBun;
+	}
+	public void setRoadNameBonBun(String roadNameBonBun) {
+		this.roadNameBonBun = roadNameBonBun;
+	}
 	public String getAptCode() {
 		return aptCode;
 	}
