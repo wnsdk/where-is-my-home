@@ -80,7 +80,9 @@ public class MemberController {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		try {
+			System.out.println(memberDto.toString());
 			MemberDto loginUser = memberService.loginMember(memberDto);
+			System.out.println(loginUser);
 			if (loginUser != null) {
 				String accessToken = jwtService.createAccessToken("userId", loginUser.getUserId());// key, data
 				String refreshToken = jwtService.createRefreshToken("userId", loginUser.getUserId());// key, data

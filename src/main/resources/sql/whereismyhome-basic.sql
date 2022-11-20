@@ -8,12 +8,15 @@ DROP TABLE IF EXISTS `myhome`.`members` ;
 CREATE TABLE IF NOT EXISTS `myhome`.`members` (
   `userId` VARCHAR(16) NOT NULL,
   `userName` VARCHAR(20) NOT NULL,
-  `userPwd` VARCHAR(32) NOT NULL,
+  `userPwd` VARCHAR(32) NULL DEFAULT NULL,
   `userEmail` VARCHAR(40) NULL DEFAULT NULL,
   `userPhone` VARCHAR(20) NULL DEFAULT NULL,
+  `userImgUrl` VARCHAR(2083) NULL DEFAULT NULL,
   `userRole` VARCHAR(16) NOT NULL,
   `userDel` INT DEFAULT 0,
+  `loginType` INT NOT NULL DEFAULT 0,	-- 일반 로그인(0) / 카카오 로그인(1)
   `token` VARCHAR(1000) NULL DEFAULT NULL,
+  
   PRIMARY KEY (`userId`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -45,9 +48,9 @@ delimiter $$
 create procedure insertData()
 BEGIN
     DECLARE i INT default 1;
-    WHILE (i<=300) do
+    WHILE (i <= 100) do
     insert into board(userid, subject, content)
-    values('ssafy', concat('안녕하세요 ',i), '반갑습니다');
+    values('ssafy', concat('안녕하세요', i), '반갑습니다');
     set i=i+1;
     end while;
     end $$

@@ -11,24 +11,25 @@
 	</select>
 
 	<insert id="joinMember" parameterType="memberDto">
-		insert into members (userId, userName, userPwd, userEmail, userPhone, userRole)
-		values (#{userId}, #{userName}, md5(#{userPwd}), #{userEmail}, #{userPhone}, #{userRole})
+		insert into members (userId, userName, userPwd, userEmail, userPhone, userImgUrl, userRole, loginType)
+		values (#{userId}, #{userName}, md5(#{userPwd}), #{userEmail}, #{userPhone}, #{userImgUrl}, #{userRole}, #{loginType})
 	</insert>
 
 	<select id="loginMember" parameterType="map" resultType="memberDto">
-		select userId, userName, userRole
+		select userId, userName, userRole, loginType
 		from members
-		where userId = #{userId} and userPwd = md5(#{userPwd})
+		where userId = #{userId} and userDel != 1 
+		<if test="loginType == 0">and userPwd = md5(#{userPwd})</if>
 	</select>
 	
 	<select id="listMember" resultType="memberDto">
-		select userId, userName, userEmail, userPhone, userRole, userDel
+		select userId, userName, userEmail, userPhone, userImgUrl, userRole, loginType, userDel
 		from members
 		order by userRole
 	</select>
 	
 	<select id="getMember" parameterType="string" resultType="memberDto">
-		select userId, userName, userPwd, userEmail, userPhone, userRole, userDel, token
+		select userId, userName, userPwd, userEmail, userPhone, userImgUrl, userRole, loginType, userDel, token
 		from members
 		where userId = #{userId}
 	</select>
@@ -40,6 +41,7 @@
 			<if test="userPwd != null">userPwd = md5(#{userPwd}),</if>
 			<if test="userEmail != null">userEmail= #{userEmail},</if>
 			<if test="userPhone != null">userPhone = #{userPhone}</if>
+			<if test="userImgUrl != null">userImgUrl = #{userImgUrl}</if>
 		</trim>
 		where userId = #{userId}
 	</update>

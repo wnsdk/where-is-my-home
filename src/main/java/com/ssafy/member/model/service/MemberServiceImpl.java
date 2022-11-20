@@ -32,7 +32,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto loginMember(MemberDto memberDto) throws Exception {
-		if (memberDto.getUserId() == null || memberDto.getUserPwd() == null)
+		if (memberDto.getUserId() == null)
+			return null;
+		if (memberDto.getUserPwd() == null && memberDto.getLoginType() == 0)
 			return null;
 		return memberMapper.loginMember(memberDto);
 	}
