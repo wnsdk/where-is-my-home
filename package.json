@@ -21,6 +21,7 @@
     "nouislider": "^15.6.1",
     "vue": "^2.7.14",
     "vue-chartjs": "^4.1.2",
+    "vue-flatpickr-component": "^8.1.7",
     "vue-jwt-decode": "^0.1.0",
     "vue-lazyload": "^3.0.0-rc.2",
     "vue-router": "^3.5.1",

@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapMutations, mapState } from "vuex";
+import http from "@/api/http";
 
 export default {
   data() {
@@ -11,11 +12,20 @@ export default {
       map: null,
       geocoder: null,
       markers: [],
+      parkMarkers: [],
+      busMarkers: [],
       customOverlays: [],
     };
   },
   computed: {
-    ...mapState("houseStore", ["sidos", "guguns", "houses", "house"]),
+    ...mapState("houseStore", [
+      "sidos",
+      "guguns",
+      "houses",
+      "house",
+      "isShowPark",
+      "isShowBus",
+    ]),
   },
   watch: {
     // house가 변경되면 마커 focus가 이동됨
@@ -45,7 +55,6 @@ export default {
         }
 
         // 새로운 마커 뿌리기
-        this.apt_map = new Map();
         var coords;
         value.forEach((apt) => {
           coords = new kakao.maps.LatLng(apt.lat, apt.lng);
@@ -58,42 +67,22 @@ export default {
 
           // 생성된 마커를 배열에 추가합니다
           this.markers.push(marker);
-
-          if (!this.apt_map.has(`${apt.aptName}`)) {
-            this.apt_map.set(`${apt.aptName}`, 1);
-          } else {
-            this.apt_map.set(
-              `${apt.aptName}`,
-              this.apt_map.get(`${apt.aptName}`) + 1
-            );
-          }
-          // 나중에 처음 생성될때만 만들고 그 다음부터는 오버레이.setContent(content)로 값 변경 하게 했으면 좋겠다.
-          let price_count = this.apt_map.get(`${apt.aptName}`);
-
-          // 커스텀 오버레이에 표시할 내용입니다
-          var content = `<div class ="price-label"><span class="left"></span><span class="center">${price_count}건</span><span class="right"></span></div>`;
-
-          // 커스텀 오버레이가 표시될 위치입니다
-          var position = coords;
-
-          // 커스텀 오버레이를 생성합니다
-          var customOverlay = new kakao.maps.CustomOverlay({
-            position: position,
-            content: content,
-          });
-          this.customOverlays.push(customOverlay);
-
-          // 커스텀 오버레이를 지도에 표시합니다
-          customOverlay.setMap(this.map);
-
-          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         });
         this.map.setCenter(coords);
         this.map.setLevel(2);
       }
     },
+    isShowPark(value) {
+      if (value) this.getParkList();
+      else this.deleteParkMarker();
+    },
+    isShowBus(value) {
+      if (value) this.getBusList();
+      else this.deleteBusMarker();
+    },
   },
   methods: {
+    ...mapMutations("houseStore", ["CLEAR_IS_SHOW_PARK", "CLEAR_IS_SHOW_BUS"]),
     initMap() {
       var mapContainer = document.getElementById("map"); // 지도를 표시할 div
       var mapOption = {
@@ -103,6 +92,77 @@ export default {
       // 지도 생성
       this.map = new kakao.maps.Map(mapContainer, mapOption);
       this.geocoder = new kakao.maps.services.Geocoder();
+
+      // map(의 중심좌표)가 변경되면 공원 및 버스 정보 보여주는 위치가 달라짐
+      kakao.maps.event.addListener(this.map, "tilesloaded", () => {
+        // 기존 마커 삭제하기
+        this.deleteParkMarker();
+        this.deleteBusMarker();
+
+        if (this.isShowPark) this.getParkList();
+        if (this.isShowBus) this.getBusList();
+      });
+    },
+    getParkList() {
+      let center = this.map.getCenter();
+      http
+        .get(`/park/list?lat=${center.getLat()}&lng=${center.getLng()}`)
+        .then(({ data }) => {
+          this.makeParkMarker(data);
+        });
+    },
+    getBusList() {
+      // let center = this.map.getCenter();
+      // http
+      //   .get(`/park/list?lat=${center.getLat()}&lng=${center.getLng()}`)
+      //   .then(({ data }) => {
+      //     console.log(this.isShowPark);
+      //     console.log(data);
+      //   });
+    },
+    makeParkMarker(parks) {
+      var imageSrc =
+        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      var imageSize = new kakao.maps.Size(24, 35);
+      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+      parks.forEach((park) => {
+        var marker = new kakao.maps.Marker({
+          map: this.map,
+          position: new kakao.maps.LatLng(park.lat, park.lng),
+          title: park.parkName,
+          image: markerImage,
+        });
+
+        marker.setMap(this.map);
+        this.parkMarkers.push(marker);
+      });
+    },
+    makeBusMarker() {
+      // var imageSrc =
+      //   "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      // var imageSize = new kakao.maps.Size(24, 35);
+      // var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+      // parks.forEach((park) => {
+      //   var marker = new kakao.maps.Marker({
+      //     map: this.map,
+      //     position: new kakao.maps.LatLng(park.lat, park.lng),
+      //     title: bus.parkName,
+      //     image: markerImage,
+      //   });
+      //   marker.setMap(this.map);
+      //   this.busMarkers.push(marker);
+      // });
+    },
+    deleteParkMarker() {
+      for (let i = 0; i < this.parkMarkers.length; i++) {
+        this.parkMarkers[i].setMap(null);
+      }
+    },
+    deleteBusMarker() {
+      // for (let i = 0; i < this.busMarkers.length; i++) {
+      //   this.busMarkers[i].setMap(null);
+      // }
     },
   },
   mounted() {
@@ -118,6 +178,8 @@ export default {
     } else {
       this.initMap();
     }
+    this.CLEAR_IS_SHOW_PARK();
+    this.CLEAR_IS_SHOW_BUS();
   },
 };
 </script>

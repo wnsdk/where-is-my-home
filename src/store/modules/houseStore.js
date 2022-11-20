@@ -9,6 +9,8 @@ const houseStore = {
     house: null,
     houseDeal: null,
     showDetail: false,
+    isShowPark: false,
+    isShowBus: false,
   },
   getters: {},
   mutations: {
@@ -35,11 +37,16 @@ const houseStore = {
     CLEAR_DETAIL_HOUSE(state) {
       state.house = null;
     },
+    CLEAR_IS_SHOW_PARK(state) {
+      state.isShowPark = false;
+    },
+    CLEAR_IS_SHOW_BUS(state) {
+      state.isShowBus = false;
+    },
     SET_HOUSE_LIST(state, houses) {
       state.houses = houses;
     },
     SET_DETAIL_HOUSE(state, house) {
-      // console.log("Mutations", house);
       state.house = house;
       console.log("HouseInfo 값이 채워짐");
       console.log(state.houseDeal);
@@ -54,6 +61,12 @@ const houseStore = {
     },
     SET_SHOW_DETAIL_TRUE(state) {
       state.showDetail = true;
+    },
+    SET_IS_SHOW_PARK(state, value) {
+      state.isShowPark = value;
+    },
+    SET_IS_SHOW_BUS(state, value) {
+      state.isShowBus = value;
     },
   },
   actions: {

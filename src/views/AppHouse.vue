@@ -32,8 +32,9 @@ export default {
 }
 #map {
   position: absolute;
-  width: 100%;
+  width: 85%;
   height: 88vh;
   z-index: -1;
+  right: 0;
 }
 </style>
