@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <the-header-navbar></the-header-navbar>
+    <argon-app-header></argon-app-header>
     <router-view id="main"></router-view>
   </div>
 </template>
 
 <script>
-import TheHeaderNavbar from "@/components/TheHeaderNavbar";
+//import TheHeaderNavbar from "@/components/TheHeaderNavbar";
+import ArgonAppHeader from "./layout/ArgonAppHeader";
+//import ArgonAppFooter from "./layout/ArgonAppFooter";
 export default {
   name: "App",
   components: {
-    TheHeaderNavbar,
+    //TheHeaderNavbar,
+    ArgonAppHeader,
+    //ArgonAppFooter
   },
 };
 </script>
