@@ -131,9 +131,6 @@ export default {
       }
     },
     async loginWithKakao() {
-      // appkey를 .env.local 파일에서 관리하는 방법??????????
-      await window.Kakao.init("3c7045b115e2a3139ea644855b1dee31");
-
       // 카카오 - 어플리케이션 연결 끊기
       // if (window.Kakao.Auth.getAccessToken()) {
       //   await console.log("카카오 계정 회원탈퇴 시키기");

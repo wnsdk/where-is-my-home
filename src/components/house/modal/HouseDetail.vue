@@ -2,11 +2,20 @@
   <div v-if="house" id="house-detail-container">
     <img id="house-img" :src="require('@/assets/apt.png')" />
     <h4 id="house-detail-name">{{ house.apartmentName }}</h4>
-    <font-awesome-icon
-      :icon="iconHeart"
-      id="click-my-house"
-      @click="clickMyhouse"
-    />
+
+    <div id="icons">
+      <font-awesome-icon
+        :icon="iconHeart"
+        id="click-my-house"
+        class="house-icon"
+        @click="clickMyhouse"
+      />
+      <img
+        src="@/assets/icon-share.svg"
+        class="house-icon"
+        @click="shareKakao"
+      />
+    </div>
 
     <table id="house-detail-table">
       <tr>
@@ -19,7 +28,7 @@
       </tr>
       <tr>
         <th>도로명주소</th>
-        <td>{{ house.roadName }}</td>
+        <td>{{ house.roadName }} {{ this.house.roadNameBonBun }}</td>
       </tr>
       <tr>
         <th>법정동</th>
@@ -116,6 +125,27 @@ export default {
         }
       });
     },
+    shareKakao() {
+      console.log(this.house);
+
+      window.Kakao.Share.sendDefault({
+        objectType: "location",
+        content: {
+          title: this.house.apartmentName,
+          description: `일련번호 : ${this.house.aptCode}\n주소 : ${this.house.roadName} ${this.house.roadNameBonBun}`,
+          imageUrl:
+            "https://img.etoday.co.kr/pto_db/2022/03/600/20220302133228_1723814_1181_787.jpg",
+          imageHeight: 200,
+          imageWidth: 200,
+          link: {
+            mobileWebUrl: "http://localhost:8080/",
+            webUrl: "http://localhost:8080/",
+          },
+        },
+        addressTitle: this.house.apartmentName,
+        address: this.house.roadName + " " + this.house.roadNameBonBun,
+      });
+    },
   },
 };
 </script>
@@ -133,10 +163,20 @@ export default {
 #house-detail-name {
   width: 100%;
 }
+#icons {
+  display: flex;
+  justify-content: center;
+}
 #click-my-house {
   width: 40px;
   height: 40px;
   color: rgb(233, 132, 141);
+}
+.house-icon {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
 }
 #house-detail-table {
   width: 100%;

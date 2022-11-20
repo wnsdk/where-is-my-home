@@ -151,7 +151,7 @@ export default {
         plugins: {
           title: {
             display: true,
-            text: "거래내역 (단위 : 천만)",
+            text: "2021년 거래내역 (단위 : 천만)",
             font: {
               size: 15,
             },
