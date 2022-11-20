@@ -12,9 +12,9 @@
       <house-search-bar id="main-house-search-bar"></house-search-bar>
     </div>
     <div id="main-body">
-      <div id="main-news"><main-articles></main-articles></div>
-      <div id="main-board"><main-articles></main-articles></div>
-      <div id="main-qna"><main-articles></main-articles></div>
+      <div id="main-news"><main-articles type="news"></main-articles></div>
+      <div id="main-board"><main-articles type="board"></main-articles></div>
+      <div id="main-qna"><main-articles type="qna"></main-articles></div>
     </div>
   </div>
 </template>

@@ -72,18 +72,12 @@ export default {
     };
   },
   created() {
-    http.get(`news/crawl`).then(({ data }) => {
+    http.get(`/news?limit=MAX`).then(({ data }) => {
       this.articles = data;
       this.total = data.length;
     });
   },
   methods: {
-    viewArticle(article) {
-      this.$router.push({
-        name: "boardview",
-        params: { articleNo: article.articleNo },
-      });
-    },
     pgfunc(data) {
       this.currentPage = data;
     },
