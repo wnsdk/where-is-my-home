@@ -6,18 +6,18 @@ public class ParkDto {
 	private String address;
 	private String phoneNum;
 	private String lng;
-	private String lnt;
+	private String lat;
 	private String distance;
 	public ParkDto() {
 	}
-	public ParkDto(String parkName, String gugunName, String address, String phoneNum, String lng, String lnt,String distance) {
+	public ParkDto(String parkName, String gugunName, String address, String phoneNum, String lng, String lat,String distance) {
 		super();
 		this.parkName = parkName;
 		this.gugunName = gugunName;
 		this.address = address;
 		this.phoneNum = phoneNum;
 		this.lng = lng;
-		this.lnt = lnt;
+		this.lat = lat;
 		this.distance = distance;
 	}
 	public String getParkName() {
@@ -50,11 +50,11 @@ public class ParkDto {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-	public String getLnt() {
-		return lnt;
+	public String getlat() {
+		return lat;
 	}
-	public void setLnt(String lnt) {
-		this.lnt = lnt;
+	public void setlat(String lat) {
+		this.lat = lat;
 	}
 	public String getDistance() {
 		return distance;

@@ -17,10 +17,7 @@ public class ParkServiceImpl implements ParkService{
 	private ParkMapper parkMapper;
 	
 	@Override
-	public List<ParkDto> selectparks(String lat,String lng) throws SQLException {
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("lat", lat);
-		map.put("lng", lng);
+	public List<ParkDto> selectparks(Map<String, Object> map) throws SQLException {
 		map.put("distance", 5);
 		return parkMapper.selectparks(map);
 	}

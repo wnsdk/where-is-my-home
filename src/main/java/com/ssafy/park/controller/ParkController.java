@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,19 +27,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.park.model.ParkDto;
 import com.ssafy.park.model.service.ParkService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/park")
+@Api("공원 컨트롤러  API")
+@CrossOrigin(origins= "*")
 public class ParkController {
 	
     @Autowired
 	public ParkService parkService;
 
-	@GetMapping("/getAllParks")
-	public ResponseEntity<?> getAllParks(@RequestParam Map<String,String> map, Model model) throws IOException {
-        String lng = map.get("lng");
-        String lat = map.get("lat");
+	@GetMapping("/list")
+	public ResponseEntity<?> getAllParks(@RequestParam Map<String, Object> map) throws IOException {
 		try {
-			List<ParkDto> list=parkService.selectparks(lat, lng);
+			List<ParkDto> list=parkService.selectparks(map);
 			if(list!=null&&!list.isEmpty()) {
 				return new ResponseEntity<List<ParkDto>>(list, HttpStatus.OK);
 			}else {

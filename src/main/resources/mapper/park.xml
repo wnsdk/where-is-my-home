@@ -6,17 +6,17 @@
 	
 	<select id="selectparks" parameterType="map" resultType="parkDto">
 		select parkName, gugunName,
-			   (6371 * acos(cos(radians(#{lat})) * cos(radians(lnt)) 
+			   (6371 * acos(cos(radians(#{lat})) * cos(radians(lat)) 
 			   * cos(radians(lng)-radians(#{lng})) 
-			   + sin(radians(#{lat})) * sin(radians(lnt)))) 
-			   AS distance, address, phoneNum, lng, lnt 
+			   + sin(radians(#{lat})) * sin(radians(lat)))) 
+			   AS distance, address, phoneNum, lng, lat 
 		  from parkinfo 
 		having distance <![CDATA[<]]> #{distance}
 		 order by distance desc 
 	</select>
 	
 	<select id="selectpark" parameterType="string" resultType="parkDto">
-		select parkName, gugunName, address, phoneNum, lng, lnt
+		select parkName, gugunName, address, phoneNum, lng, lat
 		  from parkinfo
 		 where parkName = #{parkName}
 	</select>
