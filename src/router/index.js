@@ -8,7 +8,7 @@ const onlyAuthUser = async (to, from, next) => {
   const checkUserInfo = store.getters["memberStore/checkUserInfo"];
   const checkToken = store.getters["memberStore/checkToken"];
   let token = sessionStorage.getItem("access-token");
-  // console.log("로그인 처리 전", checkUserInfo, token);
+  console.log("로그인 처리 전", checkUserInfo, token);
 
   // 토큰 유효성 체크하기
   if (checkUserInfo != null && token) {
@@ -27,8 +27,12 @@ const routes = [
   {
     path: "/",
     name: "main",
-    //component: () => import("@/views/AppMain"),
-    component: () => import("@/views/ArgonLanding"),
+    component: () => import("@/views/AppMain"),
+  },
+  {
+    path: "/example",
+    name: "example",
+    component: () => import("@/views/Components"),
   },
   {
     path: "/house",
@@ -133,7 +137,7 @@ const routes = [
       {
         path: "login",
         name: "login",
-        component: () => import("@/components/user/Login"),
+        component: () => import("@/components/user/UserLogin"),
       },
       {
         path: "mypage",

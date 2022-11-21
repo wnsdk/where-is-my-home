@@ -67,6 +67,23 @@ export default {
 
           // 생성된 마커를 배열에 추가합니다
           this.markers.push(marker);
+          ///////////////////////////////////////////////////////////
+          console.log(apt);
+          // 커스텀 오버레이를 생성합니다
+          var customOverlay = new kakao.maps.CustomOverlay({
+            position: coords,
+            content:
+              `<div class='customoverlay'>` +
+              `<a href='https://map.kakao.com/link/map/${apt.dongCode}' target='_blank'>` +
+              `<span class='title'>${apt.apartmentName}</span>` +
+              `</a>` +
+              `</div>`,
+            xAnchor: 0.3,
+            yAnchor: 0.91,
+          });
+
+          // 커스텀 오버레이를 지도에 표시합니다
+          customOverlay.setMap(this.map);
         });
         this.map.setCenter(coords);
         this.map.setLevel(2);
@@ -168,9 +185,7 @@ export default {
   mounted() {
     if (!window.kakao || !window.kakao.maps) {
       const script = document.createElement("script");
-
-      // appkey를 .env.local 파일에서 관리하는 방법??????????
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=3c7045b115e2a3139ea644855b1dee31`;
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=${process.env.VUE_APP_KAKAOMAP_KEY}`;
 
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
@@ -184,4 +199,50 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.customoverlay {
+  position: relative;
+  bottom: 50px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ddd;
+  float: left;
+}
+.customoverlay:nth-of-type(n) {
+  border: 0;
+  box-shadow: 0px 1px 2px #888;
+}
+.customoverlay a {
+  display: block;
+  text-decoration: none;
+  color: #111;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  background: #d95050;
+  background: #d95050
+    url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+    no-repeat right 14px center;
+}
+.customoverlay .title {
+  display: block;
+  text-align: center;
+  background: #fff;
+  margin-right: 35px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.customoverlay:after {
+  content: "";
+  position: absolute;
+  margin-left: -12px;
+  left: 50%;
+  bottom: -12px;
+  width: 22px;
+  height: 12px;
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
+}
+</style>

@@ -5,7 +5,7 @@
         <b-alert show><h3>Q&A</h3></b-alert>
       </b-col>
     </b-row>
-    <b-row class="mb-1">
+    <b-row class="mb-1 d-flex justify-content-between">
       <b-col class="text-right">
         <b-button variant="outline-primary" @click="moveWrite()"
           >글쓰기</b-button
@@ -47,7 +47,6 @@
     <b-row>
       <b-col>
         <b-table
-          striped
           hover
           :items="articles"
           :fields="fields"
@@ -85,7 +84,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col>
+      <b-col class="d-flex justify-content-center">
         <pagination
           :pageCount="pageCount"
           :perPage="perPage"
@@ -119,7 +118,6 @@ export default {
         { key: "subject", label: "제목", tdClass: "tdSubject" },
         { key: "userName", label: "작성자", tdClass: "tdClass" },
         { key: "registerTime", label: "작성일", tdClass: "tdClass" },
-        { key: "hit", label: "조회수", tdClass: "tdClass" },
         { key: "answer", label: "답변여부", tdClass: "tdClass" },
         { key: "details", label: "상세", tdClass: "tdClass" },
       ],

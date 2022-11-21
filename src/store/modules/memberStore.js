@@ -43,13 +43,14 @@ const memberStore = {
             let accessToken = data["access-token"];
             let refreshToken = data["refresh-token"];
             console.log(
-              "login success token created!!!! >> ",
+              "login success token created >> ",
               accessToken,
               refreshToken
             );
             commit("SET_IS_LOGIN", true);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_IS_VALID_TOKEN", true);
+
             sessionStorage.setItem("access-token", accessToken);
             sessionStorage.setItem("refresh-token", refreshToken);
           } else {

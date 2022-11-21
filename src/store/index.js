@@ -9,6 +9,14 @@ import memberStore from "@/store/modules/memberStore";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state: {
+    fontColor: "black",
+  },
+  mutations: {
+    SET_FONT_COLOR: (state, data) => {
+      state.fontColor = data;
+    },
+  },
   modules: {
     boardStore,
     houseStore,

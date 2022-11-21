@@ -6,29 +6,32 @@
       </b-col>
     </b-row>
     <b-row class="mb-1">
-      <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
-          >글쓰기</b-button
-        >
-      </b-col>
+      <b-col class="text-right"> </b-col>
       <b-col>
+        <div class="input-group input-group-sm">
+          <b-button variant="outline-primary" @click="moveWrite()"
+            >글쓰기</b-button
+          >
+        </div>
         <div class="col-md-10 offset-2">
           <form class="d-flex" id="form-search" action="">
-            <b-form-select
+            <select
+              class="form-select form-select-sm col"
+              style="width: 200px"
               v-model="searchOption"
-              class="form-select form-select-sm ms-10 me-1 w-50"
               name="key"
               aria-label="검색조건"
             >
               <option value="" selected>검색조건</option>
               <option value="subject">제목</option>
               <option value="userid">아이디</option>
-            </b-form-select>
-            <div class="input-group input-group-sm">
+            </select>
+
+            <div class="input-group input-group-sm" style="width: 400px">
               <input
                 v-model="word"
                 type="text"
-                class="form-control"
+                class="form-control col-12"
                 name="searchBar"
                 placeholder="검색어..."
               />
@@ -44,20 +47,23 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-table
-          striped
-          hover
-          :items="articles"
-          :fields="fields"
-          @row-clicked="viewArticle"
-          :per-page="perPage"
-          :current-page="currentPage"
-        >
-        </b-table>
+        <section class="intro">
+          <div class="table-responsive">
+            <b-table
+              class="table table-hover mb-0"
+              :items="articles"
+              :fields="fields"
+              @row-clicked="viewArticle"
+              :per-page="perPage"
+              :current-page="currentPage"
+            >
+            </b-table>
+          </div>
+        </section>
       </b-col>
     </b-row>
     <b-row>
-      <b-col>
+      <b-col class="d-flex justify-content-center">
         <pagination
           :pageCount="pageCount"
           :perPage="perPage"
@@ -142,5 +148,21 @@ export default {
 .tdSubject {
   width: 300px;
   text-align: left;
+}
+
+/* 테이블 템플릿 */
+.intro {
+  height: 100%;
+}
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card {
+  border-radius: 0.5rem;
 }
 </style>

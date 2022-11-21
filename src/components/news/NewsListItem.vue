@@ -1,5 +1,5 @@
 <template>
-  <a :href="link">
+  <a :href="link" class="page-item">
     <b-tr>
       <b-td rowspan="3"><a :href="link"></a><img :src="photo" /></b-td>
       <b-th colspan="2" class="text-left">{{ subject }}</b-th>

@@ -5,8 +5,16 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "AppUser",
+  methods: {
+    ...mapMutations(["SET_FONT_COLOR"]),
+  },
+  created() {
+    this.SET_FONT_COLOR("#D8D8D8");
+  },
 };
 </script>
 

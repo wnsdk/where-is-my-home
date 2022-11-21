@@ -21,9 +21,9 @@
             class="border-0"
           >
             <template>
-              <!-- <div class="text-muted text-center mb-3">
+              <div class="text-muted text-center mb-3">
                 <small>Sign in with</small>
-              </div> -->
+              </div>
               <div class="btn-wrapper text-center">
                 <b-button id="kakao-login-btn" @click="loginWithKakao">
                   <b-img
@@ -66,7 +66,7 @@
                   type="button"
                   variant="success"
                   class="my-4"
-                  @click="confirm"
+                  @click="confirm(userId, 0)"
                   >로그인</b-button
                 >
               </div>
@@ -131,7 +131,7 @@ export default {
       }
     },
     async loginWithKakao() {
-      // 카카오 - 어플리케이션 연결 끊기
+      //카카오 - 어플리케이션 연결 끊기
       // if (window.Kakao.Auth.getAccessToken()) {
       //   await console.log("카카오 계정 회원탈퇴 시키기");
       //   await window.Kakao.API.request({
@@ -202,7 +202,6 @@ export default {
   background-color: white;
   border: white;
   padding: 0;
-  margin-top: 10px;
   margin-bottom: 15px;
 }
 </style>

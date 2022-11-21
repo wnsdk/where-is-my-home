@@ -1,10 +1,9 @@
 <template>
   <table>
-    <tr>
-      <th>{{ this.type }}</th>
-    </tr>
     <tr v-for="(article, index) in articles" :key="index">
-      <td @click="moveDetail(article)">{{ article.subject }}</td>
+      <td class="card-content" @click="moveDetail(article)">
+        {{ article.subject }}
+      </td>
     </tr>
   </table>
 </template>
@@ -30,11 +29,25 @@ export default {
   methods: {
     moveDetail(article) {
       if (this.type == "news") location.href = article.link;
-      else
-        location.href = `http://localhost:8080/${this.type}/view/${article.articleNo}`;
+      else if (this.type == "board")
+        this.$router.push(`${this.type}/view/${article.articleNo}`);
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+/* 카드 내용 */
+.card-content {
+  text-align: left;
+  font-family: "Noto Sans KR", sans-serif;
+  color: black;
+  width: 210px;
+  height: 30px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+</style>

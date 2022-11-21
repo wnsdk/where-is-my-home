@@ -1,27 +1,26 @@
 <template>
   <div id="app">
-    <!-- <a-a></a-a> -->
-    <the-header-navbar></the-header-navbar>
     <argon-app-header></argon-app-header>
     <router-view id="main"></router-view>
   </div>
 </template>
 
 <script>
-//import TheHeaderNavbar from "@/components/TheHeaderNavbar";
 import ArgonAppHeader from "./layout/ArgonAppHeader";
-//import ArgonAppFooter from "./layout/ArgonAppFooter";
+
 export default {
   name: "App",
   components: {
-    //TheHeaderNavbar,
     ArgonAppHeader,
-    //ArgonAppFooter
   },
 };
 </script>
 
 <style>
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
