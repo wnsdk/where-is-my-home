@@ -43,8 +43,13 @@ public class NewsController {
     	StringBuilder url = new StringBuilder("https://news.naver.com/main/list.naver?mode=LS2D&sid2=260&sid1=101&mid=shm");
     	Document doc = Jsoup.connect(url.toString()).get();
     	int lastpageno = 1;
-    	if (doc.select("div.paging>a:last-child").text() != null && !doc.select("div.paging>a:last-child").text().equals(""))
+    	
+    	String last = doc.select("div.paging>a:last-child").text();
+    	if (last.equals("다음"))
+    		lastpageno = 10;
+    	else if (last != null && !last.equals(""))
     		lastpageno = Integer.parseInt(doc.select("div.paging>a:last-child").text());
+
     	
     	// 오늘 날짜 구하기
     	Date today = new Date();

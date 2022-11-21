@@ -27,7 +27,7 @@
 	</sql>
 
 	<select id="listArticle" parameterType="map" resultMap="article">
-		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.hit, q.registerTime, m.userName
+		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.registerTime, m.userName
 		from qna q, members m 
 		where q.userId = m.userId
 		<include refid="search"></include>
@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultMap="article">
-		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.hit, q.registerTime, m.userName 
+		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.registerTime, m.userName 
 		from qna q, members m
 		where q.userId = m.userId
 		and q.articleNo = #{articleNo}

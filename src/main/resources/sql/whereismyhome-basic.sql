@@ -78,5 +78,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 insert into `myhome`.`qna` (userId, subject, content, answer)
 values ('ssafy', '답변이 등록된 게시물입니다.', '질문입니다.', '답변입니다.');
 
+insert into `myhome`.`qna` (userId, subject, content, answer)
+values ('ssafy', '답변이 등록된 게시물입니다.', '질문입니다.', '답변입니다.');
+
+insert into `myhome`.`qna` (userId, subject, content)
+values ('ssafy', '답변이 없는 게시물입니다.', '질문입니다.');
+
+insert into `myhome`.`qna` (userId, subject, content)
+values ('ssafy', '답변이 없는 게시물입니다.', '질문입니다.');
+
 insert into `myhome`.`qna` (userId, subject, content)
 values ('ssafy', '답변이 없는 게시물입니다.', '질문입니다.');
