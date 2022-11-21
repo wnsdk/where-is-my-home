@@ -3,13 +3,12 @@
     <b-navbar id="header-navbar" toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand href="#">
         <router-link :to="{ name: 'main' }">
-          <!-- <b-img
-            :src="require('@/assets/ssafy_logo.png')"
+          <b-img
+            :src="require('@/assets/house.png')"
             id="logo"
             class="d-inline-block align-top"
             alt="logo"
-          ></b-img> -->
-          로고이미지
+          ></b-img>
         </router-link>
       </b-navbar-brand>
 
@@ -128,7 +127,7 @@ export default {
 
 <style scoped>
 #header-navbar {
-  height: 7vh;
+  height: 10vh;
 }
 
 #logo {

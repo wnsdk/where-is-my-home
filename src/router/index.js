@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
-
 Vue.use(VueRouter);
 
 // https://v3.router.vuejs.org/kr/guide/advanced/navigation-guards.html
@@ -28,7 +27,8 @@ const routes = [
   {
     path: "/",
     name: "main",
-    component: () => import("@/views/AppMain"),
+    //component: () => import("@/views/AppMain"),
+    component: () => import("@/views/ArgonLanding"),
   },
   {
     path: "/house",

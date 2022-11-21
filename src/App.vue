@@ -2,19 +2,21 @@
   <div id="app">
     <!-- <a-a></a-a> -->
     <the-header-navbar></the-header-navbar>
+    <argon-app-header></argon-app-header>
     <router-view id="main"></router-view>
   </div>
 </template>
 
 <script>
-//import AA from "@/views/Components.vue";
-
-import TheHeaderNavbar from "@/components/TheHeaderNavbar";
+//import TheHeaderNavbar from "@/components/TheHeaderNavbar";
+import ArgonAppHeader from "./layout/ArgonAppHeader";
+//import ArgonAppFooter from "./layout/ArgonAppFooter";
 export default {
   name: "App",
   components: {
-    TheHeaderNavbar,
-    //AA,
+    //TheHeaderNavbar,
+    ArgonAppHeader,
+    //ArgonAppFooter
   },
 };
 </script>

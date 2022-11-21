@@ -1,37 +1,32 @@
 <template>
-  <b-row id="house-search-bar">
-    <!-- <b-col class="sm-3">
-      <b-form-input
-        v-model.trim="dongCode"
-        placeholder="동코드 입력...(예 : 11110)"
-        @keypress.enter="sendKeyword"
-      ></b-form-input>
-    </b-col>
-    <b-col class="sm-3" align="left">
-      <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
-    </b-col> -->
-    <b-form-select
-      class="form-select"
-      style="border-radius: 5px 0 0 5px"
-      v-model="sidoCode"
-      :options="sidos"
-      @change="gugunList"
-    />
-    <b-form-select
-      class="form-select"
-      style="border-radius: 0 0 0 0"
-      v-model="gugunCode"
-      :options="guguns"
-    />
-
-    <button
-      id="search-button"
-      class="btn-dark rounded-right"
-      @click="searchApt"
-    >
-      검색
-    </button>
-  </b-row>
+  <section class="section-hero section-shaped my-0">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 text-center pt-lg align-items-center">
+        <section id="house-search-bar">
+          <b-form-select
+            class="lead mt-4 m-5"
+            style="border-radius: 5px 5px 5px 5px"
+            v-model="sidoCode"
+            :options="sidos"
+            @change="gugunList"
+          />
+          <b-form-select
+            class="lead mt-4 m-5"
+            style="border-radius: 5px 5px 5px 5px"
+            v-model="gugunCode"
+            :options="guguns"
+          />
+          <base-button
+            id="search-button"
+            class="btn-dark rounded-right lead mt-4 mb-5"
+            @click="searchApt"
+          >
+            검색
+          </base-button>
+        </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
