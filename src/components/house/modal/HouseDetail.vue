@@ -28,7 +28,7 @@
       </tr>
       <tr>
         <th>도로명주소</th>
-        <td>{{ house.roadName }} {{ this.house.roadNameBonBun }}</td>
+        <td>{{ house.roadName }} {{ parseInt(this.house.roadNameBonBun) }}</td>
       </tr>
       <tr>
         <th>법정동</th>
@@ -196,5 +196,10 @@ export default {
   width: 341px;
   height: 30vh;
   /* background-color: aqua; */
+}
+td,
+th {
+  text-align: left;
+  font-size: 15px;
 }
 </style>

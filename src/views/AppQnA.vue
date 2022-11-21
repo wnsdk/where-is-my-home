@@ -1,5 +1,10 @@
 <template>
   <div>
+    <b-row>
+      <b-col>
+        <h3>Q&A</h3>
+      </b-col>
+    </b-row>
     <router-view></router-view>
   </div>
 </template>

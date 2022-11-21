@@ -1,22 +1,24 @@
 <template>
-  <b-row
-    class="m-2"
+  <div
+    id="list-box"
     @click="selectHouse"
     @mouseover="colorChange(true)"
     @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
   >
-    <b-col cols="2" class="text-center align-self-center">
-      <b-img
-        thumbnail
-        src="https://picsum.photos/250/250/?image=58"
-        alt="Image 1"
-      ></b-img>
-    </b-col>
-    <b-col cols="10" class="align-self-center">
+    <b-row class="m-2 title">
       {{ house.apartmentName }}
-    </b-col>
-  </b-row>
+    </b-row>
+    <b-row class="m-2 description">
+      {{ house.roadName }} {{ parseInt(house.roadNameBonBun) }} &nbsp; ({{
+        house.dong
+      }})
+    </b-row>
+    <b-row class="m-2 description">
+      위도 : {{ house.lat | latlng }} &nbsp;&nbsp;&nbsp;&nbsp; 경도 :
+      {{ house.lng | latlng }}
+    </b-row>
+  </div>
 </template>
 
 <script>
@@ -42,6 +44,11 @@ export default {
       this.isColor = flag;
     },
   },
+  filters: {
+    latlng(value) {
+      return parseFloat(value).toFixed(2);
+    },
+  },
 };
 </script>
 
@@ -50,6 +57,16 @@ export default {
   width: 50px;
 }
 .mouse-over-bgcolor {
-  background-color: lightblue;
+  background-color: rgb(239, 244, 247);
+}
+#list-box {
+  border-bottom: rgb(218, 218, 218) solid 1px;
+  padding: 8px;
+}
+.title {
+  font-weight: 700;
+}
+.description {
+  font-size: 13px;
 }
 </style>

@@ -2,28 +2,7 @@
   <b-row class="mb-1">
     <b-col style="text-align: left">
       <b-form @submit="onSubmit" @reset="onReset">
-        <b-form-group
-          id="userId-group"
-          label="작성자:"
-          label-for="userId"
-          description="작성자를 입력하세요."
-        >
-          <b-form-input
-            id="userId"
-            :disabled="isuserId"
-            v-model="article.userId"
-            type="text"
-            required
-            placeholder="작성자 입력..."
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          id="subject-group"
-          label="제목:"
-          label-for="subject"
-          description="제목을 입력하세요."
-        >
+        <b-form-group id="subject-group" label-for="subject">
           <b-form-input
             id="subject"
             v-model="article.subject"
@@ -33,15 +12,23 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="content-group" label="내용:" label-for="content">
-          <b-form-textarea
-            id="content"
-            v-model="article.content"
-            placeholder="내용 입력..."
-            rows="10"
-            max-rows="15"
-          ></b-form-textarea>
-        </b-form-group>
+        <editor
+          api-key="no-api-key"
+          :init="{
+            height: 500,
+            menubar: false,
+            plugins: [
+              'advlist autolink lists link image charmap print preview anchor',
+              'searchreplace visualblocks code fullscreen',
+              'insertdatetime media table paste code help wordcount',
+            ],
+            toolbar:
+              'undo redo | formatselect | bold italic backcolor | \
+           alignleft aligncenter alignright alignjustify | \
+           bullist numlist outdent indent | removeformat | help',
+          }"
+          v-model="article.content"
+        />
 
         <b-button
           type="submit"
@@ -61,9 +48,14 @@
 
 <script>
 import http from "@/api/http";
+import Editor from "@tinymce/tinymce-vue";
+import { mapState } from "vuex";
 
 export default {
   name: "QnAInputItem",
+  components: {
+    editor: Editor,
+  },
   data() {
     return {
       article: {
@@ -78,13 +70,12 @@ export default {
   props: {
     type: { type: String },
   },
+  computed: {
+    ...mapState("memberStore", ["userInfo"]),
+  },
   created() {
     if (this.type === "modify") {
       http.get(`/qna/${this.$route.params.articleNo}`).then(({ data }) => {
-        // this.article.articleNo = data.article.articleNo;
-        // this.article.userId = data.article.userId;
-        // this.article.subject = data.article.subject;
-        // this.article.content = data.article.content;
         this.article = data;
       });
       this.isuserId = true;
@@ -96,12 +87,8 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.article.userId &&
-        ((msg = "작성자 입력해주세요"),
-        (err = false),
-        this.$refs.userId.focus());
-      err &&
-        !this.article.subject &&
+
+      !this.article.subject &&
         ((msg = "제목 입력해주세요"),
         (err = false),
         this.$refs.subject.focus());
@@ -125,7 +112,7 @@ export default {
     registArticle() {
       http
         .post(`/qna`, {
-          userId: this.article.userId,
+          userId: this.userInfo.userId,
           subject: this.article.subject,
           content: this.article.content,
         })
@@ -138,7 +125,7 @@ export default {
       http
         .put(`/qna`, {
           articleNo: this.article.articleNo,
-          userId: this.article.userId,
+          userId: this.userInfo.userId,
           subject: this.article.subject,
           content: this.article.content,
         })

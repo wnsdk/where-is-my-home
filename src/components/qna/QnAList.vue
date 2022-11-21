@@ -1,44 +1,39 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <b-alert show><h3>Q&A</h3></b-alert>
-      </b-col>
-    </b-row>
     <b-row class="mb-1 d-flex justify-content-between">
-      <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
-          >글쓰기</b-button
-        >
-      </b-col>
       <b-col>
+        <div class="input-group input-group-sm">
+          <b-button variant="outline-primary" @click="moveWrite()"
+            >글쓰기</b-button
+          >
+        </div>
         <div class="col-md-10 offset-2">
           <form class="d-flex" id="form-search" action="">
-            <b-form-select
+            <select
+              class="form-select form-select-sm col"
+              style="width: 200px"
               v-model="searchOption"
-              class="form-select form-select-sm ms-10 me-1 w-50"
               name="key"
               aria-label="검색조건"
             >
               <option value="" selected>검색조건</option>
               <option value="subject">제목</option>
               <option value="userid">아이디</option>
-            </b-form-select>
-            <div class="input-group input-group-sm">
+            </select>
+
+            <div class="input-group input-group-sm" style="width: 400px">
               <input
                 v-model="word"
                 type="text"
-                class="form-control"
+                class="form-control col-12"
                 name="searchBar"
                 placeholder="검색어..."
               />
-              <b-button
-                id="btn-search"
-                class="btn btn-dark"
-                @click.self.prevent="search()"
-              >
-                검색
-              </b-button>
+              <div class="input-group-append">
+                <button class="btn btn-dark" @click.self.prevent="search()">
+                  검색
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -79,6 +74,10 @@
                 <b-col>{{ data.item.answer }}</b-col>
               </b-row>
             </b-card>
+          </template>
+
+          <template #cell(registerTime)="data">
+            {{ data.item.registerTime.substr(0, 10) }}
           </template>
         </b-table>
       </b-col>

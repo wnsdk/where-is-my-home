@@ -1,5 +1,12 @@
 <template>
-  <div><router-view></router-view></div>
+  <div>
+    <b-row>
+      <b-col>
+        <h3>부동산 뉴스</h3>
+      </b-col>
+    </b-row>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>

@@ -22,6 +22,14 @@ npm i --save @fortawesome/vue-fontawesome@2
 
 See [Configuration Reference](https://github.com/FortAwesome/vue-fontawesome).
 
+### 글작성 editor 페이지 템플릿 - 필수
+
+```
+npm install --save "@tinymce/tinymce-vue@^3"
+```
+
+See [Configuration Reference](https://www.tiny.cloud/docs/integrations/vue/).
+
 ### vuex-persistedstate - 필수
 
 ```

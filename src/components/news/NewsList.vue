@@ -2,11 +2,6 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert show><h3>부동산 뉴스</h3></b-alert>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
         <b-table-simple
           hover
           responsive

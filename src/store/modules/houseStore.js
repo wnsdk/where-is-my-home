@@ -11,6 +11,8 @@ const houseStore = {
     showDetail: false,
     isShowPark: false,
     isShowBus: false,
+    sliderPark: 2.5,
+    sliderBus: 2.5,
   },
   getters: {},
   mutations: {
@@ -68,6 +70,10 @@ const houseStore = {
     SET_IS_SHOW_BUS(state, value) {
       state.isShowBus = value;
     },
+    SET_DIST_SLIDER(state, value) {
+      state.sliderPark = value.park;
+      state.sliderBus = value.bus;
+    },
   },
   actions: {
     getSido({ commit }) {
@@ -104,9 +110,6 @@ const houseStore = {
         });
     },
     async detailHouse({ commit }, house) {
-      // 나중에 house.일련번호를 이용하여 API 호출
-      // console.log(commit, house);
-
       await commit("SET_DETAIL_HOUSE", house);
       await http.get(`house/AptDealList/${house.aptCode}`).then(({ data }) => {
         commit("SET_HOUSEDEAL", data);

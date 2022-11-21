@@ -23,6 +23,8 @@
             type="checkbox"
             v-model="isShowPark"
           />
+          <base-slider v-model="sliders.park" :range="{ min: 0, max: 5 }">
+          </base-slider>
         </div>
       </li>
       <li class="nav-item">
@@ -31,6 +33,8 @@
             주변 버스정류장
           </label>
           <input class="form-check-input" type="checkbox" v-model="isShowBus" />
+          <base-slider v-model="sliders.bus" :range="{ min: 0, max: 5 }">
+          </base-slider>
         </div>
       </li>
     </ul>
@@ -43,10 +47,18 @@ export default {
     return {
       isShowPark: false,
       isShowBus: false,
+      sliders: {
+        park: 2.5,
+        bus: 2.5,
+      },
     };
   },
   methods: {
-    ...mapMutations("houseStore", ["SET_IS_SHOW_PARK", "SET_IS_SHOW_BUS"]),
+    ...mapMutations("houseStore", [
+      "SET_IS_SHOW_PARK",
+      "SET_IS_SHOW_BUS",
+      "SET_DIST_SLIDER",
+    ]),
   },
   watch: {
     isShowPark(value) {
@@ -55,6 +67,9 @@ export default {
     isShowBus(value) {
       this.SET_IS_SHOW_BUS(value);
     },
+  },
+  updated() {
+    this.SET_DIST_SLIDER(this.sliders);
   },
 };
 </script>

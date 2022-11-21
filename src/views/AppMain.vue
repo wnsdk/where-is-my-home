@@ -53,7 +53,7 @@
           <card id="card" class="border-0">
             <icon name="ni ni-check-bold" type="primary" rounded class="mb-4">
             </icon>
-            <h6 class="text-primary text-uppercase card-title">공지사항</h6>
+            <h6 class="text-primary text-uppercase card-title">자유게시판</h6>
             <div>
               <badge type="primary" rounded>design</badge>
               <badge type="primary" rounded>system</badge>

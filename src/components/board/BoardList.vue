@@ -1,10 +1,5 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <b-alert show><h3>글목록</h3></b-alert>
-      </b-col>
-    </b-row>
     <b-row class="mb-1">
       <b-col class="text-right"> </b-col>
       <b-col>
@@ -57,6 +52,9 @@
               :per-page="perPage"
               :current-page="currentPage"
             >
+              <template #cell(registerTime)="data">
+                {{ data.item.registerTime.substr(0, 10) }}
+              </template>
             </b-table>
           </div>
         </section>
@@ -95,7 +93,7 @@ export default {
       fields: [
         { key: "articleNo", label: "글번호", tdClass: "tdClass" },
         { key: "subject", label: "제목", tdClass: "tdSubject" },
-        { key: "userId", label: "작성자", tdClass: "tdClass" },
+        { key: "userName", label: "작성자", tdClass: "tdClass" },
         { key: "registerTime", label: "작성일", tdClass: "tdClass" },
         { key: "hit", label: "조회수", tdClass: "tdClass" },
       ],
