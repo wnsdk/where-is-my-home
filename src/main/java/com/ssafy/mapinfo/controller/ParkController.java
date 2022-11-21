@@ -1,4 +1,4 @@
-package com.ssafy.park.controller;
+package com.ssafy.mapinfo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.park.model.ParkDto;
-import com.ssafy.park.model.service.ParkService;
+import com.ssafy.mapinfo.model.ParkDto;
+import com.ssafy.mapinfo.model.service.ParkService;
 
 import io.swagger.annotations.Api;
 

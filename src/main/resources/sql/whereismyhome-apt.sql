@@ -56,6 +56,20 @@ CREATE TABLE IF NOT EXISTS `myhome`.`parkinfo` (
   `lat` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+--
+-- Table structure for table `businfo`
+--
+
+DROP TABLE IF EXISTS `businfo`;
+CREATE TABLE IF NOT EXISTS `myhome`.`businfo` (
+  `busId` int NOT NULL,
+  `busName` varchar(40) NOT NULL,
+  `lng` varchar(30) DEFAULT NULL,
+  `lat` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (busId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Table structure for table `dongcode`
 --

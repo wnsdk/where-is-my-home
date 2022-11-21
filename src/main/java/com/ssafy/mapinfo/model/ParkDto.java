@@ -1,4 +1,4 @@
-package com.ssafy.park.model;
+package com.ssafy.mapinfo.model;
 
 public class ParkDto {
 	private String parkName;

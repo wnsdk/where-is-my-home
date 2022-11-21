@@ -1,4 +1,4 @@
-package com.ssafy.park.model.service;
+package com.ssafy.mapinfo.model.service;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.park.model.ParkDto;
-import com.ssafy.park.model.mapper.ParkMapper;
+import com.ssafy.mapinfo.model.ParkDto;
+import com.ssafy.mapinfo.model.mapper.ParkMapper;
 
 @Service
 public class ParkServiceImpl implements ParkService{
@@ -18,7 +18,7 @@ public class ParkServiceImpl implements ParkService{
 	
 	@Override
 	public List<ParkDto> selectparks(Map<String, Object> map) throws SQLException {
-		map.put("distance", 5);
+//		map.put("distance", 5);
 		return parkMapper.selectparks(map);
 	}
 

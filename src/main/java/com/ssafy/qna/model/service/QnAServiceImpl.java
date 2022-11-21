@@ -36,6 +36,9 @@ public class QnAServiceImpl implements QnAService {
 		if (map.containsKey("word"))
 			param.put("word", map.get("word"));
 		
+		if (map.containsKey("limit"))
+			param.put("limit", Integer.parseInt(map.get("limit")));
+		
 		return qnaMapper.listArticle(param);
 	}
 

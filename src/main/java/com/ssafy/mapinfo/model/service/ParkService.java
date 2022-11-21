@@ -1,10 +1,10 @@
-package com.ssafy.park.model.service;
+package com.ssafy.mapinfo.model.service;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.ssafy.park.model.ParkDto;
+import com.ssafy.mapinfo.model.ParkDto;
 
 public interface ParkService{
 	List<ParkDto> selectparks(Map<String, Object> map) throws SQLException; 

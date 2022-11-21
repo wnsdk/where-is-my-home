@@ -1,11 +1,11 @@
-package com.ssafy.park.model.mapper;
+package com.ssafy.mapinfo.model.mapper;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.park.model.ParkDto;
+import com.ssafy.mapinfo.model.ParkDto;
 
 @Mapper
 public interface ParkMapper {
