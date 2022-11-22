@@ -1,7 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3">
     <b-row class="mb-1">
-      <b-col class="text-right"> </b-col>
       <b-col>
         <div class="input-group input-group-sm">
           <b-button variant="outline-primary" @click="moveWrite()"

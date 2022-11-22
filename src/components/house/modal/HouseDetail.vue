@@ -1,6 +1,6 @@
 <template>
   <div v-if="house" id="house-detail-container">
-    <img id="house-img" :src="require('@/assets/apt.png')" />
+    <div id="roadview"></div>
     <h4 id="house-detail-name">{{ house.apartmentName }}</h4>
 
     <div id="icons">
@@ -62,6 +62,7 @@ export default {
   data() {
     return {
       iconHeart: "fa-regular fa-heart",
+      aptImgUrl: String,
     };
   },
   computed: {
@@ -74,16 +75,25 @@ export default {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
-  created() {
+  watch: {
+    house() {
+      this.fillHeart();
+      this.getKakaoRoadView();
+    },
+  },
+  mounted() {
+    if (!window.kakao || !window.kakao.maps) {
+      const script = document.createElement("script");
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=${process.env.VUE_APP_KAKAOMAP_KEY}`;
+
+      /* global kakao */
+      document.head.appendChild(script);
+    }
     console.log("디테일 창이 띄어짐");
     console.log(this.houseDeal);
 
     this.fillHeart();
-  },
-  watch: {
-    house() {
-      this.fillHeart();
-    },
+    this.getKakaoRoadView();
   },
   methods: {
     fillHeart() {
@@ -98,6 +108,18 @@ export default {
         }
       });
     },
+    getKakaoRoadView() {
+      // 로드뷰 이미지 가져오기
+      var roadviewContainer = document.getElementById("roadview"); //로드뷰를 표시할 div
+      var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+      var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+      var position = new kakao.maps.LatLng(this.house.lat, this.house.lng);
+
+      // 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+      roadviewClient.getNearestPanoId(position, 50, function (panoId) {
+        roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+      });
+    },
     clickMyhouse() {
       if (this.iconHeart == "fa-regular fa-heart") this.addMyhouse();
       else this.deleteMyhouse();
@@ -108,9 +130,6 @@ export default {
           alert("로그인이 필요한 서비스입니다.");
         } else {
           http.post(`myhouse/${this.userInfo.userId}/${this.house.aptCode}`);
-          // .then((response) => {
-          //   console.log(response);
-          // });
           this.iconHeart = "fa-solid fa-heart";
         }
       });
@@ -182,7 +201,7 @@ export default {
   width: 100%;
   height: 20px;
 }
-#house-img {
+#roadview {
   width: 100%;
   height: 200px;
   object-fit: cover;

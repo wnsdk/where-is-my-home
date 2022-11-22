@@ -47,53 +47,54 @@ export default {
         this.map.setLevel(2);
       }
     },
-    // houses가 변경되면 지도가 변경됨
+    // houses가 변경되면 마커가 변경됨
     houses: function (value) {
       if (value != null && window.kakao != null && window.kakao.maps != null) {
         // 기존 마커 삭제하기
-        for (let i = 0; i < this.markers.length; i++) {
-          this.markers[i].setMap(null);
-          this.customOverlays[i].setMap(null);
+        this.deleteAptMarker();
+
+        if (value != null && value.length > 0) {
+          // 새로운 마커 뿌리기
+          var coords;
+          value.forEach((apt) => {
+            coords = new kakao.maps.LatLng(apt.lat, apt.lng);
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+              position: coords,
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(this.map);
+
+            // 마커에 클릭이벤트를 등록합니다
+            kakao.maps.event.addListener(marker, "click", () => {
+              this.detailHouse(apt);
+            });
+
+            // 생성된 마커를 배열에 추가합니다
+            this.markers.push(marker);
+            ///////////////////////////////////////////////////////////
+
+            // 커스텀 오버레이를 생성합니다
+            var customOverlay = new kakao.maps.CustomOverlay({
+              position: coords,
+              content:
+                `<div class='customoverlay'>` +
+                `<a href='https://map.kakao.com/?q=%20${apt.roadName}%20${apt.roadNameBonBun}&map_type=DEFAULT&map_hybrid=false&from=total' target='_blank'>` +
+                `<span class='title'>${apt.apartmentName}</span>` +
+                `</a>` +
+                `</div>`,
+              yAnchor: 1,
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            customOverlay.setMap(this.map);
+
+            this.customOverlays.push(customOverlay);
+          });
+          this.map.setCenter(coords);
+          this.map.setLevel(2);
         }
-
-        // 새로운 마커 뿌리기
-        var coords;
-        value.forEach((apt) => {
-          coords = new kakao.maps.LatLng(apt.lat, apt.lng);
-          // 결과값으로 받은 위치를 마커로 표시합니다
-          var marker = new kakao.maps.Marker({
-            position: coords,
-          });
-
-          // 마커가 지도 위에 표시되도록 설정합니다
-          marker.setMap(this.map);
-
-          // 마커에 클릭이벤트를 등록합니다
-          kakao.maps.event.addListener(marker, "click", () => {
-            this.detailHouse(apt);
-          });
-
-          // 생성된 마커를 배열에 추가합니다
-          this.markers.push(marker);
-          ///////////////////////////////////////////////////////////
-
-          // 커스텀 오버레이를 생성합니다
-          var customOverlay = new kakao.maps.CustomOverlay({
-            position: coords,
-            content:
-              `<div class='customoverlay'>` +
-              `<a href='https://map.kakao.com/?q=%20${apt.roadName}%20${apt.roadNameBonBun}&map_type=DEFAULT&map_hybrid=false&from=total' target='_blank'>` +
-              `<span class='title'>${apt.apartmentName}</span>` +
-              `</a>` +
-              `</div>`,
-            yAnchor: 1,
-          });
-
-          // 커스텀 오버레이를 지도에 표시합니다
-          customOverlay.setMap(this.map);
-        });
-        this.map.setCenter(coords);
-        this.map.setLevel(2);
       }
     },
     isShowPark(value) {
@@ -211,11 +212,24 @@ export default {
       for (let i = 0; i < this.parkMarkers.length; i++) {
         this.parkMarkers[i].setMap(null);
       }
+      this.parkMarkers = [];
     },
     deleteBusMarker() {
       for (let i = 0; i < this.busMarkers.length; i++) {
         this.busMarkers[i].setMap(null);
       }
+      this.busMarkers = [];
+    },
+    deleteAptMarker() {
+      this.markers.forEach((marker) => {
+        marker.setMap(null);
+      });
+      this.customOverlays.forEach((marker) => {
+        marker.setMap(null);
+      });
+
+      this.markers = [];
+      this.customOverlays = [];
     },
   },
   mounted() {

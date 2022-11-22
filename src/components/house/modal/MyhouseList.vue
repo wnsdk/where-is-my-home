@@ -36,7 +36,8 @@ export default {
   methods: {
     ...mapActions("houseStore", ["getMyhouse"]),
   },
-  created() {
+  mounted() {
+    console.log("관심매물보기");
     this.getMyhouse(this.userInfo.userId);
   },
 };
@@ -45,6 +46,6 @@ export default {
 <style scoped>
 #my-house-list {
   height: 78vh;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>

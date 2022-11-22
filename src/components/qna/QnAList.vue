@@ -1,6 +1,6 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row class="mb-1 d-flex justify-content-between">
+    <b-row class="mb-1">
       <b-col>
         <div class="input-group input-group-sm">
           <b-button variant="outline-primary" @click="moveWrite()"
@@ -41,45 +41,49 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-table
-          hover
-          :items="articles"
-          :fields="fields"
-          @row-clicked="showAnswer"
-          :per-page="perPage"
-          :current-page="currentPage"
-        >
-          <template #cell(answer)="data">
-            {{ data.item.answer | answerFlag }}
-          </template>
-
-          <template #cell(details)="data"
-            ><b-button
-              size="sm"
-              class="mr-2"
-              @click="data.toggleDetails"
-              @change="data.toggleDetails"
+        <section class="intro">
+          <div class="table-responsive">
+            <b-table
+              hover
+              :items="articles"
+              :fields="fields"
+              @row-clicked="showAnswer"
+              :per-page="perPage"
+              :current-page="currentPage"
             >
-              {{ data.detailsShowing ? "Hide" : "Show" }}
-            </b-button>
-          </template>
-          <template #row-details="data">
-            <b-card>
-              <b-row class="mb-2">
-                <b-col sm="3" class="text-sm-right"><b>질문</b></b-col>
-                <b-col>{{ data.item.content }}</b-col>
-              </b-row>
-              <b-row class="mb-2">
-                <b-col sm="3" class="text-sm-right"><b>답변</b></b-col>
-                <b-col>{{ data.item.answer }}</b-col>
-              </b-row>
-            </b-card>
-          </template>
+              <template #cell(answer)="data">
+                {{ data.item.answer | answerFlag }}
+              </template>
 
-          <template #cell(registerTime)="data">
-            {{ data.item.registerTime.substr(0, 10) }}
-          </template>
-        </b-table>
+              <template #cell(details)="data"
+                ><b-button
+                  size="sm"
+                  class="mr-2"
+                  @click="data.toggleDetails"
+                  @change="data.toggleDetails"
+                >
+                  {{ data.detailsShowing ? "Hide" : "Show" }}
+                </b-button>
+              </template>
+              <template #row-details="data">
+                <b-card>
+                  <b-row class="mb-2">
+                    <b-col sm="3" class="text-sm-right"><b>질문</b></b-col>
+                    <b-col>{{ data.item.content }}</b-col>
+                  </b-row>
+                  <b-row class="mb-2">
+                    <b-col sm="3" class="text-sm-right"><b>답변</b></b-col>
+                    <b-col>{{ data.item.answer }}</b-col>
+                  </b-row>
+                </b-card>
+              </template>
+
+              <template #cell(registerTime)="data">
+                {{ data.item.registerTime.substr(0, 10) }}
+              </template>
+            </b-table>
+          </div>
+        </section>
       </b-col>
     </b-row>
     <b-row>

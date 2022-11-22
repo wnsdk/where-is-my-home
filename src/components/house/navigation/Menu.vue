@@ -1,43 +1,27 @@
 <template>
-  <div id="house-menu">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <router-link to="/house/search" class="nav-link"
-          >지역별 매물</router-link
-        >
-      </li>
-      <li class="nav-item">
-        <router-link to="/house/myhouse" class="nav-link"
-          >관심 매물</router-link
-        >
-      </li>
-    </ul>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <div class="form-check">
-          <label class="form-check-label" for="flexCheckDefault">
-            주변 공원
-          </label>
-          <input
-            class="form-check-input"
-            type="checkbox"
-            v-model="isShowPark"
-          />
-          <base-slider v-model="sliders.park" :range="{ min: 0, max: 5 }">
-          </base-slider>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div class="form-check">
-          <label class="form-check-label" for="flexCheckDefault">
-            주변 버스정류장
-          </label>
-          <input class="form-check-input" type="checkbox" v-model="isShowBus" />
-          <base-slider v-model="sliders.bus" :range="{ min: 0, max: 5 }">
-          </base-slider>
-        </div>
-      </li>
-    </ul>
+  <div style="width: 100%" class="d-flex flex-row justify-content-between">
+    <div id="nav1" class="d-flex">
+      <router-link to="/house/search" class="nav1-item"
+        >지역별 매물</router-link
+      >
+      <router-link to="/house/myhouse" class="nav1-item">관심 매물</router-link>
+    </div>
+    <div id="nav2" class="d-flex justify-content-end">
+      <div class="nav2-item d-flex">
+        <input class="form-check-input" type="checkbox" v-model="isShowPark" />
+        <label class="form-check-label" for="flexCheckDefault">
+          주변 공원
+        </label>
+        <input type="range" v-model="sliders.park" min="0" max="5" step="0.5" />
+      </div>
+      <div class="nav2-item d-flex">
+        <input class="form-check-input" type="checkbox" v-model="isShowBus" />
+        <label class="form-check-label" for="flexCheckDefault">
+          버스정류장
+        </label>
+        <input type="range" v-model="sliders.bus" min="0" max="5" step="0.5" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -74,7 +58,56 @@ export default {
 };
 </script>
 <style scoped>
-#house-menu {
-  display: flex;
+* {
+  color: rgb(226, 226, 226);
+  text-decoration: none;
+  align-items: center;
+}
+#nav1 {
+  width: 300px;
+  margin-left: 30px;
+}
+#nav2 {
+  width: 500px;
+}
+.nav1-item {
+  padding-left: 50px;
+}
+.nav2-item {
+  width: 200px;
+  margin-left: 50px;
+}
+.nav2-item > *:nth-child(3) {
+  margin-left: 5px;
+}
+.nav2-item > *:nth-child(2) {
+  margin-left: 5px;
+}
+.nav2-item > *:nth-child(1) {
+  width: 20px;
+  height: 20px;
+}
+.nav2-item > *:nth-child(1):checked {
+  background-color: rgb(71, 184, 122);
+}
+input[type="range"] {
+  overflow: hidden;
+  -webkit-appearance: none;
+  height: 10px;
+  width: 100px;
+  background: white;
+  border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: rgb(66, 66, 66);
+  box-shadow: 1px 1px 7px rgb(71, 184, 122);
+  box-shadow: -100vw 0 0 100vw rgb(71, 184, 122);
+  border-radius: 10px;
+  outline: 0;
+  border: 0;
 }
 </style>

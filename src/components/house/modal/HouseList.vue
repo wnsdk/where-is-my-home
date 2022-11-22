@@ -12,7 +12,9 @@
   </div>
   <div v-else class="bv-example-row mt-3">
     <b-row>
-      <b-col>주택 목록이 없습니다.</b-col>
+      <b-col style="display: absolute; z-index: -1"
+        >주택 목록이 없습니다.</b-col
+      >
     </b-row>
   </div>
 </template>
@@ -41,6 +43,6 @@ export default {
 <style>
 #house-list {
   height: 78vh;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>

@@ -5,6 +5,7 @@
     expand
     title="아파트 매매 정보"
     id="house-navbar"
+    @click="goSearch"
   >
     <div class="row" slot="content-header" slot-scope="{ closeMenu }">
       <div class="col-6 collapse-close">
@@ -38,6 +39,11 @@ export default {
       //   { type: "info", menuComponent: Menu6 },
       // ],
     };
+  },
+  methods: {
+    goSearch() {
+      this.$router.push("house/search");
+    },
   },
 };
 </script>
