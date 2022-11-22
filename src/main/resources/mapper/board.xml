@@ -42,7 +42,7 @@
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultMap="article">
-		select b.articleNo, b.userId, b.subject, b.content, b.hit, b.registerTime, m.userName 
+		select b.articleNo, b.userId, b.subject, b.content, b.hit, b.registerTime, m.userName, m.userImgUrl 
 		from board b, members m
 		where b.userId = m.userId
 		and b.articleNo = #{articleNo}

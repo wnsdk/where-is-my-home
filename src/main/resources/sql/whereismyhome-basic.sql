@@ -69,7 +69,50 @@ values ('ssafy', '신혼부부임차보증금 이자지원사업 잘 아시는�
 insert into `myhome`.`board` (userId, subject, content)
 values ('ssafy', '월요일 오전은 항상 힘드네요.. ', 'ㅎㅎ');
 
--- -----------------------------------------------------
+--
+-- Table structure for table `boardComment`
+--
+DROP TABLE IF EXISTS `myhome`.`comment` ;
+
+CREATE TABLE IF NOT EXISTS `myhome`.`comment` (
+  `commentNo` INT NOT NULL AUTO_INCREMENT,
+  `userId` VARCHAR(16) NULL DEFAULT NULL,
+  `comment` VARCHAR(500) NULL DEFAULT NULL,
+  `articleNo` INT NULL DEFAULT NULL,
+  `registerTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`commentNo`),
+  INDEX `comment_to_board_fk` (`articleNo` ASC) VISIBLE,
+  INDEX `comment_to_members_fk_idx` (`userId` ASC) VISIBLE,
+  CONSTRAINT `comment_to_board_fk`
+    FOREIGN KEY (`articleNo`)
+    REFERENCES `myhome`.`board` (`articleNo`),
+  CONSTRAINT `comment_to_members_fk`
+    FOREIGN KEY (`userId`)
+    REFERENCES `myhome`.`members` (`userId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+insert into comment (userId, comment, articleNo)
+values ('admin', 'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ', 105);
+insert into comment (userId, comment, articleNo)
+values ('admin', '24시간 아무때나 궁금한 사항이 있으시면 편안하게 문자나 전화 주세요.
+카톡으로도 언제든지 문의주세요..
+실시간 답변은 그래도 문자나 전화가 빨라요.
+
+최선을 다해 사시는 분들 늘 건강하시고 매일 매일 행운이 함께하시길 바라겠습니다.
+
+약속합니다. 집주인으로써 최선을 다해 입주민분들이 평안함을 갖도록 늘 최선을 다하겠습니다.', 105);
+insert into comment (userId, comment, articleNo)
+values ('ssafy', '싸피 짱', 105);
+
+--
+-- Table structure for table `qna`
+--
+
 DROP TABLE IF EXISTS `myhome`.`qna` ;
 
 CREATE TABLE IF NOT EXISTS `myhome`.`qna` (

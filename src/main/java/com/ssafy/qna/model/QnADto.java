@@ -8,11 +8,18 @@ public class QnADto {
 	private String subject;
 	private String content;
 	private String answer;
+	private String userImgUrl;
 	private int hit;
 	private String registerTime;
 	
 	
 	
+	public String getUserImgUrl() {
+		return userImgUrl;
+	}
+	public void setUserImgUrl(String userImgUrl) {
+		this.userImgUrl = userImgUrl;
+	}
 	public String getUserName() {
 		return userName;
 	}
