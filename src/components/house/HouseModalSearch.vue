@@ -34,13 +34,18 @@ export default {
     HouseModalDetail,
   },
   computed: {
-    ...mapState("houseStore", ["showDetail"]),
+    ...mapState("houseStore", ["showDetail", "houses"]),
   },
   methods: {
     ...mapMutations("houseStore", ["SET_SHOW_DETAIL_FALSE"]),
   },
   created() {
     this.SET_SHOW_DETAIL_FALSE();
+  },
+  watch: {
+    houses() {
+      this.SET_SHOW_DETAIL_FALSE();
+    },
   },
 };
 </script>
