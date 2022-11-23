@@ -15,5 +15,6 @@ public interface QnAService {
 	void deleteArticle(int articleNo) throws Exception;
 	int totalArticleCount(Map<String, String> map) throws Exception;
 	void writeAnswer(QnADto qnaDto) throws Exception;
+	void deleteAnswer(int articleNo) throws Exception;
 	
 }

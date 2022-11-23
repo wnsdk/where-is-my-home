@@ -17,4 +17,5 @@ public interface QnAMapper {
 	int totalArticleCount(Map<String, String> map) throws Exception;
 	void updateHit(int articleNo) throws Exception;
 	void writeAnswer(QnADto qnaDto) throws Exception;
+	void deleteAnswer(int articleNo) throws Exception;
 }

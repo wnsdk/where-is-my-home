@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultMap="article">
-		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.registerTime, m.userName, m.userImgUrl; 
+		select q.articleNo, q.userId, q.subject, q.content, q.answer, q.registerTime, m.userName, m.userImgUrl
 		from qna q, members m
 		where q.userId = m.userId
 		and q.articleNo = #{articleNo}
@@ -60,6 +60,12 @@
 	<update id="writeAnswer" parameterType="qnaDto">
 		update qna
 		set answer = #{answer}
+		where articleNo = #{articleNo}
+	</update>
+	
+	<update id="deleteAnswer" parameterType="int">
+		update qna
+		set answer = null
 		where articleNo = #{articleNo}
 	</update>
 	

@@ -3,6 +3,7 @@ package com.ssafy.qna.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,14 @@ public class QnAController {
 	@ApiOperation(value = "QnA 답변작성", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	private ResponseEntity<?> writeAnswer(@RequestBody @ApiParam(value = "게시글 정보.", required = true) QnADto qnaDto) throws Exception {
 		qnaService.writeAnswer(qnaDto);
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/answer")
+	@ApiOperation(value = "QnA 답변삭제", notes = "새로운 게시글 정보를 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	private ResponseEntity<?> deleteAnswer(@RequestParam("articleNo") @ApiParam(value = "게시글 정보.", required = true) int articleNo) throws Exception {
+		System.out.println(articleNo);
+		qnaService.deleteAnswer(articleNo);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	

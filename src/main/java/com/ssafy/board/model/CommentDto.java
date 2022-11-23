@@ -11,6 +11,12 @@ public class CommentDto {
 	private String userImgUrl;
 	
 	
+	@Override
+	public String toString() {
+		return "CommentDto [commentNo=" + commentNo + ", userId=" + userId + ", userName=" + userName + ", comment="
+				+ comment + ", registerTime=" + registerTime + ", articleNo=" + articleNo + ", userImgUrl=" + userImgUrl
+				+ "]";
+	}
 	public String getUserImgUrl() {
 		return userImgUrl;
 	}

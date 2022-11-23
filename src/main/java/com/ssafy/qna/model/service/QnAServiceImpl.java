@@ -74,6 +74,12 @@ public class QnAServiceImpl implements QnAService {
 	public void writeAnswer(QnADto qnaDto) throws Exception {
 		qnaMapper.writeAnswer(qnaDto);
 	}
+
+	@Override
+	public void deleteAnswer(int articleNo) throws Exception {
+		qnaMapper.deleteAnswer(articleNo);
+		
+	}
 	
 
 }
