@@ -113,7 +113,7 @@ const routes = [
         component: () => import("@/components/qna/QnAWrite"),
       },
       {
-        path: "modify",
+        path: "modify/:articleNo",
         name: "qnamodify",
         component: () => import("@/components/qna/QnAModify"),
       },

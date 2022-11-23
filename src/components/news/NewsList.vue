@@ -3,7 +3,6 @@
     <b-row>
       <b-col>
         <b-table-simple
-          hover
           responsive
           :per-page="perPage"
           :current-page="currentPage"

@@ -1,14 +1,14 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3 body-container">
     <b-row class="mb-1">
-      <b-col>
+      <b-col class="d-flex">
         <div class="input-group input-group-sm">
           <b-button variant="outline-primary" @click="moveWrite()"
             >글쓰기</b-button
           >
         </div>
-        <div class="col-md-10 offset-2">
-          <form class="d-flex" id="form-search" action="">
+        <div>
+          <form class="d-flex" id="form-search" style="width: 500px">
             <select
               class="form-select form-select-sm col"
               style="width: 200px"
@@ -161,5 +161,9 @@ table th {
 
 .card {
   border-radius: 0.5rem;
+}
+
+.body-container {
+  width: 1000px;
 }
 </style>

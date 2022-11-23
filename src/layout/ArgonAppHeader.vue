@@ -154,6 +154,10 @@ export default {
 };
 </script>
 <style scoped>
+.navbar-main {
+  padding: 0;
+  height: 68px;
+}
 .link {
   text-decoration: none;
 }

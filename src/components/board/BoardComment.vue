@@ -2,7 +2,7 @@
   <div>
     <ul v-for="(comment, index) in comments" :key="index">
       <li>
-        <table style="text-align: left">
+        <table>
           <tr>
             <td rowspan="3">
               <b-avatar
@@ -18,30 +18,55 @@
               ></b-avatar>
             </td>
             <td>{{ comment.userName }}</td>
-            <td rowspan="3">
-              <img
-                src="@/assets/img/icons/common/icon-show-more.png"
-                width="20px"
-                @click="isShowMore = true"
-              />
+            <td rowspan="3" style="overflow: visible">
+              <base-dropdown tag="li" class="nav-item">
+                <div
+                  slot="title"
+                  href="#"
+                  class="m-2 link"
+                  data-toggle="dropdown"
+                  role="button"
+                >
+                  <img
+                    src="@/assets/img/icons/common/icon-show-more.png"
+                    width="20px"
+                  />
+                </div>
+                <div class="dropdown-item">
+                  <div v-if="userInfo.userId == comment.userId">
+                    <div @click="showUpdateComment(index)">수정</div>
+                    <div @click="deleteComment(comment.commentNo)">삭제</div>
+                  </div>
+                  <div v-else>
+                    <div>신고</div>
+                  </div>
+                </div>
+              </base-dropdown>
             </td>
           </tr>
           <tr>
-            <td>{{ comment.comment }}</td>
+            <td v-text="comment.comment"></td>
           </tr>
           <tr>
             <td>{{ comment.registerTime.substr(0, 16) }}</td>
           </tr>
         </table>
-        <div v-if="isShowMore">
-          <div v-if="userInfo.userId == comment.userId">
-            <div>수정</div>
-            <div @click="deleteComment(comment.commentNo)">삭제</div>
+        <!-- 댓글 수정 버튼을 누르면 보이는 영역 -->
+        <form :class="comment.commentNo" style="display: none">
+          <textarea
+            :id="comment.commentNo"
+            class="form-control form-control-alternative"
+            rows="3"
+            placeholder="댓글을 수정해보세요"
+            :value="comment.comment"
+          ></textarea>
+          <div
+            @click="updateComment(comment.commentNo, index)"
+            id="btn-register"
+          >
+            수정
           </div>
-          <div v-else>
-            <div>신고</div>
-          </div>
-        </div>
+        </form>
       </li>
     </ul>
     <form>
@@ -51,7 +76,7 @@
         placeholder="댓글을 남겨보세요"
         v-model="comment"
       ></textarea>
-      <div @click="writeComment">등록</div>
+      <div @click="writeComment" id="btn-register">등록</div>
     </form>
   </div>
 </template>
@@ -59,15 +84,18 @@
 <script>
 import http from "@/api/http";
 import { mapState } from "vuex";
+import BaseDropdown from "@/components/Argons/BaseDropdown";
 
 export default {
   name: "BoardComment",
   props: {
     articleNo: Number,
   },
+  components: {
+    BaseDropdown,
+  },
   data() {
     return {
-      isShowMore: false,
       comment: "",
       comments: [],
     };
@@ -104,12 +132,64 @@ export default {
         this.listComment();
       });
     },
+    updateComment(commentNo, i) {
+      let comment = document.getElementById(commentNo).value;
+      http
+        .put(`/comment`, { commentNo: commentNo, comment: comment })
+        .then(() => {
+          this.listComment();
+          let form = document.getElementsByTagName("form")[i];
+          form.setAttribute("style", "display: none");
+        });
+    },
+    showUpdateComment(i) {
+      let form = document.getElementsByTagName("form")[i];
+      form.setAttribute("style", "display: visible");
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 ul {
+  padding: 0;
   list-style: none;
+}
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+td {
+  text-align: left;
+}
+ul {
+  text-align: left;
+  padding-bottom: 10px;
+  border-bottom: solid 1px rgb(228, 228, 228);
+}
+table > tr:first-child > td:first-child {
+  vertical-align: top;
+  padding: 5px 12px 0 0;
+}
+/* 점 3개 아이콘 */
+table > tr:first-child > td:last-child {
+  vertical-align: top;
+}
+/* 댓글 내용 */
+table > tr:nth-child(2) > td {
+  white-space: pre-wrap !important;
+  width: 100%;
+}
+
+/* 댓글 작성 시각 */
+table > tr:nth-child(3) > td {
+  font-size: 12px;
+  color: rgb(156, 156, 156);
+}
+
+#btn-register {
+  transform: translateX(400px) translateY(-30px);
+  font-size: 13px;
+  color: rgb(122, 122, 122);
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3 body-container">
     <board-input-item type="register" />
   </b-container>
 </template>
@@ -20,4 +20,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.body-container {
+  width: 1000px;
+}
+</style>

@@ -6,13 +6,19 @@
       </b-col>
     </b-row>
     <router-view></router-view>
+    <argon-app-footer></argon-app-footer>
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
+import ArgonAppFooter from "@/layout/ArgonAppFooter";
+
 export default {
   name: "AppNews",
+  components: {
+    ArgonAppFooter,
+  },
   methods: {
     ...mapMutations(["SET_FONT_COLOR"]),
   },
@@ -22,4 +28,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+h3 {
+  margin: 70px 0;
+}
+</style>

@@ -5,14 +5,20 @@
         <div class="col-md-6 mb-5 mb-md-0">
           <div class="card card-lift--hover shadow border-0">
             <router-link to="/landing" title="Landing Page">
-              <img v-lazy="'img/theme/landing.jpg'" class="card-img" />
+              <img
+                src="https://static.hubzum.zumst.com/hubzum/2017/04/05/13/1649b01263f240cf8bae3096224aad90.jpg"
+                class="card-img"
+              />
             </router-link>
           </div>
         </div>
         <div class="col-md-6 mb-5 mb-lg-0">
           <div class="card card-lift--hover shadow border-0">
             <router-link to="/profile" title="Profile Page">
-              <img v-lazy="'img/theme/profile.jpg'" class="card-img" />
+              <img
+                src="https://images.chosun.com/resizer/XzBAet4Pt0zZSuDh6Jeg9Qr690g=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/6Y6SF53PVQJ4BUKTA53YMI2PZA.jpg"
+                class="card-img"
+              />
             </router-link>
           </div>
         </div>
@@ -22,27 +28,25 @@
       <div class="row row-grid align-items-center my-md">
         <div class="col-lg-6">
           <h3 class="text-primary font-weight-light mb-2">
-            Thank you for supporting us!
+            Thank you for visiting us!
           </h3>
-          <h4 class="mb-0 font-weight-light">
-            Let's get in touch on any of these platforms.
-          </h4>
+          <h4 class="mb-0 font-weight-light">Where is my home</h4>
         </div>
         <div class="col-lg-6 text-lg-center btn-wrapper">
           <a
             target="_blank"
             rel="noopener"
-            href="https://twitter.com/creativetim"
+            href="https://www.instagram.com/hellossafy/"
             class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg"
             data-toggle="tooltip"
             data-original-title="Follow us"
           >
-            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
           </a>
           <a
             target="_blank"
             rel="noopener"
-            href="https://www.facebook.com/creativetim"
+            href="https://ko-kr.facebook.com/hellossafy/"
             class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg"
             data-toggle="tooltip"
             data-original-title="Like us"
@@ -52,17 +56,17 @@
           <a
             target="_blank"
             rel="noopener"
-            href="https://dribbble.com/creativetim"
+            href="https://www.youtube.com/channel/UC_XI3ByFO1uZIIH-g-zJZiw/featured"
             class="btn btn-neutral btn-icon-only btn-dribbble btn-lg btn-round"
             data-toggle="tooltip"
             data-original-title="Follow us"
           >
-            <i class="fa fa-dribbble"></i>
+            <i class="fa fa-youtube"></i>
           </a>
           <a
             target="_blank"
             rel="noopener"
-            href="https://github.com/creativetimofficial"
+            href="https://github.com/where-is-my-home"
             class="btn btn-neutral btn-icon-only btn-github btn-round btn-lg"
             data-toggle="tooltip"
             data-original-title="Star on Github"
@@ -77,14 +81,19 @@
           <div class="copyright">
             &copy; {{ year }}
             <a
-              href="https://www.creative-tim.com"
+              href=""
               target="_blank"
               rel="noopener"
-              >Creative Tim</a
+              style="text-decoration: none"
+              >최준아</a
             >
             &
-            <a href="https://www.binarcode.com" target="_blank" rel="noopener"
-              >Binar Code</a
+            <a
+              href=""
+              target="_blank"
+              rel="noopener"
+              style="text-decoration: none"
+              >김민소</a
             >
           </div>
         </div>
@@ -142,4 +151,14 @@ export default {
   },
 };
 </script>
-<style></style>
+<style scoped>
+i {
+  transform: translateX(-6.5px) translateY(-15px);
+}
+.card-img {
+  height: 200px;
+  object-fit: cover;
+  filter: grayscale(10%);
+  opacity: 80%;
+}
+</style>

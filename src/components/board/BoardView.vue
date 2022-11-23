@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt-3">
+  <b-container class="bv-example-row mt-3 body-container">
     <b-row class="mb-1">
       <b-col class="text-left">
         <b-button variant="outline-primary" @click="listArticle">목록</b-button>
@@ -19,14 +19,14 @@
     </b-row>
     <b-row class="mb-1">
       <b-col>
-        <b-card class="mb-2" no-body>
+        <b-card class="mb-2 card-box" no-body>
           <b-card-header>
             <table>
               <tr>
                 <td colspan="4">{{ article.subject }}</td>
               </tr>
               <tr>
-                <td rowspan="2">
+                <td rowspan="2" id="profile-img">
                   <b-avatar
                     variant="primary"
                     v-text="article.userId.charAt(0).toUpperCase()"
@@ -61,7 +61,6 @@
 </template>
 
 <script>
-// import moment from "moment";
 import { getArticle, deleteArticle } from "@/api/board";
 import BoardComment from "@/components/board/BoardComment.vue";
 
@@ -109,7 +108,7 @@ export default {
       //this.$router.push({ path: `/board/modify/${this.article.articleNo}` });
     },
     removeArticle() {
-      if (confirm("정말로 삭제?")) {
+      if (confirm("게시물을 삭제하시겠습니까?")) {
         deleteArticle(this.article.articleNo, () => {
           this.$router.push({ name: "boardlist" });
         });
@@ -119,4 +118,34 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.body-container {
+  width: 1000px;
+}
+.card-box {
+  padding: 0 20px 20px 20px;
+}
+.card-box > * {
+  background-color: white;
+}
+.card-box > *:nth-child(2) {
+  margin: 50px 0 50px 0;
+}
+td {
+  text-align: left;
+}
+table > tr:first-child > td {
+  font-size: 25px;
+  height: 80px;
+}
+/* 작성자 프로필 이미지 */
+#profile-img {
+  width: 50px;
+}
+/* 글 작성 시각, 조회수 */
+table > tr:nth-child(3) > td {
+  font-size: 12px;
+  color: rgb(156, 156, 156);
+  width: 100px;
+}
+</style>

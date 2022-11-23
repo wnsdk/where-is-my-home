@@ -17,9 +17,25 @@
         <span></span>
       </div>
       <div class="container shape-container d-flex">
-        <div class="col">
-          <h6 class="display-6 text-white">어떤 집을 찾고 계세요?</h6>
-          <house-search-bar id="main-house-search-bar"></house-search-bar>
+        <div class="col" style="padding-top: 100px">
+          <div class="row">
+            <h6 class="display-6 text-white">어떤 집을 찾고 계세요?</h6>
+          </div>
+          <div class="d-flex" style="margin-left: 385px; padding-top: 20px">
+            <house-search-bar
+              id="main-house-search-bar"
+              class="d-flex flex-row justify-content-center"
+            ></house-search-bar>
+            <b-button
+              style="
+                border-radius: 0;
+                background-color: #444444;
+                border: 0;
+                width: 70px;
+              "
+              >검색</b-button
+            >
+          </div>
         </div>
       </div>
     </section>
@@ -44,10 +60,11 @@
             <div id="main-news" class="text-primary text-uppercase">
               <main-articles type="news"></main-articles>
             </div>
-
-            <base-button tag="a" href="#" type="primary" class="mt-4">
-              더보기
-            </base-button>
+            <router-link to="/news">
+              <base-button tag="a" href="#" type="primary" class="mt-4">
+                더보기
+              </base-button>
+            </router-link>
           </card>
 
           <card id="card" class="border-0">
@@ -63,10 +80,11 @@
             <div id="main-news" class="text-primary text-uppercase">
               <main-articles type="board"></main-articles>
             </div>
-
-            <base-button tag="a" href="#" type="primary" class="mt-4">
-              더보기
-            </base-button>
+            <router-link to="/board">
+              <base-button tag="a" href="#" type="primary" class="mt-4">
+                더보기
+              </base-button>
+            </router-link>
           </card>
 
           <card id="card" class="border-0">
@@ -82,9 +100,11 @@
             <div id="main-news" class="text-primary text-uppercase">
               <main-articles type="qna"></main-articles>
             </div>
-            <base-button tag="a" href="#" type="primary" class="mt-4">
-              더보기
-            </base-button>
+            <router-link to="/qna">
+              <base-button tag="a" href="#" type="primary" class="mt-4">
+                더보기
+              </base-button>
+            </router-link>
           </card>
         </div>
       </div>
@@ -117,9 +137,7 @@ export default {
 </script>
 
 <style scoped>
-#main {
-  height: 1300px;
-  min-height: 100%;
+#main-body {
   position: relative;
 }
 #main-background {
@@ -132,16 +150,16 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-
+  transform: translateY(350px);
   position: absolute;
   z-index: 2;
-  margin-top: 350px;
   margin-bottom: -126px !important;
 }
 #card {
   width: 265px;
   margin-left: 20px;
   margin-right: 20px;
+  z-index: 2;
   box-shadow: 5px 5px 10px rgba(68, 68, 68, 0.3);
 }
 /* 카드 제목 */
@@ -153,8 +171,13 @@ export default {
 #footer {
   width: 100%;
   position: absolute;
+  transform: translateY(700px);
   bottom: 0;
   right: 0;
   /* transform: translatY(-100%); */
+}
+#main-house-search-bar {
+  margin: 0;
+  width: 420px;
 }
 </style>
