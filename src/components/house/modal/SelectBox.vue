@@ -1,6 +1,11 @@
 <template>
   <div class="select-box">
-    <div class="select-box__current" tabindex="1">
+    <div
+      class="select-box__current"
+      tabindex="1"
+      @focus="ifFocus()"
+      @blur="ifBlur()"
+    >
       <div
         class="select-box__value"
         v-for="(item, index) in items"
@@ -49,12 +54,32 @@ export default {
     document.getElementsByName(this.name)[0].setAttribute("checked", "checked");
   },
   methods: {
+    // 셀렉트 박스가 선택되면 목록 보이기
+    ifFocus() {
+      let list = document.getElementsByClassName("select-box__list");
+      for (let element of list) {
+        element.style.display = "block";
+      }
+    },
+    ifBlur() {
+      setTimeout(() => {
+        let list = document.getElementsByClassName("select-box__list");
+        for (let element of list) {
+          console.log(element);
+          element.style.display = "none";
+        }
+      }, 100);
+    },
     onEmit(code) {
       if (this.name == "sido") this.$emit("gugunList", code);
       else if (this.name == "gugun") this.$emit("searchApt", code);
     },
   },
 };
+// .select-box__current:focus 일 때
+// 모든 .select-box__list 는 보여야됨
+
+// .select-box__current:not(:focus) 일 때
 </script>
 
 <style scoped>
@@ -72,6 +97,7 @@ export default {
   cursor: pointer;
   outline: none;
 }
+
 .select-box__current:focus + .select-box__list {
   opacity: 1;
   -webkit-animation-name: none;
@@ -81,11 +107,11 @@ export default {
   cursor: pointer;
 }
 .select-box__current:focus .select-box__icon {
-  transform: translateY(-35px) rotate(180deg);
+  transform: translateY(-30px) translateX(2px) rotate(180deg);
 }
 .select-box__icon {
   position: absolute;
-  transform: translateY(-35px);
+  transform: translateY(-30px) translateX(2px);
   right: 10px;
 
   width: 15px;
@@ -108,6 +134,7 @@ export default {
   padding: 10px;
   background-color: #fff;
 }
+
 .select-box__list {
   position: absolute;
   width: 100%;

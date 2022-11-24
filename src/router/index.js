@@ -101,12 +101,6 @@ const routes = [
         name: "qnalist",
         component: () => import("@/components/qna/QnAList"),
       },
-
-      {
-        path: "view/:articleNo",
-        name: "qnaview",
-        component: () => import("@/components/qna/QnAView"),
-      },
       {
         path: "write",
         name: "qnawrite",

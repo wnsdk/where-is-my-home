@@ -91,7 +91,11 @@
                             />
                           </div>
                           <div class="dropdown-item">
-                            <div v-if="userInfo.userRole == 'admin'">
+                            <div
+                              v-if="
+                                userInfo != null && userInfo.userRole == 'admin'
+                              "
+                            >
                               <div v-if="data.item.answer == null">
                                 <a
                                   v-b-toggle
@@ -107,7 +111,12 @@
                                 답변삭제
                               </div>
                             </div>
-                            <div v-if="userInfo.userId == data.item.userId">
+                            <div
+                              v-if="
+                                userInfo != null &&
+                                userInfo.userId == data.item.userId
+                              "
+                            >
                               <div
                                 @click="moveModifyArticle(data.item.articleNo)"
                               >
