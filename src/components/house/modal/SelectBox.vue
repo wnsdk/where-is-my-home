@@ -69,7 +69,7 @@ export default {
           console.log(element);
           element.style.display = "none";
         }
-      }, 100);
+      }, 500);
     },
     onEmit(code) {
       if (this.name == "sido") this.$emit("gugunList", code);

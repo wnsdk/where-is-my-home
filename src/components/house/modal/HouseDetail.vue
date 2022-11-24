@@ -128,6 +128,7 @@ export default {
       checkAuthUser().then((response) => {
         if (!response) {
           alert("로그인이 필요한 서비스입니다.");
+          this.$router.push("/member/login");
         } else {
           http.post(`myhouse/${this.userInfo.userId}/${this.house.aptCode}`);
           this.iconHeart = "fa-solid fa-heart";
@@ -138,6 +139,7 @@ export default {
       checkAuthUser().then((response) => {
         if (!response) {
           alert("로그인이 필요한 서비스입니다.");
+          this.$router.push("/member/login");
         } else {
           http.delete(`myhouse/${this.userInfo.userId}/${this.house.aptCode}`);
           this.iconHeart = "fa-regular fa-heart";

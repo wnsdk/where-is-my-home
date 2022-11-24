@@ -201,7 +201,7 @@ export default {
         });
     },
     movePage() {
-      this.$router.push({ name: "join" });
+      this.$router.push("/member/join");
     },
   },
 };

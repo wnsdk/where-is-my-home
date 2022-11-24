@@ -32,12 +32,16 @@
                     width="20px"
                   />
                 </div>
-                <div class="dropdown-item">
-                  <div v-if="userInfo.userId == comment.userId">
+                <div v-if="userInfo.userId == comment.userId">
+                  <div class="dropdown-item">
                     <div @click="showUpdateComment(index)">수정</div>
+                  </div>
+                  <div class="dropdown-item">
                     <div @click="deleteComment(comment.commentNo)">삭제</div>
                   </div>
-                  <div v-else>
+                </div>
+                <div class="dropdown-item" v-else>
+                  <div>
                     <div>신고</div>
                   </div>
                 </div>
@@ -63,6 +67,7 @@
           <div
             @click="updateComment(comment.commentNo, index)"
             id="btn-register"
+            style="transform: translateX(840px) translateY(-30px)"
           >
             수정
           </div>

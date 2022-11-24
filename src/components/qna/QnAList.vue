@@ -50,6 +50,9 @@
               :per-page="perPage"
               :current-page="currentPage"
             >
+              <template #cell(subject)="data">
+                <div class="subject">{{ data.item.subject }}</div>
+              </template>
               <template #cell(answer)="data">
                 <div
                   v-if="data.item.answer == null || data.item.answer == ''"
@@ -91,45 +94,53 @@
                               width="20px"
                             />
                           </div>
-                          <div class="dropdown-item">
+
+                          <div
+                            v-if="
+                              userInfo != null && userInfo.userRole == 'admin'
+                            "
+                          >
                             <div
-                              v-if="
-                                userInfo != null && userInfo.userRole == 'admin'
-                              "
+                              class="dropdown-item"
+                              v-if="data.item.answer == null"
                             >
-                              <div v-if="data.item.answer == null">
-                                <a
-                                  v-b-toggle
-                                  href="#example-collapse"
-                                  @click.prevent
-                                  >답변달기</a
-                                >
-                              </div>
-                              <div
-                                v-else
-                                @click="deleteAnswer(data.item.articleNo)"
+                              <a
+                                v-b-toggle
+                                href="#example-collapse"
+                                @click.prevent
+                                style="text-decoration: none; color: black"
+                                >답변달기</a
                               >
-                                답변삭제
-                              </div>
                             </div>
                             <div
-                              v-if="
-                                userInfo != null &&
-                                userInfo.userId == data.item.userId
-                              "
+                              class="dropdown-item"
+                              v-else
+                              @click="deleteAnswer(data.item.articleNo)"
                             >
+                              답변삭제
+                            </div>
+                          </div>
+                          <div
+                            v-if="
+                              userInfo != null &&
+                              userInfo.userId == data.item.userId
+                            "
+                          >
+                            <div class="dropdown-item">
                               <div
                                 @click="moveModifyArticle(data.item.articleNo)"
                               >
                                 수정하기
                               </div>
+                            </div>
+                            <div class="dropdown-item">
                               <div @click="removeArticle(data.item.articleNo)">
                                 삭제하기
                               </div>
                             </div>
-                            <div v-else>
-                              <div>신고하기</div>
-                            </div>
+                          </div>
+                          <div v-else>
+                            <div><div class="dropdown-item">신고하기</div></div>
                           </div>
                         </base-dropdown>
                       </td>
@@ -263,6 +274,7 @@ export default {
   },
   created() {
     this.getArticles();
+    console.log(this.userInfo);
   },
   computed: {
     ...mapState("memberStore", ["userInfo"]),
@@ -337,9 +349,12 @@ export default {
   width: 50px;
   text-align: center;
 }
-.tdSubject {
-  width: 300px;
+.subject {
+  width: 500px;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .body-container {
   width: 1000px;
