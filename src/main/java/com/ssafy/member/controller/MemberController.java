@@ -68,7 +68,7 @@ public class MemberController {
 	
 	@ApiOperation(value = "회원정보 수정", notes = "입력받은 회원정보를 update한다.", response = Map.class)
 	@PutMapping
-	public ResponseEntity<?> update(@RequestBody @ModelAttribute @ApiParam(value = "변경할 회원정보", required = true) MemberDto member) throws Exception {		
+	public ResponseEntity<?> update(@RequestBody @ApiParam(value = "변경할 회원정보", required = true) MemberDto member) throws Exception {		
 		logger.debug("update : {}", member);
 		memberService.updateMember(member);
 		return new ResponseEntity<String>(HttpStatus.OK);

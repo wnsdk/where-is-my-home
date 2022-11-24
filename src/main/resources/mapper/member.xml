@@ -40,8 +40,8 @@
 			<if test="userName != null">userName = #{userName},</if>
 			<if test="userPwd != null">userPwd = md5(#{userPwd}),</if>
 			<if test="userEmail != null">userEmail= #{userEmail},</if>
-			<if test="userPhone != null">userPhone = #{userPhone}</if>
-			<if test="userImgUrl != null">userImgUrl = #{userImgUrl}</if>
+			<if test="userPhone != null">userPhone = #{userPhone},</if>
+			<if test="userImgUrl != null">userImgUrl = #{userImgUrl},</if>
 		</trim>
 		where userId = #{userId}
 	</update>
