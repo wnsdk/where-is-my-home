@@ -21,41 +21,39 @@
           <div class="row">
             <h6 class="display-6 text-white">어떤 집을 찾고 계세요?</h6>
           </div>
-          <!-- 검색 창 start -->
-          <div class="d-flex" style="margin-left: 385px; padding-top: 20px">
-            <div
-              id="main-house-search-bar"
-              class="d-flex flex-row justify-content-center"
-            >
-              <select-box
-                :items="sidos"
-                name="sido"
-                @gugunList="gugunList"
-              ></select-box>
-              <select-box
-                :items="guguns"
-                name="gugun"
-                @searchApt="searchApt"
-              ></select-box>
-            </div>
-
-            <router-link to="/house/search">
-              <b-button
-                style="
-                  border-radius: 0;
-                  background-color: #444444;
-                  border: 0;
-                  width: 70px;
-                  height: 5vh;
-                "
-                >검색</b-button
-              >
-            </router-link>
-          </div>
-          <!-- 검색 창 end -->
         </div>
       </div>
     </section>
+
+    <!-- 검색 창 start -->
+    <div class="d-flex" id="main-house-search-bar">
+      <div id="house-select-box" class="d-flex flex-row justify-content-center">
+        <select-box
+          :items="sidos"
+          name="sido"
+          @gugunList="gugunList"
+        ></select-box>
+        <select-box
+          :items="guguns"
+          name="gugun"
+          @searchApt="searchApt"
+        ></select-box>
+      </div>
+
+      <router-link to="/house/search">
+        <b-button
+          style="
+            border-radius: 0;
+            background-color: #444444;
+            border: 0;
+            width: 70px;
+            height: 5vh;
+          "
+          >검색</b-button
+        >
+      </router-link>
+    </div>
+    <!-- 검색 창 end -->
 
     <section id="card3">
       <div class="container">
@@ -200,19 +198,18 @@ export default {
   z-index: -1;
 }
 #card3 {
+  z-index: -1;
   width: 100%;
   display: flex;
   justify-content: center;
   transform: translateY(350px);
   position: absolute;
-  z-index: 2;
   margin-bottom: -126px !important;
 }
 #card {
   width: 265px;
   margin-left: 20px;
   margin-right: 20px;
-  z-index: 2;
   box-shadow: 5px 5px 10px rgba(68, 68, 68, 0.3);
 }
 /* 카드 제목 */
@@ -229,9 +226,14 @@ export default {
   right: 0;
   /* transform: translatY(-100%); */
 }
-#main-house-search-bar {
+#house-select-box {
   margin: 0;
   height: 8vh;
   width: 420px;
+}
+#main-house-search-bar {
+  display: flex;
+  justify-content: center;
+  transform: translateY(250px);
 }
 </style>

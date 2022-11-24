@@ -52,6 +52,7 @@ export default {
   mounted() {
     // select 박스 첫 번째꺼 checked하기
     document.getElementsByName(this.name)[0].setAttribute("checked", "checked");
+    this.ifBlur();
   },
   methods: {
     // 셀렉트 박스가 선택되면 목록 보이기
@@ -136,6 +137,7 @@ export default {
 }
 
 .select-box__list {
+  z-index: 9999;
   position: absolute;
   width: 100%;
   height: 300px;

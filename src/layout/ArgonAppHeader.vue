@@ -84,21 +84,25 @@
 
       <!-- before login -->
       <b-navbar-nav class="ml-auto" v-else>
-        <b-nav-item-dropdown right>
-          <template #button-content>
-            <b-icon icon="people" font-scale="2"></b-icon>
-          </template>
-          <b-dropdown-item>
-            <router-link :to="{ name: 'join' }" class="link">
-              <b-icon icon="person-circle"></b-icon> 회원가입
-            </router-link>
-          </b-dropdown-item>
-          <b-dropdown-item>
-            <router-link :to="{ name: 'login' }" class="link">
-              <b-icon icon="key"></b-icon> 로그인
-            </router-link>
-          </b-dropdown-item>
-        </b-nav-item-dropdown>
+        <base-dropdown tag="li" class="nav-item">
+          <a
+            slot="title"
+            href="#"
+            class="m-2 link"
+            data-toggle="dropdown"
+            role="button"
+          >
+            <b-icon icon="people" font-scale="2" style="color: white"></b-icon>
+          </a>
+
+          <router-link :to="{ name: 'join' }" class="dropdown-item">
+            <b-icon icon="person-circle"></b-icon> 회원가입
+          </router-link>
+
+          <router-link :to="{ name: 'login' }" class="dropdown-item">
+            <b-icon icon="key"></b-icon> 로그인
+          </router-link>
+        </base-dropdown>
       </b-navbar-nav>
     </base-nav>
   </header>

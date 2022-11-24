@@ -60,15 +60,16 @@
                 <div v-else style="color: #2c9bd6">답변 완료</div>
               </template>
 
-              <template #cell(details)="data"
-                ><b-button
-                  size="sm"
-                  class="mr-2"
+              <template #cell(details)="data">
+                <img
+                  class="select-box__icon"
+                  src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+                  alt="Arrow Icon"
+                  aria-hidden="true"
                   @click="data.toggleDetails"
                   @change="data.toggleDetails"
-                >
-                  {{ data.detailsShowing ? "Hide" : "Show" }}
-                </b-button>
+                  width="15px"
+                />
               </template>
               <template #row-details="data">
                 <b-card style="overflow: visible">
@@ -244,9 +245,9 @@ export default {
         },
         {
           key: "details",
-          label: "상세",
+          label: "",
           tdClass: "tdClass",
-          thStyle: { width: "10%" },
+          thStyle: { width: "5%" },
         },
       ],
       word: "",
