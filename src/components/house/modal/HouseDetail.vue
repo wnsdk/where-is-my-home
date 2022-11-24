@@ -175,12 +175,16 @@ export default {
   /* background-color: red; */
   display: flex;
   flex-direction: column;
+  align-items: center;
   /* justify-content: center;
   flex: auto;
   flex-wrap: wrap; */
 }
 #house-detail-name {
+  margin: 20px 0;
   width: 100%;
+  font-size: 30px;
+  font-weight: 600;
 }
 #icons {
   display: flex;
@@ -214,11 +218,31 @@ export default {
   bottom: 40px;
   width: 341px;
   height: 30vh;
-  /* background-color: aqua; */
+}
+table {
+  display: block;
+  margin-top: 20px;
+  margin-left: 50px;
+  width: 100px;
+}
+th {
+  width: 100px;
+  background-color: rgb(245, 245, 245);
+}
+td {
+  width: 200px;
 }
 td,
 th {
+  border-top: solid 1px rgb(228, 228, 228);
   text-align: left;
   font-size: 15px;
+  padding: 2px 0 2px 20px;
+}
+tr:first-child > * {
+  border-top: solid 1px rgb(167, 167, 167);
+}
+tr:last-child > * {
+  border-bottom: solid 1px rgb(167, 167, 167);
 }
 </style>

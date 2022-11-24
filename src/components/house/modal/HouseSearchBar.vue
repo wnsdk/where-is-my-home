@@ -29,9 +29,9 @@ export default {
     ...mapState(houseStore, ["sidos", "guguns", "houses"]),
   },
   created() {
-    this.CLEAR_SIDO_LIST();
-    this.CLEAR_GUGUN_LIST();
-    this.CLEAR_APT_LIST();
+    // this.CLEAR_SIDO_LIST();
+    // this.CLEAR_GUGUN_LIST();
+    // this.CLEAR_APT_LIST();
     this.getSido();
   },
   methods: {

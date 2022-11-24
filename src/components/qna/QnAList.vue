@@ -60,15 +60,16 @@
                 <div v-else style="color: #2c9bd6">답변 완료</div>
               </template>
 
-              <template #cell(details)="data"
-                ><b-button
-                  size="sm"
-                  class="mr-2"
+              <template #cell(details)="data">
+                <img
+                  class="select-box__icon"
+                  src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+                  alt="Arrow Icon"
+                  aria-hidden="true"
                   @click="data.toggleDetails"
                   @change="data.toggleDetails"
-                >
-                  {{ data.detailsShowing ? "Hide" : "Show" }}
-                </b-button>
+                  width="15px"
+                />
               </template>
               <template #row-details="data">
                 <b-card style="overflow: visible">
@@ -91,7 +92,11 @@
                             />
                           </div>
                           <div class="dropdown-item">
-                            <div v-if="userInfo.userRole == 'admin'">
+                            <div
+                              v-if="
+                                userInfo != null && userInfo.userRole == 'admin'
+                              "
+                            >
                               <div v-if="data.item.answer == null">
                                 <a
                                   v-b-toggle
@@ -107,7 +112,12 @@
                                 답변삭제
                               </div>
                             </div>
-                            <div v-if="userInfo.userId == data.item.userId">
+                            <div
+                              v-if="
+                                userInfo != null &&
+                                userInfo.userId == data.item.userId
+                              "
+                            >
                               <div
                                 @click="moveModifyArticle(data.item.articleNo)"
                               >
@@ -235,9 +245,9 @@ export default {
         },
         {
           key: "details",
-          label: "상세",
+          label: "",
           tdClass: "tdClass",
-          thStyle: { width: "10%" },
+          thStyle: { width: "5%" },
         },
       ],
       word: "",
