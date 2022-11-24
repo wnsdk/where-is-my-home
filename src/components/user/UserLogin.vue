@@ -10,6 +10,7 @@
       <span></span>
       <span></span>
     </div>
+    <find-pwd-modal :show="showModal" @closeModal="closeModal"></find-pwd-modal>
     <div class="container pt-lg-md">
       <div class="row justify-content-center">
         <div class="col-lg-5">
@@ -73,8 +74,8 @@
             </template>
           </b-card>
           <div class="row mt-3">
-            <div class="col-6">
-              <a href="#" class="text-light">
+            <div class="col-6 text-left">
+              <a href="#" class="text-light" @click="showModal = true">
                 <small>비밀번호 찾기</small>
               </a>
             </div>
@@ -92,6 +93,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import http from "@/api/http";
+import FindPwdModal from "@/components/user/UserFindPwdModal.vue";
 const memberStore = "memberStore";
 
 export default {
@@ -103,13 +105,20 @@ export default {
         userId: null,
         userPwd: null,
       },
+      showModal: false,
     };
+  },
+  components: {
+    FindPwdModal,
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
   },
   methods: {
     ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+    closeModal() {
+      this.showModal = false;
+    },
     async confirm(kakaoId, loginType) {
       if (loginType == 1) {
         await this.userConfirm({
