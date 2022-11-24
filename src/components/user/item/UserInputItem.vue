@@ -37,83 +37,78 @@
             </template>
             <template>
               <b-form @submit="onSubmit" @reset="onReset">
-                <div class="text-center text-muted mb-4"></div>
-              <b-form-group label-for="userName">
-                <b-form-input
-                  ref = "userName"
-                  alternative
-                  type="text"
-                  class="mb-3"
-                  addon-left-icon="ni ni-email-83"
-                  id="userName"
-                  v-model="user.userName"
-                  required
-                  placeholder="이름...."
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group label-for="userId">
-                <b-form-input
-                  ref = "userId"
-                  alternative
-                  type="text"
-                  class="mb-3"
-                  addon-left-icon="ni ni-email-83"
-                  id="userId"
-                  v-model="user.userId"
-                  required
-                  placeholder="아이디...."
-                >
-                </b-form-input>
-                <b-button type="button" @click="checkId">
-                아이디 중복 체크
-              </b-button>
-              </b-form-group>
-              <b-form-group label-for="userPwd">
-                <b-form-input
-                  ref = "userPwd"
-                  alternative
-                  type="password"
-                  class="mb-3"
-                  addon-left-icon="ni ni-email-83"
-                  id="userPwd"
-                  v-model="user.userPwd"
-                  required
-                  placeholder="비밀번호...."
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group label-for="userEmail">
-                <b-form-input
-                  alternative
-                  type="email"
-                  class="mb-3"
-                  addon-left-icon="ni ni-email-83"
-                  id="userEmail"
-                  v-model="user.userEmail"
-                  required
-                  placeholder="Email...."
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group label-for="userPhone">
-                <b-form-input
-                  alternative
-                  type="text"
-                  class="mb-3"
-                  addon-left-icon="ni ni-email-83"
-                  id="userPhone"
-                  v-model="user.userPhone"
-                  required
-                  placeholder="전화번호...."
-                ></b-form-input>
-              </b-form-group>
-              <div class="text-center">
-                <b-button
-                  type="submit"
-                  variant="success"
-                  class="my-4"
-                  
-                  >회원가입</b-button
-                >
-              </div>
+                <b-form-group label-for="userName">
+                  <b-form-input
+                    ref="userName"
+                    alternative
+                    type="text"
+                    class="mb-3"
+                    addon-left-icon="ni ni-email-83"
+                    id="userName"
+                    v-model="user.userName"
+                    required
+                    placeholder="이름...."
+                  ></b-form-input>
+                </b-form-group>
+                <b-form-group label-for="userId">
+                  <b-form-input
+                    ref="userId"
+                    alternative
+                    type="text"
+                    class="mb-3"
+                    addon-left-icon="ni ni-email-83"
+                    id="userId"
+                    v-model="user.userId"
+                    required
+                    placeholder="아이디...."
+                  >
+                  </b-form-input>
+                  <b-button type="button" @click="checkId">
+                    아이디 중복 체크
+                  </b-button>
+                </b-form-group>
+                <b-form-group label-for="userPwd">
+                  <b-form-input
+                    ref="userPwd"
+                    alternative
+                    type="password"
+                    class="mb-3"
+                    addon-left-icon="ni ni-email-83"
+                    id="userPwd"
+                    v-model="user.userPwd"
+                    required
+                    placeholder="비밀번호...."
+                  ></b-form-input>
+                </b-form-group>
+                <b-form-group label-for="userEmail">
+                  <b-form-input
+                    alternative
+                    type="email"
+                    class="mb-3"
+                    addon-left-icon="ni ni-email-83"
+                    id="userEmail"
+                    v-model="user.userEmail"
+                    required
+                    placeholder="Email...."
+                  ></b-form-input>
+                </b-form-group>
+                <b-form-group label-for="userPhone">
+                  <b-form-input
+                    alternative
+                    type="text"
+                    class="mb-3"
+                    addon-left-icon="ni ni-email-83"
+                    id="userPhone"
+                    v-model="user.userPhone"
+                    required
+                    placeholder="전화번호...."
+                  ></b-form-input>
+                </b-form-group>
+                <div class="text-center">
+                  <b-button type="submit" variant="success" class="my-4"
+                    >회원가입</b-button
+                  >
+                </div>
               </b-form>
             </template>
           </b-card>
@@ -143,15 +138,15 @@ export default {
       isuserId: false,
     };
   },
-  props:{
-    type:{type : String},
+  props: {
+    type: { type: String },
   },
 
-  methods:{
+  methods: {
     checkId() {
       http
         .get("member/idcheck/" + this.user.userId)
-        .then(({data}) => {
+        .then(({ data }) => {
           console.log(data);
           if (data > 0) {
             alert("이미 존재하는 아이디입니다.");
@@ -166,7 +161,7 @@ export default {
           return;
         });
     },
-    
+
     onSubmit(event) {
       event.preventDefault();
       let err = true;
@@ -187,34 +182,33 @@ export default {
         this.$refs.userPwd.focus());
       err &&
         !this.user.userEmail &&
-        ((msg = "비밀번호를 입력해주세요"),
+        ((msg = "이메일을 입력해주세요"),
         (err = false),
         this.$refs.userEmail.focus());
       err &&
         !this.user.userPhone &&
-        ((msg = "비밀번호를 입력해주세요"),
+        ((msg = "전화번호를 입력해주세요"),
         (err = false),
         this.$refs.userPhone.focus());
       if (!err) alert(msg);
-      else
-        this.type === "join" ? this.joinMember() : this.modifyMember();
+      else this.type === "join" ? this.joinMember() : this.modifyMember();
     },
     onReset(event) {
       event.preventDefault();
-      this.user.userId= "",
-      this.user.userName= "",
-      this.user.userPwd= "",
-      this.user.userEmail= "",
-      this.user.userPhone= "",
-      this.user.userRole= "",
-      this.moveLogin();
+      (this.user.userId = ""),
+        (this.user.userName = ""),
+        (this.user.userPwd = ""),
+        (this.user.userEmail = ""),
+        (this.user.userPhone = ""),
+        (this.user.userRole = ""),
+        this.moveLogin();
     },
     joinMember() {
-      if(!this.isuserId){
+      if (!this.isuserId) {
         alert("아이디 중복 확인 버튼을 눌러주세요");
         console.log(this.user);
         return;
-      } 
+      }
       http
         .post(`/member`, {
           userId: this.user.userId,
@@ -222,7 +216,7 @@ export default {
           userPwd: this.user.userPwd,
           userEmail: this.user.userEmail,
           userPhone: this.user.userPhone,
-          userRole : this.user.userRole,
+          userRole: this.user.userRole,
         })
         .then((response) => {
           console.log(response);
@@ -241,7 +235,7 @@ export default {
           userPwd: this.user.userPwd,
           userEmail: this.user.userEmail,
           userPhone: this.user.userPhone,
-          userRole : this.user.userRole,
+          userRole: this.user.userRole,
         })
         .then((response) => {
           console.log(response);
@@ -255,7 +249,6 @@ export default {
       this.$router.push({ name: "mypage" });
     },
   },
-  
 };
 </script>
 <style></style>

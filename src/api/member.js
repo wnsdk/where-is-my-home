@@ -17,12 +17,10 @@ async function checkAuthUser() {
 }
 
 async function login(user, success, fail) {
-  //서버의 memberController 의 @PostMapping("/login과 연결")
   await api
     .post(`/member/login`, JSON.stringify(user))
     .then(success)
     .catch(fail);
-  //await console.log("여긴 member.js의 로그인 끝 ")
 }
 
 async function findById(userId, success, fail) {
@@ -44,4 +42,16 @@ async function join(userId, success, fail) {
   await api.get(`/member`).then(success).catch(fail);
 }
 
-export { checkAuthUser, login, findById, tokenRegeneration, logout, join };
+async function deleteMember(userId, success, fail) {
+  await api.delete(`/member/${userId}`).then(success).catch(fail);
+}
+
+export {
+  checkAuthUser,
+  login,
+  findById,
+  tokenRegeneration,
+  logout,
+  join,
+  deleteMember,
+};

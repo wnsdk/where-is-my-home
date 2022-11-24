@@ -66,7 +66,7 @@
                   type="button"
                   variant="success"
                   class="my-4"
-                  @click="confirm(userId, 0)"
+                  @click="confirm(user.userId, 0)"
                   >로그인</b-button
                 >
               </div>
@@ -127,7 +127,7 @@ export default {
         // console.log("4. confirm() userInfo :: ", this.userInfo);
         this.$router.push({ name: "main" });
       } else {
-        console.log("로그인 에러");
+        alert("아이디 또는 비밀번호를 확인해주세요");
       }
     },
     async loginWithKakao() {
