@@ -1,6 +1,6 @@
 <template>
-  <div class="profile-page">
-    <section class="section-profile-cover section-shaped section-my-0">
+  <div class="profile-page" id="my-page">
+    <section class="section-profile-cover section-shaped my-0">
       <div class="shape shape-style-1 shape-primary shape-skew alpha-4">
         <span></span>
         <span></span>
@@ -20,14 +20,14 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <img
+                    class="rounded-circle"
                     :src="userDetail.userImgUrl"
                     v-if="userDetail.userImgUrl != null"
                   />
-                  <div>
+                  <div v-else>
                     <img
                       class="rounded-circle"
                       src="@/assets/img/theme/noprofile.jpg"
-                      v-if="userDetail.userImgUrl == null"
                     />
                     <div
                       class="avatarImg"
@@ -127,8 +127,5 @@ export default {
   position: absolute;
   color: white;
   transform: translateX(70px) translateY(-30px);
-}
-.section-my-0 {
-  margin-top: -330px;
 }
 </style>
