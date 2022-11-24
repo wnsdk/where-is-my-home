@@ -50,6 +50,23 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
+	@ApiOperation(value = "비밀번호 찾기", notes = "입력받은 아이디의 비밀번호를 이메일로 전송해준다.", response = Map.class)
+	@PutMapping("/findpwd")
+	public ResponseEntity<?> findPassword(@RequestBody @ApiParam(value = "가입할 회원정보", required = true) MemberDto memberDto) throws Exception {
+		Map<String, Object> resultMap = new HashMap<>();
+		MemberDto findMember = memberService.getMember(memberDto.getUserId());
+
+		if (findMember.getUserEmail().equals(memberDto.getUserEmail())) {
+			memberService.findPassword(findMember);
+			resultMap.put("message", SUCCESS);
+		}
+		else {
+			resultMap.put("message", FAIL);
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+	}
+	
 	@ApiOperation(value = "아이디 중복 체크", notes = "입력받은 아이디가 DB에 몇 개 있는지 반환한다.", response = Map.class)
 	@GetMapping("/idcheck/{userId}")
 	public ResponseEntity<?> idCheck(@PathVariable("userId") String userId) throws Exception {

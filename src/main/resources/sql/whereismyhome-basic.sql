@@ -26,7 +26,7 @@ insert into `myhome`.`members` (userId, userName, userPwd, userEmail, userPhone,
 values     ('admin', '관리자', '1234', 'admin@google.com', '010-1234-5678', 'admin'),
 	('ssafy', '김싸피', '1234', 'ssafy@ssafy.com', '010-1234-5678', 'member');
     
-update members set userPwd=md5(userPwd);
+update members set userPwd=HEX(AES_ENCRYPT(userPwd, 'key'));
 
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `myhome`.`board` ;

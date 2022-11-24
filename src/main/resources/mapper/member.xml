@@ -12,14 +12,14 @@
 
 	<insert id="joinMember" parameterType="memberDto">
 		insert into members (userId, userName, userPwd, userEmail, userPhone, userImgUrl, userRole, loginType)
-		values (#{userId}, #{userName}, md5(#{userPwd}), #{userEmail}, #{userPhone}, #{userImgUrl}, #{userRole}, #{loginType})
+		values (#{userId}, #{userName}, HEX(AES_ENCRYPT(#{userPwd}, 'key')), #{userEmail}, #{userPhone}, #{userImgUrl}, #{userRole}, #{loginType})
 	</insert>
 
 	<select id="loginMember" parameterType="map" resultType="memberDto">
 		select userId, userName, userRole, loginType
 		from members
 		where userId = #{userId} and userDel != 1 
-		<if test="loginType == 0">and userPwd = md5(#{userPwd})</if>
+		<if test="loginType == 0">and userPwd = HEX(AES_ENCRYPT(#{userPwd}, 'key'))</if>
 	</select>
 	
 	<select id="listMember" resultType="memberDto">
@@ -29,7 +29,7 @@
 	</select>
 	
 	<select id="getMember" parameterType="string" resultType="memberDto">
-		select userId, userName, userPwd, userEmail, userPhone, userImgUrl, userRole, loginType, userDel, token
+		select userId, userName, AES_DECRYPT(UNHEX(userPwd), 'key') as 'userPwd', userEmail, userPhone, userImgUrl, userRole, loginType, userDel, token
 		from members
 		where userId = #{userId}
 	</select>
@@ -38,7 +38,7 @@
 		update members
 		<trim prefix="set" suffixOverrides=",">
 			<if test="userName != null">userName = #{userName},</if>
-			<if test="userPwd != null">userPwd = md5(#{userPwd}),</if>
+			<if test="userPwd != null">userPwd = HEX(AES_ENCRYPT(#{userPwd}, 'key')),</if>
 			<if test="userEmail != null">userEmail= #{userEmail},</if>
 			<if test="userPhone != null">userPhone = #{userPhone},</if>
 			<if test="userImgUrl != null">userImgUrl = #{userImgUrl},</if>

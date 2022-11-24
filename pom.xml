@@ -110,6 +110,12 @@
 			<artifactId>guava-collections</artifactId>
 			<version>r03</version>
 		</dependency>
+		
+		<!-- 메일 보내기 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
