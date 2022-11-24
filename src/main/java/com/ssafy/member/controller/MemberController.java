@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -120,7 +121,6 @@ public class MemberController {
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
-
 	}
 	
 	@ApiOperation(value = "회원인증", notes = "회원 정보를 담은 Token을 반환한다.", response = Map.class)
@@ -174,5 +174,12 @@ public class MemberController {
 			status = HttpStatus.UNAUTHORIZED;
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<?> deleteMember(@PathVariable("userId") String userId) throws Exception {
+		HttpStatus status = HttpStatus.ACCEPTED;
+		memberService.deleteMember(userId);
+		return new ResponseEntity<String>(status);
 	}
 }
