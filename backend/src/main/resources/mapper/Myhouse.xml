@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatim.org//DTD Mapper 3.0//EN" 
+	"http://mybatim.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.apartment.model.mapper.MyhouseMapper">
+	
+	<select id="listMyhouse" parameterType="String" resultType="houseInfoDto">
+		select *
+		from houseinfo h join myhouse m
+		 on h.aptCode = m.aptCode
+		where m.userId = #{userId}
+		order by apartmentName
+	</select>
+	
+	<insert id="addMyhouse" parameterType="map">
+		insert into myhouse (userId, aptCode)
+		values(#{userId}, #{aptCode})
+	</insert>
+	
+	<delete id="deleteMyhouse" parameterType="map">
+		delete from myhouse
+		where userId=#{userId} and aptCode=#{aptCode}
+	</delete>
+	
+	<select id="getMyhouse" parameterType="map" resultType="int">
+		select count(*)
+		from myhouse
+		where userId=#{userId} and aptCode=#{aptCode}
+	</select>
+</mapper>

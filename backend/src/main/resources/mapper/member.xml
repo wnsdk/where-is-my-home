@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.member.model.mapper.MemberMapper">
+
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(userId)
+		from members
+		where userId = #{userId}
+	</select>
+
+	<insert id="joinMember" parameterType="memberDto">
+		insert into members (userId, userName, userPwd, userEmail, userPhone, userImgUrl, userRole, loginType)
+		values (#{userId}, #{userName}, HEX(AES_ENCRYPT(#{userPwd}, 'key')), #{userEmail}, #{userPhone}, #{userImgUrl}, #{userRole}, #{loginType})
+	</insert>
+
+	<select id="loginMember" parameterType="map" resultType="memberDto">
+		select userId, userName, userRole, loginType
+		from members
+		where userId = #{userId} and userDel != 1 
+		<if test="loginType == 0">and userPwd = HEX(AES_ENCRYPT(#{userPwd}, 'key'))</if>
+	</select>
+	
+	<select id="listMember" resultType="memberDto">
+		select userId, userName, userEmail, userPhone, userImgUrl, userRole, loginType, userDel
+		from members
+		order by userRole
+	</select>
+	
+	<select id="getMember" parameterType="string" resultType="memberDto">
+		select userId, userName, AES_DECRYPT(UNHEX(userPwd), 'key') as 'userPwd', userEmail, userPhone, userImgUrl, userRole, loginType, userDel, token
+		from members
+		where userId = #{userId}
+	</select>
+	
+	<update id="updateMember" parameterType="memberDto">
+		update members
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userName != null">userName = #{userName},</if>
+			<if test="userPwd != null">userPwd = HEX(AES_ENCRYPT(#{userPwd}, 'key')),</if>
+			<if test="userEmail != null">userEmail= #{userEmail},</if>
+			<if test="userPhone != null">userPhone = #{userPhone},</if>
+			<if test="userImgUrl != null">userImgUrl = #{userImgUrl},</if>
+		</trim>
+		where userId = #{userId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		update members set userDel = 1
+		where userId = #{userId}
+	</delete>
+	
+	<select id="getRefreshToken" parameterType="string" resultType="string">
+		select token
+		from members
+		where userId = #{userId}
+	</select>
+	
+	<update id="saveRefreshToken" parameterType="map">
+		update members
+		set token = #{token}
+		where userId = #{userId}
+	</update>
+	
+	<update id="deleteRefreshToken" parameterType="map">
+		update members
+		set token = #{token, jdbcType=VARCHAR}
+		where userId = #{userId}
+	</update>
+</mapper>
